@@ -1,0 +1,6 @@
+framework module Pods_Vim {
+  umbrella header "Pods-Vim-umbrella.h"
+
+  export *
+  module * { export * }
+}

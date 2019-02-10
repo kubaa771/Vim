@@ -7,13 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F493D8EE827C664AAD8A8CA /* Pods_Vim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DF256CCF3FFC76506666F7 /* Pods_Vim.framework */; };
+		3D331BDE643490355AB05E7D /* Pods_VimTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAB66A4FE6180E0DDC3813A /* Pods_VimTests.framework */; };
 		8A03E0A3220F56F80038EA9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A03E0A2220F56F80038EA9C /* AppDelegate.swift */; };
-		8A03E0A5220F56F80038EA9C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A03E0A4220F56F80038EA9C /* ViewController.swift */; };
 		8A03E0A8220F56F80038EA9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A03E0A6220F56F80038EA9C /* Main.storyboard */; };
 		8A03E0AA220F56FA0038EA9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A03E0A9220F56FA0038EA9C /* Assets.xcassets */; };
 		8A03E0AD220F56FA0038EA9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A03E0AB220F56FA0038EA9C /* LaunchScreen.storyboard */; };
 		8A03E0B8220F56FA0038EA9C /* VimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A03E0B7220F56FA0038EA9C /* VimTests.swift */; };
 		8A03E0C3220F56FA0038EA9C /* VimUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A03E0C2220F56FA0038EA9C /* VimUITests.swift */; };
+		8A07475C22108CBE00C6828A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A07475B22108CBE00C6828A /* GoogleService-Info.plist */; };
+		8A07475F221093D100C6828A /* FirestoreDb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07475E221093D100C6828A /* FirestoreDb.swift */; };
+		8A074761221095AB00C6828A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A074760221095AB00C6828A /* User.swift */; };
+		8A0747632210986400C6828A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747622210986400C6828A /* LoginViewController.swift */; };
+		8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747642210DDF600C6828A /* MainTabBarController.swift */; };
+		C6025D9B4D45BD4166B4518A /* Pods_VimUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E3BE1E2FB026D781721729 /* Pods_VimUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2410051551220DE28AD6C15D /* Pods-VimUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VimUITests/Pods-VimUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8A03E09F220F56F80038EA9C /* Vim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A03E0A2220F56F80038EA9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8A03E0A4220F56F80038EA9C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8A03E0A7220F56F80038EA9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A03E0A9220F56FA0038EA9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A03E0AC220F56FA0038EA9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +54,19 @@
 		8A03E0BE220F56FA0038EA9C /* VimUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VimUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A03E0C2220F56FA0038EA9C /* VimUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimUITests.swift; sourceTree = "<group>"; };
 		8A03E0C4220F56FA0038EA9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A07475B22108CBE00C6828A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8A07475E221093D100C6828A /* FirestoreDb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDb.swift; sourceTree = "<group>"; };
+		8A074760221095AB00C6828A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8A0747622210986400C6828A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8A0747642210DDF600C6828A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		8F81FC9FA32F3E76CD66B1C2 /* Pods-VimTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimTests/Pods-VimTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B6E5A1C2CF76701D250D5096 /* Pods-Vim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vim.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vim/Pods-Vim.release.xcconfig"; sourceTree = "<group>"; };
+		BFAB66A4FE6180E0DDC3813A /* Pods_VimTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6DF256CCF3FFC76506666F7 /* Pods_Vim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC03CF341C7F52A7608E1188 /* Pods-VimTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VimTests/Pods-VimTests.release.xcconfig"; sourceTree = "<group>"; };
+		E5B80736DBD1E554BC7F15A0 /* Pods-Vim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vim.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vim/Pods-Vim.debug.xcconfig"; sourceTree = "<group>"; };
+		E8E3BE1E2FB026D781721729 /* Pods_VimUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F96D654056E0547823B4A74C /* Pods-VimUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimUITests/Pods-VimUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F493D8EE827C664AAD8A8CA /* Pods_Vim.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D331BDE643490355AB05E7D /* Pods_VimTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +90,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6025D9B4D45BD4166B4518A /* Pods_VimUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		30F2A455198CB340FF472DA4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6DF256CCF3FFC76506666F7 /* Pods_Vim.framework */,
+				BFAB66A4FE6180E0DDC3813A /* Pods_VimTests.framework */,
+				E8E3BE1E2FB026D781721729 /* Pods_VimUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7B92B0024B6CF47651D4DA48 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E5B80736DBD1E554BC7F15A0 /* Pods-Vim.debug.xcconfig */,
+				B6E5A1C2CF76701D250D5096 /* Pods-Vim.release.xcconfig */,
+				8F81FC9FA32F3E76CD66B1C2 /* Pods-VimTests.debug.xcconfig */,
+				DC03CF341C7F52A7608E1188 /* Pods-VimTests.release.xcconfig */,
+				F96D654056E0547823B4A74C /* Pods-VimUITests.debug.xcconfig */,
+				2410051551220DE28AD6C15D /* Pods-VimUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8A03E096220F56F80038EA9C = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +127,8 @@
 				8A03E0B6220F56FA0038EA9C /* VimTests */,
 				8A03E0C1220F56FA0038EA9C /* VimUITests */,
 				8A03E0A0220F56F80038EA9C /* Products */,
+				7B92B0024B6CF47651D4DA48 /* Pods */,
+				30F2A455198CB340FF472DA4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,12 +145,15 @@
 		8A03E0A1220F56F80038EA9C /* Vim */ = {
 			isa = PBXGroup;
 			children = (
+				8A07475D2210939900C6828A /* Model */,
 				8A03E0A2220F56F80038EA9C /* AppDelegate.swift */,
-				8A03E0A4220F56F80038EA9C /* ViewController.swift */,
+				8A0747622210986400C6828A /* LoginViewController.swift */,
+				8A0747642210DDF600C6828A /* MainTabBarController.swift */,
 				8A03E0A6220F56F80038EA9C /* Main.storyboard */,
 				8A03E0A9220F56FA0038EA9C /* Assets.xcassets */,
 				8A03E0AB220F56FA0038EA9C /* LaunchScreen.storyboard */,
 				8A03E0AE220F56FA0038EA9C /* Info.plist */,
+				8A07475B22108CBE00C6828A /* GoogleService-Info.plist */,
 			);
 			path = Vim;
 			sourceTree = "<group>";
@@ -125,6 +176,15 @@
 			path = VimUITests;
 			sourceTree = "<group>";
 		};
+		8A07475D2210939900C6828A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8A07475E221093D100C6828A /* FirestoreDb.swift */,
+				8A074760221095AB00C6828A /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +192,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A03E0C7220F56FA0038EA9C /* Build configuration list for PBXNativeTarget "Vim" */;
 			buildPhases = (
+				310EE33CE89465326C6D49DF /* [CP] Check Pods Manifest.lock */,
 				8A03E09B220F56F80038EA9C /* Sources */,
 				8A03E09C220F56F80038EA9C /* Frameworks */,
 				8A03E09D220F56F80038EA9C /* Resources */,
+				8E4DF01134C344C395B9DD05 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -149,6 +211,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A03E0CA220F56FA0038EA9C /* Build configuration list for PBXNativeTarget "VimTests" */;
 			buildPhases = (
+				DE05F76768B00824CBAFB646 /* [CP] Check Pods Manifest.lock */,
 				8A03E0AF220F56FA0038EA9C /* Sources */,
 				8A03E0B0220F56FA0038EA9C /* Frameworks */,
 				8A03E0B1220F56FA0038EA9C /* Resources */,
@@ -167,6 +230,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A03E0CD220F56FA0038EA9C /* Build configuration list for PBXNativeTarget "VimUITests" */;
 			buildPhases = (
+				0ABD48FFE9AE37791265CF4B /* [CP] Check Pods Manifest.lock */,
 				8A03E0BA220F56FA0038EA9C /* Sources */,
 				8A03E0BB220F56FA0038EA9C /* Frameworks */,
 				8A03E0BC220F56FA0038EA9C /* Resources */,
@@ -230,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A03E0AD220F56FA0038EA9C /* LaunchScreen.storyboard in Resources */,
+				8A07475C22108CBE00C6828A /* GoogleService-Info.plist in Resources */,
 				8A03E0AA220F56FA0038EA9C /* Assets.xcassets in Resources */,
 				8A03E0A8220F56F80038EA9C /* Main.storyboard in Resources */,
 			);
@@ -251,13 +316,119 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0ABD48FFE9AE37791265CF4B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VimUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		310EE33CE89465326C6D49DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Vim-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E4DF01134C344C395B9DD05 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Vim/Pods-Vim-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vim/Pods-Vim-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE05F76768B00824CBAFB646 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VimTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8A03E09B220F56F80038EA9C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A03E0A5220F56F80038EA9C /* ViewController.swift in Sources */,
+				8A0747632210986400C6828A /* LoginViewController.swift in Sources */,
 				8A03E0A3220F56F80038EA9C /* AppDelegate.swift in Sources */,
+				8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */,
+				8A07475F221093D100C6828A /* FirestoreDb.swift in Sources */,
+				8A074761221095AB00C6828A /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +601,7 @@
 		};
 		8A03E0C8220F56FA0038EA9C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5B80736DBD1E554BC7F15A0 /* Pods-Vim.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -448,6 +620,7 @@
 		};
 		8A03E0C9220F56FA0038EA9C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6E5A1C2CF76701D250D5096 /* Pods-Vim.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -466,6 +639,7 @@
 		};
 		8A03E0CB220F56FA0038EA9C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F81FC9FA32F3E76CD66B1C2 /* Pods-VimTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -487,6 +661,7 @@
 		};
 		8A03E0CC220F56FA0038EA9C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC03CF341C7F52A7608E1188 /* Pods-VimTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -508,6 +683,7 @@
 		};
 		8A03E0CE220F56FA0038EA9C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F96D654056E0547823B4A74C /* Pods-VimUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -528,6 +704,7 @@
 		};
 		8A03E0CF220F56FA0038EA9C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2410051551220DE28AD6C15D /* Pods-VimUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
