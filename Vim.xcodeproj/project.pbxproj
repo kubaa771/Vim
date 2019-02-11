@@ -21,6 +21,9 @@
 		8A0747632210986400C6828A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747622210986400C6828A /* LoginViewController.swift */; };
 		8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747642210DDF600C6828A /* MainTabBarController.swift */; };
 		8AF823D52211A15500BC2C95 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D42211A15500BC2C95 /* HomeViewController.swift */; };
+		8AF823D72211CCFA00BC2C95 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */; };
+		8AF823D92211DB7E00BC2C95 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */; };
+		8AF823DB2211E02C00BC2C95 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823DA2211E02C00BC2C95 /* Post.swift */; };
 		C6025D9B4D45BD4166B4518A /* Pods_VimUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E3BE1E2FB026D781721729 /* Pods_VimUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +64,9 @@
 		8A0747622210986400C6828A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8A0747642210DDF600C6828A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		8AF823D42211A15500BC2C95 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		8AF823DA2211E02C00BC2C95 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		8F81FC9FA32F3E76CD66B1C2 /* Pods-VimTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimTests/Pods-VimTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6E5A1C2CF76701D250D5096 /* Pods-Vim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vim.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vim/Pods-Vim.release.xcconfig"; sourceTree = "<group>"; };
 		BFAB66A4FE6180E0DDC3813A /* Pods_VimTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,7 +156,9 @@
 				8A07475D2210939900C6828A /* Model */,
 				8A03E0A2220F56F80038EA9C /* AppDelegate.swift */,
 				8A0747622210986400C6828A /* LoginViewController.swift */,
+				8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */,
 				8AF823D42211A15500BC2C95 /* HomeViewController.swift */,
+				8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */,
 				8A0747642210DDF600C6828A /* MainTabBarController.swift */,
 				8A03E0A6220F56F80038EA9C /* Main.storyboard */,
 				8A03E0A9220F56FA0038EA9C /* Assets.xcassets */,
@@ -183,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				8A07475E221093D100C6828A /* FirestoreDb.swift */,
+				8AF823DA2211E02C00BC2C95 /* Post.swift */,
 				8A074760221095AB00C6828A /* User.swift */,
 			);
 			path = Model;
@@ -433,8 +442,11 @@
 			files = (
 				8A0747632210986400C6828A /* LoginViewController.swift in Sources */,
 				8A03E0A3220F56F80038EA9C /* AppDelegate.swift in Sources */,
+				8AF823D72211CCFA00BC2C95 /* HomeTableViewCell.swift in Sources */,
+				8AF823D92211DB7E00BC2C95 /* RegisterViewController.swift in Sources */,
 				8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */,
 				8A07475F221093D100C6828A /* FirestoreDb.swift in Sources */,
+				8AF823DB2211E02C00BC2C95 /* Post.swift in Sources */,
 				8A074761221095AB00C6828A /* User.swift in Sources */,
 				8AF823D52211A15500BC2C95 /* HomeViewController.swift in Sources */,
 			);

@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 
 class FirestoreDb {
     
@@ -19,8 +20,18 @@ class FirestoreDb {
         //docRef = Firestore.firestore().document("users")
     }
     
-    func addNewUser(user: User) {
-        db.collection("users").document(user.login).setData([
+    func addNewUser(givenEmail: String, givenPassword: String, completion: @escaping (Bool) -> Void) {
+        Auth.auth().createUser(withEmail: givenEmail, password: givenPassword) { (user, error) in
+            if user != nil {
+                completion(true)
+            } else {
+                completion(false)
+            }
+            if let errorString = error?.localizedDescription {
+                completion(false)
+            }
+        }
+        /*db.collection("users").document(user.login).setData([
             "login" : user.login,
             "password" : user.password,
             "email" : user.email
@@ -30,17 +41,15 @@ class FirestoreDb {
             } else {
                 
             }
-        }
+        }*/
     }
     
     func checkUserLogin(givenEmail: String, givenPassword: String, completion: @escaping (Bool) -> Void) {
         Auth.auth().signIn(withEmail: givenEmail, password: givenPassword) { (user, error) in
             if user != nil {
                 completion(true)
-                print("success")
             } else {
                 completion(false)
-                print("failed")
             }
             if let errorString = error?.localizedDescription {
                 completion(false)
@@ -68,18 +77,30 @@ class FirestoreDb {
         }*/
     }
     
-    func getUserData(currentUserEmail: String, completion: @escaping (Array<String>) -> Void) {
+    func getUserData(currentUserEmail: String, completion: @escaping (Array<Post>) -> Void) {
         
         db.collection("users").document(currentUserEmail).collection("posts").getDocuments { (snapshot, error) in
             if let documents = snapshot?.documents {
-                var postsArray: Array<String> = []
+                var postsArray: Array<Post> = []
                 for post in documents {
-                    let postData = post.data()["text"] as! String
-                    postsArray.append(postData)
+                    let textContent = post.data()["text"] as! String
+                    let timeResult = post.data()["date"] as! Timestamp
+                    let myPost = Post(date: timeResult, text: textContent)
+                    postsArray.append(myPost)
                 }
                 completion(postsArray)
             }
-            
+        }
+    }
+    
+    func createNewPost(currentEmail: String, date: Timestamp, text: String) {
+         db.collection("users").document(currentEmail).collection("posts").addDocument(data: [
+            "date" : date,
+            "text" : text
+         ]) { (error) in
+            if let errorString = error?.localizedDescription {
+                print(errorString)
+            }
         }
     }
     
