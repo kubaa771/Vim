@@ -87,7 +87,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CuU-NE-4dl"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="lbM-DV-1jR"/>
+                    <navigationItem key="navigationItem" title="Home" id="lbM-DV-1jR">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="compose" id="BoU-mW-q97">
+                            <connections>
+                                <action selector="newPostAction:" destination="uVV-TI-zFf" id="coo-Z3-4A5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="UIi-bD-dss" id="0U9-zg-Q9a"/>
                     </connections>
@@ -148,7 +154,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" textContentType="username"/>
+                                                <textInputTraits key="textInputTraits" textContentType="email"/>
                                                 <connections>
                                                     <action selector="emailTextFieldTyped:" destination="IrZ-Hx-zHJ" eventType="editingChanged" id="WX4-Mw-Fxv"/>
                                                 </connections>

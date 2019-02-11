@@ -8,6 +8,8 @@
 
 import UIKit
 import FirebaseAuth
+import Firebase
+import FirebaseFirestore
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
@@ -19,13 +21,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        FirestoreDb.shared.getUserData(currentUserEmail: (Auth.auth().currentUser?.email)!) { (passedArray) in
+        tableView.tableFooterView = UIView()
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //zmienic na notyfikacje - odbierac jak cos sie zmienilo i wywolywac ta funkcje
+        FirestoreDb.shared.getPostsData(currentUserEmail: (Auth.auth().currentUser?.email)!) { (passedArray) in
             self.posts = passedArray
-            print(self.posts)
             self.tableView.reloadData()
         }
-        print(posts)
-        // Do any additional setup after loading the view.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -40,5 +45,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
 
+    @IBAction func newPostAction(_ sender: UIBarButtonItem) {
+        FirestoreDb.shared.createNewPost(currentEmail: (Auth.auth().currentUser?.email)!, date: Firebase.Timestamp.init(date: Date()), text: "My third post")
+    }
+    
 
 }

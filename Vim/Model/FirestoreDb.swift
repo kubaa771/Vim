@@ -77,7 +77,7 @@ class FirestoreDb {
         }*/
     }
     
-    func getUserData(currentUserEmail: String, completion: @escaping (Array<Post>) -> Void) {
+    func getPostsData(currentUserEmail: String, completion: @escaping (Array<Post>) -> Void) {
         
         db.collection("users").document(currentUserEmail).collection("posts").getDocuments { (snapshot, error) in
             if let documents = snapshot?.documents {
