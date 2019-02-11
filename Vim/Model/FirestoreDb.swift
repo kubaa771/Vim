@@ -33,11 +33,28 @@ class FirestoreDb {
         }
     }
     
-    func checkUserLogin(givenLogin: String, givenPassword: String, completion: @escaping (Bool) -> Void) {
-        db.collection("users").document(givenLogin).getDocument { (document, error) in
+    func checkUserLogin(givenEmail: String, givenPassword: String, completion: @escaping (Bool) -> Void) {
+        Auth.auth().signIn(withEmail: givenEmail, password: givenPassword) { (user, error) in
+            if user != nil {
+                completion(true)
+                print("success")
+            } else {
+                completion(false)
+                print("failed")
+            }
+            if let errorString = error?.localizedDescription {
+                completion(false)
+                print(errorString)
+            }
+            completion(false)
+            
+            
+        }
+        
+        /*db.collection("users").document(givenEmail).getDocument { (document, error) in
             if let document = document, document.exists {
                 if let login = document.get("login") as? String, let password = document.get("password") as? String {
-                    if login == givenLogin, password == givenPassword {
+                    if login == givenEmail, password == givenPassword {
                         print("login: \(login), password: \(password)")
                         completion(true)
                     } else {
@@ -48,6 +65,22 @@ class FirestoreDb {
                 print(error?.localizedDescription ?? "error")
                 completion(false)
             }
+        }*/
+    }
+    
+    func getUserData(currentUserEmail: String, completion: @escaping (Array<String>) -> Void) {
+        
+        db.collection("users").document(currentUserEmail).collection("posts").getDocuments { (snapshot, error) in
+            if let documents = snapshot?.documents {
+                var postsArray: Array<String> = []
+                for post in documents {
+                    let postData = post.data()["text"] as! String
+                    postsArray.append(postData)
+                }
+                completion(postsArray)
+            }
+            
         }
     }
+    
 }

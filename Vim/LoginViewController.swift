@@ -7,32 +7,37 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
-    var first = User(login: "mistic123", password: "admin", email: "cso@gmail.com")
-    var loginText: String? //zmienic na ?
+    var emailText: String?
     var passwordText: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //FirestoreDb.shared.addNewUser(user: first)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
         
     }
     
-    
-    @IBAction func loginTextFieldTyped(_ sender: UITextField) {
-        loginText = sender.text
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
+    
+    @IBAction func emailTextFieldTyped(_ sender: UITextField) {
+        emailText = sender.text
+    }
     
     @IBAction func passwordTextFieldTyped(_ sender: UITextField) {
         passwordText = sender.text
     }
     
     @IBAction func doneBtnTapped(_ sender: UIButton) {
-        if loginText != nil, passwordText != nil {
-            FirestoreDb.shared.checkUserLogin(givenLogin: loginText!, givenPassword: passwordText!) { (matched) in
+        if emailText != nil, passwordText != nil {
+            FirestoreDb.shared.checkUserLogin(givenEmail: emailText!, givenPassword: passwordText!) { (matched) in
                 if matched {
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
                     self.showDetailViewController(vc, sender: sender)

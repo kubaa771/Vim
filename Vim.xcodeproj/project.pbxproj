@@ -20,6 +20,7 @@
 		8A074761221095AB00C6828A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A074760221095AB00C6828A /* User.swift */; };
 		8A0747632210986400C6828A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747622210986400C6828A /* LoginViewController.swift */; };
 		8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747642210DDF600C6828A /* MainTabBarController.swift */; };
+		8AF823D52211A15500BC2C95 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D42211A15500BC2C95 /* HomeViewController.swift */; };
 		C6025D9B4D45BD4166B4518A /* Pods_VimUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E3BE1E2FB026D781721729 /* Pods_VimUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		8A074760221095AB00C6828A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8A0747622210986400C6828A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8A0747642210DDF600C6828A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		8AF823D42211A15500BC2C95 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8F81FC9FA32F3E76CD66B1C2 /* Pods-VimTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimTests/Pods-VimTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6E5A1C2CF76701D250D5096 /* Pods-Vim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vim.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vim/Pods-Vim.release.xcconfig"; sourceTree = "<group>"; };
 		BFAB66A4FE6180E0DDC3813A /* Pods_VimTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +150,7 @@
 				8A07475D2210939900C6828A /* Model */,
 				8A03E0A2220F56F80038EA9C /* AppDelegate.swift */,
 				8A0747622210986400C6828A /* LoginViewController.swift */,
+				8AF823D42211A15500BC2C95 /* HomeViewController.swift */,
 				8A0747642210DDF600C6828A /* MainTabBarController.swift */,
 				8A03E0A6220F56F80038EA9C /* Main.storyboard */,
 				8A03E0A9220F56FA0038EA9C /* Assets.xcassets */,
@@ -371,8 +374,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Vim/Pods-Vim-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoidingSwift/TPKeyboardAvoidingSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -383,8 +388,10 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoidingSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -429,6 +436,7 @@
 				8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */,
 				8A07475F221093D100C6828A /* FirestoreDb.swift in Sources */,
 				8A074761221095AB00C6828A /* User.swift in Sources */,
+				8AF823D52211A15500BC2C95 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

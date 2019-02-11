@@ -8,6 +8,8 @@ target 'Vim' do
   # Pods for Vim
 pod 'Firebase/Core'
 pod 'Firebase/Firestore'
+pod 'Firebase/Auth'
+pod 'TPKeyboardAvoidingSwift'
 
   target 'VimTests' do
     inherit! :search_paths
