@@ -12,6 +12,7 @@ class HomeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var postContentLabel: UILabel!
+    @IBOutlet weak var postImageView: UIImageView!
     
     var model: Post! {
         didSet {

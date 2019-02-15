@@ -21,14 +21,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.estimatedRowHeight = 420
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
+        refreshPostData()
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshPostData), name: NotificationNames.refreshPostData.notification, object: nil)
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        //zmienic na notyfikacje - odbierac jak cos sie zmienilo i wywolywac ta funkcje
+    @objc func refreshPostData() {
         FirestoreDb.shared.getPostsData(currentUserEmail: (Auth.auth().currentUser?.email)!) { (passedArray) in
             self.posts = passedArray
+            self.posts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
             self.tableView.reloadData()
         }
     }
@@ -46,7 +50,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
 
     @IBAction func newPostAction(_ sender: UIBarButtonItem) {
-        FirestoreDb.shared.createNewPost(currentEmail: (Auth.auth().currentUser?.email)!, date: Firebase.Timestamp.init(date: Date()), text: "My third post")
+        //stworzyc nowy vc
+        //FirestoreDb.shared.createNewPost(currentEmail: (Auth.auth().currentUser?.email)!, date: Firebase.Timestamp.init(date: Date()), text: "MY abdksdhjas hdhjjdhj kansdkj ajkndskjanskd jkankjndjk kbnkjrnrjkr k sjd jsjsd jsdnjsjnsdjn sjdsndjs")
     }
     
 

@@ -20,6 +20,8 @@
 		8A074761221095AB00C6828A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A074760221095AB00C6828A /* User.swift */; };
 		8A0747632210986400C6828A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747622210986400C6828A /* LoginViewController.swift */; };
 		8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747642210DDF600C6828A /* MainTabBarController.swift */; };
+		8AF575732216F49300F3D4AD /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF575722216F49300F3D4AD /* NotificationNames.swift */; };
+		8AF575752216FB6300F3D4AD /* AddNewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF575742216FB6300F3D4AD /* AddNewPostViewController.swift */; };
 		8AF823D52211A15500BC2C95 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D42211A15500BC2C95 /* HomeViewController.swift */; };
 		8AF823D72211CCFA00BC2C95 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */; };
 		8AF823D92211DB7E00BC2C95 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */; };
@@ -64,6 +66,8 @@
 		8A074760221095AB00C6828A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8A0747622210986400C6828A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8A0747642210DDF600C6828A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		8AF575722216F49300F3D4AD /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
+		8AF575742216FB6300F3D4AD /* AddNewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPostViewController.swift; sourceTree = "<group>"; };
 		8AF823D42211A15500BC2C95 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -158,10 +162,12 @@
 				8A07475D2210939900C6828A /* Model */,
 				8A03E0A2220F56F80038EA9C /* AppDelegate.swift */,
 				8AFC05A722122B3A004F5CEC /* Extensions.swift */,
+				8AF575722216F49300F3D4AD /* NotificationNames.swift */,
 				8A0747622210986400C6828A /* LoginViewController.swift */,
 				8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */,
 				8AF823D42211A15500BC2C95 /* HomeViewController.swift */,
 				8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */,
+				8AF575742216FB6300F3D4AD /* AddNewPostViewController.swift */,
 				8A0747642210DDF600C6828A /* MainTabBarController.swift */,
 				8A03E0A6220F56F80038EA9C /* Main.storyboard */,
 				8A03E0A9220F56FA0038EA9C /* Assets.xcassets */,
@@ -448,8 +454,10 @@
 				8AF823D72211CCFA00BC2C95 /* HomeTableViewCell.swift in Sources */,
 				8AF823D92211DB7E00BC2C95 /* RegisterViewController.swift in Sources */,
 				8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */,
+				8AF575752216FB6300F3D4AD /* AddNewPostViewController.swift in Sources */,
 				8AFC05A822122B3A004F5CEC /* Extensions.swift in Sources */,
 				8A07475F221093D100C6828A /* FirestoreDb.swift in Sources */,
+				8AF575732216F49300F3D4AD /* NotificationNames.swift in Sources */,
 				8AF823DB2211E02C00BC2C95 /* Post.swift in Sources */,
 				8A074761221095AB00C6828A /* User.swift in Sources */,
 				8AF823D52211A15500BC2C95 /* HomeViewController.swift in Sources */,

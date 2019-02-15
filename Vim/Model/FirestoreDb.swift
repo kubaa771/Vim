@@ -94,6 +94,7 @@ class FirestoreDb {
     }
     
     func createNewPost(currentEmail: String, date: Timestamp, text: String) {
+        NotificationCenter.default.post(name: NotificationNames.refreshPostData.notification, object: nil)
          db.collection("users").document(currentEmail).collection("posts").addDocument(data: [
             "date" : date,
             "text" : text
