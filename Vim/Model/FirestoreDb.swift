@@ -85,7 +85,8 @@ class FirestoreDb {
                 for post in documents {
                     let textContent = post.data()["text"] as! String
                     let timeResult = post.data()["date"] as! Timestamp
-                    let myPost = Post(date: timeResult, text: textContent)
+                    let imageData = post.data()["image"] //as! NSData //???? check
+                    let myPost = Post(date: timeResult, text: textContent, image: nil, imageData: nil)//imageData)
                     postsArray.append(myPost)
                 }
                 completion(postsArray)
@@ -93,11 +94,12 @@ class FirestoreDb {
         }
     }
     
-    func createNewPost(currentEmail: String, date: Timestamp, text: String) {
+    func createNewPost(currentEmail: String, date: Timestamp, text: String, imageData: NSData) {
         NotificationCenter.default.post(name: NotificationNames.refreshPostData.notification, object: nil)
          db.collection("users").document(currentEmail).collection("posts").addDocument(data: [
             "date" : date,
-            "text" : text
+            "text" : text,
+            "image" : imageData
          ]) { (error) in
             if let errorString = error?.localizedDescription {
                 print(errorString)

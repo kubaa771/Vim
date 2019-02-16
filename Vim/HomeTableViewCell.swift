@@ -40,6 +40,9 @@ class HomeTableViewCell: UITableViewCell {
         let strDate = dateFormatter.string(from: date)
         dateLabel.text = strDate
         postContentLabel.text = post.text
+        if let imageData = post.imageData {
+            postImageView.image = UIImage(data: imageData as Data)
+        }
     }
 
 }

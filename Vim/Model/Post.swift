@@ -12,9 +12,16 @@ import FirebaseFirestore
 class Post {
     var date: Timestamp!
     var text: String!
+    var imageData: NSData!
     
-    init(date: Timestamp, text: String) {
+    init(date: Timestamp, text: String, image: UIImage?, imageData: NSData?) {
         self.date = date
         self.text = text
+        self.imageData = imageData
+        
+        if let image = image {
+            let data = NSData(data: image.jpegData(compressionQuality: 0.9)!)
+            self.imageData = data
+        }
     }
 }

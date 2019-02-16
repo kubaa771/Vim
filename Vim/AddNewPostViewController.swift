@@ -8,11 +8,12 @@
 
 import UIKit
 
-class AddNewPostViewController: UIViewController, UITextViewDelegate {
+class AddNewPostViewController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
     var typedText: String?
+    var imagePicker: UIImagePickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,12 +61,52 @@ class AddNewPostViewController: UIViewController, UITextViewDelegate {
         typedText = textView.text
     }
     
+    func selectImageFrom(_ source: ImageSource) {
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        switch source {
+        case .camera:
+            imagePicker.sourceType = .camera
+        case .photoLibrary:
+            imagePicker.sourceType = .photoLibrary
+        }
+        present(imagePicker, animated: true)
+    }
+    
+    
+    
     
     @IBAction func cameraTapped(_ sender: UIButton) {
+        selectImageFrom(.camera)
     }
     
     
     @IBAction func openPicturesTapped(_ sender: UIButton) {
+        selectImageFrom(.photoLibrary)
     }
     
+    
+    @IBAction func doneButtonAction(_ sender: UIBarButtonItem) {
+        if typedText != nil {
+            print("done")
+        }
+    }
+    
+}
+
+extension AddNewPostViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+        imagePicker.dismiss(animated: true, completion: nil)
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            print("Image not found!")
+            return
+        }
+        imageView.image = selectedImage
+    }
+}
+
+
+enum ImageSource {
+    case photoLibrary
+    case camera
 }
