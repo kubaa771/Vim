@@ -20,12 +20,14 @@
 		8A074761221095AB00C6828A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A074760221095AB00C6828A /* User.swift */; };
 		8A0747632210986400C6828A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747622210986400C6828A /* LoginViewController.swift */; };
 		8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747642210DDF600C6828A /* MainTabBarController.swift */; };
+		8A618D28221C450A00674564 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A618D27221C450A00674564 /* Friend.swift */; };
 		8AF575732216F49300F3D4AD /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF575722216F49300F3D4AD /* NotificationNames.swift */; };
 		8AF575752216FB6300F3D4AD /* AddNewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF575742216FB6300F3D4AD /* AddNewPostViewController.swift */; };
 		8AF823D52211A15500BC2C95 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D42211A15500BC2C95 /* HomeViewController.swift */; };
 		8AF823D72211CCFA00BC2C95 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */; };
 		8AF823D92211DB7E00BC2C95 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */; };
 		8AF823DB2211E02C00BC2C95 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823DA2211E02C00BC2C95 /* Post.swift */; };
+		8AF98760221B0BDC00EE956E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9875F221B0BDC00EE956E /* Loader.swift */; };
 		8AFC05A822122B3A004F5CEC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC05A722122B3A004F5CEC /* Extensions.swift */; };
 		C6025D9B4D45BD4166B4518A /* Pods_VimUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E3BE1E2FB026D781721729 /* Pods_VimUITests.framework */; };
 /* End PBXBuildFile section */
@@ -66,12 +68,14 @@
 		8A074760221095AB00C6828A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8A0747622210986400C6828A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8A0747642210DDF600C6828A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		8A618D27221C450A00674564 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		8AF575722216F49300F3D4AD /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		8AF575742216FB6300F3D4AD /* AddNewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPostViewController.swift; sourceTree = "<group>"; };
 		8AF823D42211A15500BC2C95 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8AF823DA2211E02C00BC2C95 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		8AF9875F221B0BDC00EE956E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		8AFC05A722122B3A004F5CEC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8F81FC9FA32F3E76CD66B1C2 /* Pods-VimTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimTests/Pods-VimTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6E5A1C2CF76701D250D5096 /* Pods-Vim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vim.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vim/Pods-Vim.release.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +166,7 @@
 				8A07475D2210939900C6828A /* Model */,
 				8A03E0A2220F56F80038EA9C /* AppDelegate.swift */,
 				8AFC05A722122B3A004F5CEC /* Extensions.swift */,
+				8AF9875F221B0BDC00EE956E /* Loader.swift */,
 				8AF575722216F49300F3D4AD /* NotificationNames.swift */,
 				8A0747622210986400C6828A /* LoginViewController.swift */,
 				8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */,
@@ -200,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				8A07475E221093D100C6828A /* FirestoreDb.swift */,
+				8A618D27221C450A00674564 /* Friend.swift */,
 				8AF823DA2211E02C00BC2C95 /* Post.swift */,
 				8A074760221095AB00C6828A /* User.swift */,
 			);
@@ -394,6 +400,7 @@
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoidingSwift/TPKeyboardAvoidingSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
@@ -408,6 +415,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoidingSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
@@ -450,6 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A0747632210986400C6828A /* LoginViewController.swift in Sources */,
+				8A618D28221C450A00674564 /* Friend.swift in Sources */,
 				8A03E0A3220F56F80038EA9C /* AppDelegate.swift in Sources */,
 				8AF823D72211CCFA00BC2C95 /* HomeTableViewCell.swift in Sources */,
 				8AF823D92211DB7E00BC2C95 /* RegisterViewController.swift in Sources */,
@@ -458,6 +467,7 @@
 				8AFC05A822122B3A004F5CEC /* Extensions.swift in Sources */,
 				8A07475F221093D100C6828A /* FirestoreDb.swift in Sources */,
 				8AF575732216F49300F3D4AD /* NotificationNames.swift in Sources */,
+				8AF98760221B0BDC00EE956E /* Loader.swift in Sources */,
 				8AF823DB2211E02C00BC2C95 /* Post.swift in Sources */,
 				8A074761221095AB00C6828A /* User.swift in Sources */,
 				8AF823D52211A15500BC2C95 /* HomeViewController.swift in Sources */,

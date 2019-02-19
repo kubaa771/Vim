@@ -13,6 +13,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var postContentLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var imageHeight: NSLayoutConstraint!
     
     var model: Post! {
         didSet {
@@ -31,6 +32,12 @@ class HomeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.postImageView.image = nil
+        imageHeight.constant = 0
+    }
+    
     func customize(post: Post) {
         let date = post.date.dateValue()
         let dateFormatter = DateFormatter()
@@ -41,7 +48,12 @@ class HomeTableViewCell: UITableViewCell {
         dateLabel.text = strDate
         postContentLabel.text = post.text
         if let imageData = post.imageData {
-            postImageView.image = UIImage(data: imageData as Data)
+            let image = UIImage(data: imageData as Data)
+            postImageView.image = image
+            let ratio = image!.size.width / image!.size.height
+            let newHeight = postImageView.frame.width / ratio
+            imageHeight.constant = newHeight
+            self.layoutIfNeeded()
         }
     }
 

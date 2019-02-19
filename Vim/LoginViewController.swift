@@ -36,17 +36,20 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func doneBtnTapped(_ sender: UIButton) {
+        Loader.start()
         if emailText != nil, passwordText != nil {
             FirestoreDb.shared.checkUserLogin(givenEmail: emailText!, givenPassword: passwordText!) { (matched) in
                 if matched {
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
                     self.showDetailViewController(vc, sender: sender)
                 } else {
-                    let alert = UIAlertController(title: "Error", message: "Something went wrong, check your login or password!", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self.present(alert, animated: true)
+                    self.displayErrorAlert(message: "Something went wrong, check your login or password!")
                 }
+                Loader.stop()
             }
+        } else {
+            Loader.stop()
+            self.displayErrorAlert(message: "Please fulfill all the fields!")
         }
         
     }

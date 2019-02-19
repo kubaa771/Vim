@@ -83,10 +83,14 @@ class FirestoreDb {
             if let documents = snapshot?.documents {
                 var postsArray: Array<Post> = []
                 for post in documents {
+                    let myPost: Post!
                     let textContent = post.data()["text"] as! String
                     let timeResult = post.data()["date"] as! Timestamp
-                    let imageData = post.data()["image"] //as! NSData //???? check
-                    let myPost = Post(date: timeResult, text: textContent, image: nil, imageData: nil)//imageData)
+                    if let imageData = post.data()["image"] {
+                        myPost = Post(date: timeResult, text: textContent, image: nil, imageData: (imageData as! NSData))
+                    } else {
+                        myPost = Post(date: timeResult, text: textContent, image: nil, imageData: nil)
+                    }
                     postsArray.append(myPost)
                 }
                 completion(postsArray)
@@ -94,15 +98,40 @@ class FirestoreDb {
         }
     }
     
-    func createNewPost(currentEmail: String, date: Timestamp, text: String, imageData: NSData) {
+    func createNewPost(currentEmail: String, date: Timestamp, text: String, imageData: NSData?) {
         NotificationCenter.default.post(name: NotificationNames.refreshPostData.notification, object: nil)
-         db.collection("users").document(currentEmail).collection("posts").addDocument(data: [
-            "date" : date,
-            "text" : text,
-            "image" : imageData
-         ]) { (error) in
-            if let errorString = error?.localizedDescription {
-                print(errorString)
+        if let myimageData = imageData {
+            db.collection("users").document(currentEmail).collection("posts").addDocument(data: [
+                "date" : date,
+                "text" : text,
+                "image" : myimageData
+            ]) { (error) in
+                if let errorString = error?.localizedDescription {
+                    print(errorString)
+                }
+            }
+        } else {
+            db.collection("users").document(currentEmail).collection("posts").addDocument(data: [
+                "date" : date,
+                "text" : text,
+            ]) { (error) in
+                if let errorString = error?.localizedDescription {
+                    print(errorString)
+                }
+            }
+        }
+        
+    }
+    
+    func getFriends(currentEmail: String, completion: @escaping (Array<String>) -> Void) {
+        db.collection("users").document(currentEmail).collection("friends").getDocuments { (snapshot, error) in
+            if let documents = snapshot?.documents {
+                var friendsArray: Array<String> = []
+                for friend in documents {
+                    let friendEmail = friend.data()["email"] as! String
+                    friendsArray.append(friendEmail)
+                }
+                completion(friendsArray)
             }
         }
     }

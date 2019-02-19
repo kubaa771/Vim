@@ -16,10 +16,13 @@ class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
     @IBAction func emailTextFieldEdit(_ sender: UITextField) {
         newEmail = sender.text
@@ -30,16 +33,19 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func registerButton(_ sender: UIButton) {
+        Loader.start()
         if newEmail != nil, newPassword != nil {
             FirestoreDb.shared.addNewUser(givenEmail: newEmail!, givenPassword: newPassword!) { (finished) in
                 if finished {
                     self.navigationController?.popViewController(animated: true)
                 } else {
-                    let alert = UIAlertController(title: "Error", message: "Something went wrong, check your login or password!", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self.present(alert, animated: true)
+                    self.displayErrorAlert(message: "Something went wrong, check your login or password!")
                 }
+                Loader.stop()
             }
+        } else {
+            Loader.stop()
+            self.displayErrorAlert(message: "Please fulfill all the fields!")
         }
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseFirestore
 
-class Post {
+class Post: HashableClass {
     var date: Timestamp!
     var text: String!
     var imageData: NSData!

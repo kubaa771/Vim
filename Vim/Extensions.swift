@@ -7,9 +7,54 @@
 //
 
 import Foundation
+import UIKit
 
 extension Date {
     var ticks: UInt64 {
         return UInt64((self.timeIntervalSince1970 + 62_135_596_800) * 10_000_000)
+    }
+}
+
+extension UIViewController {
+    func displayErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+}
+
+extension Sequence where Iterator.Element : Hashable {
+    
+    func intersects<S : Sequence>(with sequence: S) -> Bool
+        where S.Iterator.Element == Iterator.Element
+    {
+        let sequenceSet = Set(sequence)
+        return self.contains(where: sequenceSet.contains)
+    }
+}
+
+open class HashableClass {
+    public init() {}
+}
+
+// MARK: - <Hashable>
+
+extension HashableClass: Hashable {
+    public var hashValue: Int {
+        return ObjectIdentifier(self).hashValue
+    }
+}
+
+// MARK: - <Equatable>
+
+extension HashableClass: Equatable {}
+public func ==(lhs: HashableClass, rhs: HashableClass) -> Bool {
+    return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+}
+
+extension Array where Element: Hashable {
+    var uniqueItems: Array  {
+        var set = Set<Element>()
+        return compactMap { set.insert($0).inserted ? $0 : nil }
     }
 }

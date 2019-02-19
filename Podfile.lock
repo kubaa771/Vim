@@ -99,6 +99,9 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - NVActivityIndicatorView (4.6.1):
+    - NVActivityIndicatorView/Presenter (= 4.6.1)
+  - NVActivityIndicatorView/Presenter (4.6.1)
   - Protobuf (3.6.1)
   - TPKeyboardAvoidingSwift (3.1)
 
@@ -106,6 +109,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - NVActivityIndicatorView
   - TPKeyboardAvoidingSwift
 
 SPEC REPOS:
@@ -125,6 +129,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - NVActivityIndicatorView
     - Protobuf
     - TPKeyboardAvoidingSwift
 
@@ -144,9 +149,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  NVActivityIndicatorView: 4ca19fccc84595a78957336a086d00a49be6ce61
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   TPKeyboardAvoidingSwift: b518d6e0c325d62ef5bddb712f22852b41cd165c
 
-PODFILE CHECKSUM: cd1846fee540327875df3fdbab990c7315ba6d5f
+PODFILE CHECKSUM: b8c97ec4cd41cd6124184eb96e3ae7b701f5c84c
 
 COCOAPODS: 1.5.3

@@ -14,6 +14,7 @@ import FirebaseFirestore
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
     var posts: Array<Post> = []
+    var friends: Array<String> = []
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,7 +22,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.estimatedRowHeight = 420
+        tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
         refreshPostData()
@@ -30,11 +31,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func refreshPostData() {
+        Loader.start()
         FirestoreDb.shared.getPostsData(currentUserEmail: (Auth.auth().currentUser?.email)!) { (passedArray) in
-            self.posts = passedArray
+            for post in passedArray {
+                let results = self.posts.filter {$0.text == post.text}
+                let exists = results.isEmpty == false
+                if exists {
+                    self.posts.removeAll()
+                }
+            }
+
+            self.posts.append(contentsOf: passedArray)
             self.posts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
+            Loader.stop()
             self.tableView.reloadData()
         }
+        getFriends()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,10 +60,27 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-
-    @IBAction func newPostAction(_ sender: UIBarButtonItem) {
-        //stworzyc nowy vc
-        //FirestoreDb.shared.createNewPost(currentEmail: (Auth.auth().currentUser?.email)!, date: Firebase.Timestamp.init(date: Date()), text: "MY abdksdhjas hdhjjdhj kansdkj ajkndskjanskd jkankjndjk kbnkjrnrjkr k sjd jsjsd jsdnjsjnsdjn sjdsndjs")
+    func getFriends() {
+        FirestoreDb.shared.getFriends(currentEmail: (Auth.auth().currentUser?.email)!) { (friends) in
+            self.friends.removeAll()
+            self.friends.append(contentsOf: friends)
+            for friendEmail in friends {
+                FirestoreDb.shared.getPostsData(currentUserEmail: friendEmail) { (passedArray) in
+                    for post in passedArray {
+                        let results = self.posts.filter {$0.text == post.text}
+                        let exists = results.isEmpty == false
+                        if exists {
+                            self.posts.removeAll()
+                        }
+                    }
+                    
+                    self.posts.append(contentsOf: passedArray)
+                    self.posts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
+                    Loader.stop()
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
 

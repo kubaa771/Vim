@@ -46,40 +46,47 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
-		<key>Pods-Vim.xcscheme</key>
+		<key>NVActivityIndicatorView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
-		<key>Pods-VimTests.xcscheme</key>
+		<key>Pods-Vim.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>12</integer>
 		</dict>
-		<key>Pods-VimUITests.xcscheme</key>
+		<key>Pods-VimTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>13</integer>
 		</dict>
-		<key>Protobuf.xcscheme</key>
+		<key>Pods-VimUITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
-		<key>TPKeyboardAvoidingSwift.xcscheme</key>
+		<key>Protobuf.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>15</integer>
+		</dict>
+		<key>TPKeyboardAvoidingSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>16</integer>
 		</dict>
 		<key>gRPC-C++-gRPCCertificates.xcscheme</key>
 		<dict>
