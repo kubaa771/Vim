@@ -48,8 +48,14 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pvf-xa-3DP">
                                                     <rect key="frame" x="15" y="11" width="345" height="398.5"/>
                                                     <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test123@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Qs-ZM-UJO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="151" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i2z-w8-4yE">
-                                                            <rect key="frame" x="0.0" y="0.0" width="28.5" height="338"/>
+                                                            <rect key="frame" x="0.0" y="40.5" width="28.5" height="297.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -68,7 +74,7 @@
                                                         </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="xWT-Xg-5rc" firstAttribute="top" secondItem="GO5-8W-dyK" secondAttribute="bottom" constant="20" id="4Up-t3-3GH"/>
+                                                        <constraint firstItem="xWT-Xg-5rc" firstAttribute="top" secondItem="GO5-8W-dyK" secondAttribute="bottom" constant="20" id="OVF-S1-DlF"/>
                                                         <constraint firstItem="xWT-Xg-5rc" firstAttribute="width" secondItem="pvf-xa-3DP" secondAttribute="width" id="OXP-HW-NbH"/>
                                                         <constraint firstItem="xWT-Xg-5rc" firstAttribute="leading" secondItem="pvf-xa-3DP" secondAttribute="leading" id="PNM-I0-SYb"/>
                                                         <constraint firstAttribute="trailing" secondItem="xWT-Xg-5rc" secondAttribute="trailing" id="WR1-cf-DWj"/>
