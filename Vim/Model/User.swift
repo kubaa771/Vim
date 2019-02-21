@@ -7,11 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 class User {
     var email: String!
+    var photo: UIImage?
     
-    init(email: String?) {
+    init(email: String?, image: UIImage?) {
         self.email = email
+        self.photo = image
     }
 }

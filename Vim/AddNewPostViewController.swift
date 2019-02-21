@@ -90,16 +90,14 @@ class AddNewPostViewController: UIViewController, UITextViewDelegate, UINavigati
     
     @IBAction func doneButtonAction(_ sender: UIBarButtonItem) {
         if typedText != nil {
+            let currentUser = User(email: Auth.auth().currentUser?.email, image: nil)
             if let image = imageView.image {
                 let imageData = NSData(data: (image.jpegData(compressionQuality: 0.1))!)
-                let myURL = URL(dataRepresentation: imageData as Data, relativeTo: nil)
-                FirestoreDb.shared.createNewPost(currentEmail: (Auth.auth().currentUser?.email)!, date: Firebase.Timestamp.init(date: Date()), text: typedText!, imageData: imageData)
+                FirestoreDb.shared.createNewPost(currentUser: currentUser, date: Firebase.Timestamp.init(date: Date()), text: typedText!, imageData: imageData)
             } else {
-                 FirestoreDb.shared.createNewPost(currentEmail: (Auth.auth().currentUser?.email)!, date: Firebase.Timestamp.init(date: Date()), text: typedText!, imageData: nil)
+                FirestoreDb.shared.createNewPost(currentUser: currentUser, date: Firebase.Timestamp.init(date: Date()), text: typedText!, imageData: nil)
             }
             navigationController?.popViewController(animated: true)
-            
-            print("done")
         }
     }
     

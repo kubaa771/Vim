@@ -13,6 +13,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var postContentLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
     
     var model: Post! {
@@ -39,6 +40,14 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     func customize(post: Post) {
+        if let imageData = post.imageData {
+            let image = UIImage(data: imageData as Data)
+            let ratio = image!.size.width / image!.size.height
+            let newHeight = postImageView.frame.width / ratio
+            imageHeight.constant = newHeight
+            postImageView.image = image
+            self.layoutIfNeeded()
+        }
         let date = post.date.dateValue()
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
@@ -47,14 +56,10 @@ class HomeTableViewCell: UITableViewCell {
         let strDate = dateFormatter.string(from: date)
         dateLabel.text = strDate
         postContentLabel.text = post.text
-        if let imageData = post.imageData {
-            let image = UIImage(data: imageData as Data)
-            postImageView.image = image
-            let ratio = image!.size.width / image!.size.height
-            let newHeight = postImageView.frame.width / ratio
-            imageHeight.constant = newHeight
-            self.layoutIfNeeded()
-        }
+        userLabel.text = post.owner.email
+        
     }
+    
+    
 
 }

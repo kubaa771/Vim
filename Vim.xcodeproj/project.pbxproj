@@ -20,7 +20,6 @@
 		8A074761221095AB00C6828A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A074760221095AB00C6828A /* User.swift */; };
 		8A0747632210986400C6828A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747622210986400C6828A /* LoginViewController.swift */; };
 		8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747642210DDF600C6828A /* MainTabBarController.swift */; };
-		8A618D28221C450A00674564 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A618D27221C450A00674564 /* Friend.swift */; };
 		8AF575732216F49300F3D4AD /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF575722216F49300F3D4AD /* NotificationNames.swift */; };
 		8AF575752216FB6300F3D4AD /* AddNewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF575742216FB6300F3D4AD /* AddNewPostViewController.swift */; };
 		8AF823D52211A15500BC2C95 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D42211A15500BC2C95 /* HomeViewController.swift */; };
@@ -68,7 +67,6 @@
 		8A074760221095AB00C6828A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8A0747622210986400C6828A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8A0747642210DDF600C6828A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		8A618D27221C450A00674564 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		8AF575722216F49300F3D4AD /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		8AF575742216FB6300F3D4AD /* AddNewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPostViewController.swift; sourceTree = "<group>"; };
 		8AF823D42211A15500BC2C95 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -205,7 +203,6 @@
 			isa = PBXGroup;
 			children = (
 				8A07475E221093D100C6828A /* FirestoreDb.swift */,
-				8A618D27221C450A00674564 /* Friend.swift */,
 				8AF823DA2211E02C00BC2C95 /* Post.swift */,
 				8A074760221095AB00C6828A /* User.swift */,
 			);
@@ -458,7 +455,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A0747632210986400C6828A /* LoginViewController.swift in Sources */,
-				8A618D28221C450A00674564 /* Friend.swift in Sources */,
 				8A03E0A3220F56F80038EA9C /* AppDelegate.swift in Sources */,
 				8AF823D72211CCFA00BC2C95 /* HomeTableViewCell.swift in Sources */,
 				8AF823D92211DB7E00BC2C95 /* RegisterViewController.swift in Sources */,
