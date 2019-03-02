@@ -31,6 +31,8 @@ class FirestoreDb {
                 completion(false)
             }
         }
+        
+        db.collection("users").document(givenEmail).setData(["email" : givenEmail])
         /*db.collection("users").document(user.login).setData([
             "login" : user.login,
             "password" : user.password,
@@ -59,26 +61,10 @@ class FirestoreDb {
             
             
         }
-        
-        /*db.collection("users").document(givenEmail).getDocument { (document, error) in
-            if let document = document, document.exists {
-                if let login = document.get("login") as? String, let password = document.get("password") as? String {
-                    if login == givenEmail, password == givenPassword {
-                        print("login: \(login), password: \(password)")
-                        completion(true)
-                    } else {
-                        completion(false)
-                    }
-                }
-            } else {
-                print(error?.localizedDescription ?? "error")
-                completion(false)
-            }
-        }*/
+    
     }
     
     func getPostsData(currentUser: User, completion: @escaping (Array<Post>) -> Void) {
-        
         db.collection("users").document(currentUser.email).collection("posts").getDocuments { (snapshot, error) in
             if let documents = snapshot?.documents {
                 var postsArray: Array<Post> = []
@@ -129,11 +115,54 @@ class FirestoreDb {
                 var friendsArray: Array<User> = []
                 for friend in documents {
                     let friendEmail = friend.data()["email"] as! String
-                    let friendUser = User(email: friendEmail, image: nil)
+                    let friendUser = User(email: friendEmail, image: nil, name: nil, surname: nil, id: UUID().uuidString)
                     friendsArray.append(friendUser)
                 }
                 completion(friendsArray)
             }
+        }
+    }
+    
+    func getAllUsers(completion: @escaping (Array<User>) -> Void) {
+        db.collection("users").getDocuments { (snapshot, err) in
+            if let documents = snapshot?.documents {
+                var usersArray: Array<User> = []
+                for document in documents {
+                    let emailData = document.data()["email"] as! String
+                    let user = User(email: emailData, image: nil, name: nil, surname: nil, id: UUID().uuidString)
+                    usersArray.append(user)
+                }
+                completion(usersArray)
+            }
+        }
+    }
+    
+    func addFriend(currentUser: User, userToAdd: User) {
+        NotificationCenter.default.post(name: NotificationNames.refreshPostData.notification, object: nil)
+        db.collection("users").document(currentUser.email).collection("friends").addDocument(data: [
+            "email" : userToAdd.email])
+    }
+    
+    func getUserProfileData(email: String, completion: @escaping (User) -> Void) {
+        db.collection("users").document(email).getDocument { (snapshot, error) in
+            if let documentData = snapshot?.data(){
+                let email = documentData["email"] as! String
+                guard let name = documentData["name"] as? String else {
+                    return
+                }
+                guard let surname = documentData["surname"] as? String else {
+                    return
+                }
+                guard let photo = documentData["photo"] as? NSData else {
+                    return
+                }
+                guard let id = documentData["id"] as? String else {
+                    return
+                }
+                let user = User(email: email, image: photo, name: name, surname: surname, id: id)
+                completion(user)
+            }
+           
         }
     }
     

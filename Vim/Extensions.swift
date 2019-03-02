@@ -58,3 +58,15 @@ extension Array where Element: Hashable {
         return compactMap { set.insert($0).inserted ? $0 : nil }
     }
 }
+
+extension UITextView {
+    func setBottomBorder() {
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width,   width:  self.frame.size.width, height: self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+    }
+}

@@ -90,7 +90,7 @@ class AddNewPostViewController: UIViewController, UITextViewDelegate, UINavigati
     
     @IBAction func doneButtonAction(_ sender: UIBarButtonItem) {
         if typedText != nil {
-            let currentUser = User(email: Auth.auth().currentUser?.email, image: nil)
+            let currentUser = User(email: Auth.auth().currentUser?.email, image: nil, name: nil, surname: nil, id: UUID().uuidString)
             if let image = imageView.image {
                 let imageData = NSData(data: (image.jpegData(compressionQuality: 0.1))!)
                 FirestoreDb.shared.createNewPost(currentUser: currentUser, date: Firebase.Timestamp.init(date: Date()), text: typedText!, imageData: imageData)

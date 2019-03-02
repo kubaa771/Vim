@@ -13,9 +13,9 @@ import FirebaseFirestore
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
-    var posts: Array<Post> = []
+    var allPosts: Array<Post> = []
     var friends: Array<User> = []
-    
+    let currentUser = User(email: Auth.auth().currentUser?.email, image: nil, name: nil, surname: nil, id: UUID().uuidString)
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -31,59 +31,61 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func refreshPostData() {
+        allPosts.removeAll()
         Loader.start()
         getSelfPostData()
         getFriendsPostData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        return allPosts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
-        cell.model = posts[indexPath.row]
+        cell.model = allPosts[indexPath.row]
         return cell
     }
     
     func getFriendsPostData() {
-        let currentUser = User(email: Auth.auth().currentUser?.email, image: nil)
         FirestoreDb.shared.getFriends(currentUser: currentUser) { (friends) in
             self.friends.removeAll()
             self.friends.append(contentsOf: friends)
             for friendUser in friends {
                 FirestoreDb.shared.getPostsData(currentUser: friendUser) { (passedArray) in
+                    var postsfriends: Array<Post> = passedArray
                     for post in passedArray {
-                        let results = self.posts.filter {$0.text == post.text}
+                        let results = self.allPosts.filter {$0.text == post.text}
                         let exists = results.isEmpty == false
                         if exists {
-                            self.posts.removeAll()
+                            postsfriends.removeAll()
                         }
                     }
-                    
-                    self.posts.append(contentsOf: passedArray)
-                    self.posts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
-                    Loader.stop()
+                    self.allPosts.append(contentsOf: postsfriends)
+                    self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
                     self.tableView.reloadData()
+                    Loader.stop()
                 }
             }
+            
+            
         }
     }
     
     func getSelfPostData() {
-        let currentUser = User(email: Auth.auth().currentUser?.email, image: nil)
         FirestoreDb.shared.getPostsData(currentUser: currentUser) { (passedArray) in
+            var myPosts = passedArray
             for post in passedArray {
-                let results = self.posts.filter {$0.text == post.text}
+                let results = self.allPosts.filter {$0.text == post.text}
                 let exists = results.isEmpty == false
                 if exists {
-                    self.posts.removeAll()
+                    myPosts.removeAll()
                 }
             }
-            self.posts.append(contentsOf: passedArray)
-            self.posts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
-            Loader.stop()
+            self.allPosts.append(contentsOf: myPosts)
+            self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
             self.tableView.reloadData()
+            Loader.stop()
         }
     }
     
