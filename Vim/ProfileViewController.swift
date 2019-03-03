@@ -12,24 +12,21 @@ import FirebaseAuth
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var surnameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     
+    @IBOutlet weak var profileImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customize()
 
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        customize()
+    }
+    
     func customize() {
-        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-        //FirestoreDb.shared.getUserProfileData(email: Auth.auth().currentUser?.email, completion: <#T##(User) -> Void#>)
-        changeRequest?.displayName = "lol"
-        changeRequest?.commitChanges(completion: { (error) in
-            print(error ?? "error")
-        })
         let user = Auth.auth().currentUser
         if let user = user {
             nameLabel.text = user.displayName

@@ -20,9 +20,12 @@ class FirestoreDb {
         //docRef = Firestore.firestore().document("users")
     }
     
-    func addNewUser(givenEmail: String, givenPassword: String, completion: @escaping (Bool) -> Void) {
+    func addNewUser(givenEmail: String, givenPassword: String, givenName: String, completion: @escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: givenEmail, password: givenPassword) { (user, error) in
             if user != nil {
+                user?.user.createProfileChangeRequest().displayName = givenName
+                user?.user.createProfileChangeRequest().commitChanges(completion: { (error) in
+                })
                 completion(true)
             } else {
                 completion(false)
@@ -163,6 +166,41 @@ class FirestoreDb {
                 completion(user)
             }
            
+        }
+    }
+    
+    func updateUserProfile(auth: Auth, newName: String?, newPassword: String?, completion: @escaping (Bool) -> Void) {
+        let user = auth.currentUser
+        let changeRequest = auth.currentUser?.createProfileChangeRequest()
+        if let user = user {
+            var i = 0
+            
+            if let name = newName {
+                changeRequest?.displayName = name
+                changeRequest?.commitChanges(completion: { (error) in
+                    completion(false)
+                })
+                i += 1
+            }
+            
+            if let password = newPassword {
+                user.updatePassword(to: password) { (error) in
+                    completion(false)
+                }
+                i += 1
+            }
+            
+            if i == 2 {
+                i=0
+                completion(true)
+            } else if i == 1 {
+                i=0
+                completion(true)
+            } else if i == 0 {
+                completion(false)
+            }
+        } else {
+            completion(false)
         }
     }
     
