@@ -13,6 +13,7 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
     
     var allUsersArray: Array<User> = []
     var userFriendsArray: Array<User> = []
+    var isUserFriendsList: Bool = false
     let currentUser = User(email: Auth.auth().currentUser?.email, image: nil, name: nil, surname: nil, id: UUID().uuidString)
 
     override func viewDidLoad() {
@@ -27,17 +28,46 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    
+    override func viewWillAppear(_ animated: Bool) {
         modelSetUp()
+        Auth.auth().currentUser?.getIDTokenResult(completion: { (result, error) in
+            print(result?.token)
+        })
+        
     }
     
     func modelSetUp() {
+        
         FirestoreDb.shared.getAllUsers { (usersList) in
             self.allUsersArray = usersList
-            self.tableView.reloadData()
         }
-        FirestoreDb.shared.getFriends(currentUser: currentUser) { (friends) in
-            self.userFriendsArray = friends
+        
+        if !isUserFriendsList {
+            FirestoreDb.shared.getFriends(currentUser: currentUser) { (friends) in
+                self.userFriendsArray = friends
+                self.tableView.reloadData()
+            }
+        } else {
+            FirestoreDb.shared.getFriends(currentUser: currentUser) { (friends) in
+                self.userFriendsArray.removeAll()
+                for friend in friends {
+                    let checker = self.checkIfFriendExists(user: friend)
+                    if checker {
+                        self.userFriendsArray.append(friend)
+                    }
+                }
+                self.allUsersArray = self.userFriendsArray
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func checkIfFriendExists(user: User) -> Bool{
+        if allUsersArray.contains(where: {$0.email == user.email}) {
+            return true
+        } else {
+            return false
         }
     }
 

@@ -150,58 +150,62 @@ class FirestoreDb {
         db.collection("users").document(email).getDocument { (snapshot, error) in
             if let documentData = snapshot?.data(){
                 let email = documentData["email"] as! String
-                guard let name = documentData["name"] as? String else {
-                    return
+                let name: String
+                let surname: String
+                let photo: NSData?
+                
+                if let nameData = documentData["name"] as? String {
+                    name = nameData
+                } else {
+                    name = " "
                 }
-                guard let surname = documentData["surname"] as? String else {
-                    return
+                if let surnameData = documentData["surname"] as? String {
+                    surname = surnameData
+                } else {
+                    surname = " "
                 }
-                guard let photo = documentData["photo"] as? NSData else {
-                    return
+                if let photoData = documentData["photo"] as? NSData {
+                    photo = photoData
+                } else {
+                    photo = nil
                 }
-                guard let id = documentData["id"] as? String else {
-                    return
-                }
-                let user = User(email: email, image: photo, name: name, surname: surname, id: id)
+                
+                let user = User(email: email, image: photo, name: name, surname: surname, id: UUID().uuidString)
                 completion(user)
             }
            
         }
     }
     
-    func updateUserProfile(auth: Auth, newName: String?, newPassword: String?, completion: @escaping (Bool) -> Void) {
+    func updateUserProfile(auth: Auth, newUser: User, newPassword: String?, completion: @escaping (Bool) -> Void) {
+        
+        if let name = newUser.name {
+            db.collection("users").document(newUser.email).setData([
+                "name" : name,
+            ])
+        }
+        
+        if let surname = newUser.surname {
+            db.collection("users").document(newUser.email).setData([
+                "surname" : surname,
+            ])
+        }
+        
+        if let photo = newUser.photo {
+            db.collection("users").document(newUser.email).setData([
+                "photo" : photo,
+            ])
+        }
+        
         let user = auth.currentUser
-        let changeRequest = auth.currentUser?.createProfileChangeRequest()
         if let user = user {
-            var i = 0
-            
-            if let name = newName {
-                changeRequest?.displayName = name
-                changeRequest?.commitChanges(completion: { (error) in
-                    completion(false)
-                })
-                i += 1
-            }
-            
             if let password = newPassword {
                 user.updatePassword(to: password) { (error) in
                     completion(false)
                 }
-                i += 1
             }
-            
-            if i == 2 {
-                i=0
-                completion(true)
-            } else if i == 1 {
-                i=0
-                completion(true)
-            } else if i == 0 {
-                completion(false)
-            }
-        } else {
-            completion(false)
         }
+        completion(true)
     }
     
 }

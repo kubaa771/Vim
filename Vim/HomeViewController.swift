@@ -55,7 +55,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 FirestoreDb.shared.getPostsData(currentUser: friendUser) { (passedArray) in
                     var postsfriends: Array<Post> = passedArray
                     for post in passedArray {
-                        let results = self.allPosts.filter {$0.text == post.text}
+                        let results = self.allPosts.filter {$0.uuid == post.uuid}
                         let exists = results.isEmpty == false
                         if exists {
                             postsfriends.removeAll()
@@ -68,7 +68,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             }
             
-            
         }
     }
     
@@ -76,7 +75,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         FirestoreDb.shared.getPostsData(currentUser: currentUser) { (passedArray) in
             var myPosts = passedArray
             for post in passedArray {
-                let results = self.allPosts.filter {$0.text == post.text}
+                let results = self.allPosts.filter {$0.uuid == post.uuid}
                 let exists = results.isEmpty == false
                 if exists {
                     myPosts.removeAll()

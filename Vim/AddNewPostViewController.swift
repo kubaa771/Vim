@@ -13,7 +13,9 @@ import Firebase
 class AddNewPostViewController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var minusButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView! 
+    
     var typedText: String?
     var imagePicker: UIImagePickerController!
     
@@ -75,6 +77,11 @@ class AddNewPostViewController: UIViewController, UITextViewDelegate, UINavigati
         present(imagePicker, animated: true)
     }
     
+    @IBAction func removePhoto(_ sender: UIButton) {
+        imageView.image = nil
+        minusButton.isHidden = true
+    }
+    
     
     
     
@@ -110,6 +117,7 @@ extension AddNewPostViewController: UIImagePickerControllerDelegate {
             print("Image not found!")
             return
         }
+        minusButton.isHidden = false
         imageView.image = selectedImage
     }
 }

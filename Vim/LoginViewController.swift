@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
                     self.showDetailViewController(vc, sender: sender)
                 } else {
-                    self.displayErrorAlert(message: "Something went wrong, check your login or password!")
+                    self.displayErrorAlert(message: "Something went wrong, check your login, password or your internet connection!")
                 }
                 Loader.stop()
             }

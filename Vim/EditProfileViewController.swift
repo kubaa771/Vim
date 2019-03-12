@@ -12,6 +12,7 @@ import FirebaseAuth
 class EditProfileViewController: UIViewController {
     
     var newName: String?
+    var newSurname: String?
     var newPassword: String?
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -25,6 +26,10 @@ class EditProfileViewController: UIViewController {
 
     @IBAction func nameTextFieldEdit(_ sender: UITextField) {
         newName = sender.text
+    }
+    
+    @IBAction func surnameTextFieldEdit(_ sender: UITextField) {
+        newSurname = sender.text
     }
     
     @IBAction func passwordTextFieldEdit(_ sender: UITextField) {
@@ -41,11 +46,16 @@ class EditProfileViewController: UIViewController {
     
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         let auth = Auth.auth()
-        FirestoreDb.shared.updateUserProfile(auth: auth, newName: newName, newPassword: newPassword) { (success) in
-            if success {
-                self.navigationController?.popViewController(animated: true)
-            } else {
-                self.displayErrorAlert(message: "Something went wrong. Try again later!")
+        if newName == nil, newSurname == nil, newPassword == nil {
+            displayErrorAlert(message: "Fulfill any field!")
+        } else {
+            let user = User(email: auth.currentUser?.email, image: nil, name: newName, surname: newSurname, id: UUID().uuidString)
+            FirestoreDb.shared.updateUserProfile(auth: auth, newUser: user, newPassword: newPassword) { (success) in
+                if success {
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    self.displayErrorAlert(message: "Something went wrong. Try again later!")
+                }
             }
         }
     }

@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
-    
+    @IBOutlet weak var surnameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     
     override func viewDidLoad() {
@@ -24,17 +24,32 @@ class ProfileViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         customize()
+        nameLabel.setBottomBorder()
+        surnameLabel.setBottomBorder()
+        emailLabel.setBottomBorder()
     }
     
     func customize() {
         let user = Auth.auth().currentUser
-        if let user = user {
+        
+        FirestoreDb.shared.getUserProfileData(email: (user?.email)!) { (userData) in
+            self.emailLabel.text = user?.email
+            self.nameLabel.text = userData.name
+            self.surnameLabel.text = userData.surname
+            
+        }
+        /*if let user = user {
             nameLabel.text = user.displayName
             emailLabel.text = user.email
-        }
+        }*/
     }
     
 
+    @IBAction func friendsButtonAction(_ sender: UIButton) {
+        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendListTableViewController") as! FriendsListTableViewController
+        vc.isUserFriendsList = true
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     /*
     // MARK: - Navigation
 
