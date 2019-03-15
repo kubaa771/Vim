@@ -9,13 +9,14 @@
 import UIKit
 import FirebaseAuth
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     var newName: String?
     var newSurname: String?
     var newPassword: String?
     
     @IBOutlet weak var profileImageView: UIImageView!
+    var imagePicker: UIImagePickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,18 +39,34 @@ class EditProfileViewController: UIViewController {
     
     
     @IBAction func chooseFromGalleryAction(_ sender: UIButton) {
+         selectImageFrom(.photoLibrary)
     }
     
     @IBAction func takePhotoAction(_ sender: UIButton) {
+         selectImageFrom(.camera)
+    }
+    
+    func selectImageFrom(_ source: ImageSource) {
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        switch source {
+        case .camera:
+            imagePicker.sourceType = .camera
+        case .photoLibrary:
+            imagePicker.sourceType = .photoLibrary
+        }
+        present(imagePicker, animated: true)
     }
     
     
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         let auth = Auth.auth()
-        if newName == nil, newSurname == nil, newPassword == nil {
+        if newName == nil, newSurname == nil, newPassword == nil, profileImageView.image == nil{
             displayErrorAlert(message: "Fulfill any field!")
         } else {
-            let user = User(email: auth.currentUser?.email, image: nil, name: newName, surname: newSurname, id: UUID().uuidString)
+            let image = profileImageView.image
+            let imageData = NSData(data: (image?.jpegData(compressionQuality: 0.1))!)
+            let user = User(email: auth.currentUser?.email, imageData: imageData, name: newName, surname: newSurname, id: UUID().uuidString)
             FirestoreDb.shared.updateUserProfile(auth: auth, newUser: user, newPassword: newPassword) { (success) in
                 if success {
                     self.navigationController?.popViewController(animated: true)
@@ -70,4 +87,16 @@ class EditProfileViewController: UIViewController {
     }
     */
 
+}
+
+extension EditProfileViewController :UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+        imagePicker.dismiss(animated: true, completion: nil)
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            print("Image not found!")
+            return
+        }
+        //minusButton.isHidden = false
+        profileImageView.image = selectedImage
+    }
 }

@@ -35,7 +35,8 @@ class FirestoreDb {
             }
         }
         
-        db.collection("users").document(givenEmail).setData(["email" : givenEmail])
+        db.collection("users").document(givenEmail).setData([
+            "email" : givenEmail])
         /*db.collection("users").document(user.login).setData([
             "login" : user.login,
             "password" : user.password,
@@ -116,12 +117,22 @@ class FirestoreDb {
         db.collection("users").document(currentUser.email).collection("friends").getDocuments { (snapshot, error) in
             if let documents = snapshot?.documents {
                 var friendsArray: Array<User> = []
+                let group = DispatchGroup()
                 for friend in documents {
+                    group.enter()
                     let friendEmail = friend.data()["email"] as! String
-                    let friendUser = User(email: friendEmail, image: nil, name: nil, surname: nil, id: UUID().uuidString)
-                    friendsArray.append(friendUser)
+                    self.getUserProfileData(email: friendEmail, completion: { (friendUser) in
+                        print("finished request")
+                        friendsArray.append(friendUser)
+                        group.leave()
+                    })
                 }
-                completion(friendsArray)
+                //group.wait()
+                //completion(friendsArray)
+                
+                group.notify(queue: .main) {
+                    completion(friendsArray)
+                }
             }
         }
     }
@@ -132,7 +143,7 @@ class FirestoreDb {
                 var usersArray: Array<User> = []
                 for document in documents {
                     let emailData = document.data()["email"] as! String
-                    let user = User(email: emailData, image: nil, name: nil, surname: nil, id: UUID().uuidString)
+                    let user = User(email: emailData, imageData: nil, name: nil, surname: nil, id: UUID().uuidString)
                     usersArray.append(user)
                 }
                 completion(usersArray)
@@ -146,7 +157,8 @@ class FirestoreDb {
             "email" : userToAdd.email])
     }
     
-    func getUserProfileData(email: String, completion: @escaping (User) -> Void) {
+    func getUserProfileData(email: String, completion: @escaping (User) -> Void){
+        
         db.collection("users").document(email).getDocument { (snapshot, error) in
             if let documentData = snapshot?.data(){
                 let email = documentData["email"] as! String
@@ -170,7 +182,7 @@ class FirestoreDb {
                     photo = nil
                 }
                 
-                let user = User(email: email, image: photo, name: name, surname: surname, id: UUID().uuidString)
+                let user = User(email: email, imageData: photo, name: name, surname: surname, id: UUID().uuidString)
                 completion(user)
             }
            
@@ -180,21 +192,15 @@ class FirestoreDb {
     func updateUserProfile(auth: Auth, newUser: User, newPassword: String?, completion: @escaping (Bool) -> Void) {
         
         if let name = newUser.name {
-            db.collection("users").document(newUser.email).setData([
-                "name" : name,
-            ])
+            db.collection("users").document(newUser.email).updateData(["name" : name])
         }
         
         if let surname = newUser.surname {
-            db.collection("users").document(newUser.email).setData([
-                "surname" : surname,
-            ])
+            db.collection("users").document(newUser.email).updateData(["surname" : surname])
         }
         
-        if let photo = newUser.photo {
-            db.collection("users").document(newUser.email).setData([
-                "photo" : photo,
-            ])
+        if let photo = newUser.imageData {
+            db.collection("users").document(newUser.email).updateData(["photo" : photo])
         }
         
         let user = auth.currentUser

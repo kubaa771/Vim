@@ -36,6 +36,10 @@ class ProfileViewController: UIViewController {
             self.emailLabel.text = user?.email
             self.nameLabel.text = userData.name
             self.surnameLabel.text = userData.surname
+            if let imgData = userData.imageData {
+                self.profileImageView.image = UIImage(data: imgData as Data)
+            }
+            
             
         }
         /*if let user = user {

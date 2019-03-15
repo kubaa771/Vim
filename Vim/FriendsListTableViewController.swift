@@ -14,7 +14,7 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
     var allUsersArray: Array<User> = []
     var userFriendsArray: Array<User> = []
     var isUserFriendsList: Bool = false
-    let currentUser = User(email: Auth.auth().currentUser?.email, image: nil, name: nil, surname: nil, id: UUID().uuidString)
+    let currentUser = User(email: Auth.auth().currentUser?.email, imageData: nil, name: nil, surname: nil, id: UUID().uuidString)
 
     override func viewDidLoad() {
         super.viewDidLoad()

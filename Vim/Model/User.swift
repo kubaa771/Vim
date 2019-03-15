@@ -11,14 +11,14 @@ import UIKit
 
 class User {
     var email: String!
-    var photo: NSData?
+    var imageData: NSData?
     var name: String?
     var surname: String?
     var uuid = UUID().uuidString
     
-    init(email: String?, image: NSData?, name: String?, surname: String?, id: String) {
+    init(email: String?, imageData: NSData?, name: String?, surname: String?, id: String) {
         self.email = email
-        self.photo = image
+        self.imageData = imageData
         self.name = name
         self.surname = surname
         self.uuid = id

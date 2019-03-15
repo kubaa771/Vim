@@ -15,17 +15,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
    
     var allPosts: Array<Post> = []
     var friends: Array<User> = []
-    let currentUser = User(email: Auth.auth().currentUser?.email, image: nil, name: nil, surname: nil, id: UUID().uuidString)
+    var currentUser: User!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        customize()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.estimatedRowHeight = 420
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
-        refreshPostData()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshPostData), name: NotificationNames.refreshPostData.notification, object: nil)
         // Do any additional setup after loading the view.
     }
@@ -35,6 +35,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         Loader.start()
         getSelfPostData()
         getFriendsPostData()
+    }
+    
+    func customize() {
+        let user = Auth.auth().currentUser
+        FirestoreDb.shared.getUserProfileData(email: (user?.email)!) { (userData) in
+            self.currentUser = userData
+            self.refreshPostData()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

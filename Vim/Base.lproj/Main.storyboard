@@ -321,6 +321,7 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="i2z-w8-4yE" id="UU0-81-6x4"/>
                                             <outlet property="imageHeight" destination="Q45-8Z-KbK" id="xrM-YF-Ppy"/>
+                                            <outlet property="ownerPictureImageView" destination="SKS-Vs-U6g" id="k36-1h-eu8"/>
                                             <outlet property="postContentLabel" destination="GO5-8W-dyK" id="lsj-f8-d0N"/>
                                             <outlet property="postImageView" destination="xWT-Xg-5rc" id="1UJ-Wi-TSU"/>
                                             <outlet property="userLabel" destination="7Qs-ZM-UJO" id="iRB-KZ-t5X"/>
@@ -976,7 +977,7 @@
                                                 <color key="textColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Surname" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fBJ-vh-dkP">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Surname" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fBJ-vh-dkP">
                                                 <rect key="frame" x="0.0" y="18" width="255" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

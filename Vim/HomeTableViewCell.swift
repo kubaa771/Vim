@@ -13,6 +13,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var postContentLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var ownerPictureImageView: UIImageView!
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
     
@@ -36,6 +37,7 @@ class HomeTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.postImageView.image = nil
+        self.ownerPictureImageView.image = UIImage(named: "user_male.jpg")
         imageHeight.constant = 0
     }
     
@@ -48,6 +50,13 @@ class HomeTableViewCell: UITableViewCell {
             postImageView.image = image
             self.layoutIfNeeded()
         }
+        
+        if let profileImageData = post.owner.imageData {
+            let image = UIImage(data: profileImageData as Data)
+            ownerPictureImageView.image = image
+            self.layoutIfNeeded()
+        }
+        
         let date = post.date.dateValue()
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
