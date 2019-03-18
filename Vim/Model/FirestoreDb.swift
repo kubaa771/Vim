@@ -122,7 +122,6 @@ class FirestoreDb {
                     group.enter()
                     let friendEmail = friend.data()["email"] as! String
                     self.getUserProfileData(email: friendEmail, completion: { (friendUser) in
-                        print("finished request")
                         friendsArray.append(friendUser)
                         group.leave()
                     })
@@ -141,12 +140,18 @@ class FirestoreDb {
         db.collection("users").getDocuments { (snapshot, err) in
             if let documents = snapshot?.documents {
                 var usersArray: Array<User> = []
-                for document in documents {
-                    let emailData = document.data()["email"] as! String
-                    let user = User(email: emailData, imageData: nil, name: nil, surname: nil, id: UUID().uuidString)
-                    usersArray.append(user)
+                let group = DispatchGroup()
+                for user in documents {
+                    group.enter()
+                    let userEmail = user.data()["email"] as! String
+                    self.getUserProfileData(email: userEmail, completion: { (newUser) in
+                        usersArray.append(newUser)
+                        group.leave()
+                    })
                 }
-                completion(usersArray)
+                group.notify(queue: .main) {
+                    completion(usersArray)
+                }
             }
         }
     }

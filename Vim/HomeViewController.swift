@@ -72,10 +72,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.allPosts.append(contentsOf: postsfriends)
                     self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
                     self.tableView.reloadData()
-                    Loader.stop()
                 }
             }
-            
+            Loader.stop()
         }
     }
     
@@ -93,6 +92,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
             self.tableView.reloadData()
             Loader.stop()
+            
         }
     }
     

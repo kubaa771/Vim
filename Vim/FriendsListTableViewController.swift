@@ -14,10 +14,11 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
     var allUsersArray: Array<User> = []
     var userFriendsArray: Array<User> = []
     var isUserFriendsList: Bool = false
-    let currentUser = User(email: Auth.auth().currentUser?.email, imageData: nil, name: nil, surname: nil, id: UUID().uuidString)
+    var currentUser: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        customize()
         tableView.estimatedRowHeight = 81
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
@@ -27,26 +28,29 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        modelSetUp()
-        Auth.auth().currentUser?.getIDTokenResult(completion: { (result, error) in
-            print(result?.token)
-        })
-        
+    func customize() {
+        let user = Auth.auth().currentUser
+        FirestoreDb.shared.getUserProfileData(email: (user?.email)!) { (userData) in
+            self.currentUser = userData
+            self.modelSetUp()
+        }
     }
     
     func modelSetUp() {
-        
+        Loader.start()
         FirestoreDb.shared.getAllUsers { (usersList) in
             self.allUsersArray = usersList
+            self.tableView.reloadData()
+            Loader.stop()
         }
         
         if !isUserFriendsList {
             FirestoreDb.shared.getFriends(currentUser: currentUser) { (friends) in
                 self.userFriendsArray = friends
                 self.tableView.reloadData()
+                Loader.stop()
             }
         } else {
             FirestoreDb.shared.getFriends(currentUser: currentUser) { (friends) in
@@ -59,6 +63,7 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
                 }
                 self.allUsersArray = self.userFriendsArray
                 self.tableView.reloadData()
+                Loader.stop()
             }
         }
     }

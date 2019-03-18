@@ -52,7 +52,7 @@ class HomeTableViewCell: UITableViewCell {
         }
         
         if let profileImageData = post.owner.imageData {
-            let image = UIImage(data: profileImageData as Data)
+            let image = UIImage(data: profileImageData as Data) //imageData    NSData?    0x000060000322d3c0
             ownerPictureImageView.image = image
             self.layoutIfNeeded()
         }

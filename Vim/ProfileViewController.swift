@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController {
     
     func customize() {
         let user = Auth.auth().currentUser
-        
+        Loader.start()
         FirestoreDb.shared.getUserProfileData(email: (user?.email)!) { (userData) in
             self.emailLabel.text = user?.email
             self.nameLabel.text = userData.name
@@ -39,7 +39,7 @@ class ProfileViewController: UIViewController {
             if let imgData = userData.imageData {
                 self.profileImageView.image = UIImage(data: imgData as Data)
             }
-            
+            Loader.stop()
             
         }
         /*if let user = user {

@@ -10,9 +10,12 @@ import Foundation
 import NVActivityIndicatorView
 
 class Loader {
+    static var counter = 0
     static var loaderView: UIView?
     
     static func start() {
+        counter += 1
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         loaderView = UIView.init(frame: UIScreen.main.bounds)
         loaderView?.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
         let loader = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40), type: .lineSpinFadeLoader, color: #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), padding: nil)
@@ -32,8 +35,14 @@ class Loader {
     }
     
     static func stop() {
-        DispatchQueue.main.async {
-            loaderView?.removeFromSuperview()
+        counter -= 1
+        if counter == 0 {
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                loaderView!.removeFromSuperview()
+            }
+        } else if counter < 0 {
+            counter = 0
         }
     }
     

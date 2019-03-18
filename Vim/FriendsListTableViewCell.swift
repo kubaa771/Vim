@@ -12,6 +12,8 @@ class FriendsListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addFriendButton: UIButton!
+    @IBOutlet weak var friendProfilePictureView: UIImageView!
+    
     weak var delegate: AddFriendProtocolDelegate?
     
     var model: User! {
@@ -33,6 +35,11 @@ class FriendsListTableViewCell: UITableViewCell {
 
     func customize(user: User) {
         nameLabel.text = user.email
+        if let imageData = user.imageData {
+            let image = UIImage(data: imageData as Data)
+            friendProfilePictureView.image = image
+            self.layoutIfNeeded()
+        }
     }
     
 
