@@ -18,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        let navigationAppereace = UINavigationBar.appearance()
+        navigationAppereace.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        navigationAppereace.barTintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        navigationAppereace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Search users", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         return true
     }
 

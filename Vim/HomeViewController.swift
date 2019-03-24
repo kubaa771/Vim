@@ -27,14 +27,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshPostData), name: NotificationNames.refreshPostData.notification, object: nil)
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshPostData), for: UIControl.Event.valueChanged)
+        tableView.refreshControl = refreshControl
         // Do any additional setup after loading the view.
     }
     
     @objc func refreshPostData() {
         allPosts.removeAll()
         Loader.start()
-        getSelfPostData()
         getFriendsPostData()
+        getSelfPostData()
+        
     }
     
     func customize() {
@@ -72,6 +76,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.allPosts.append(contentsOf: postsfriends)
                     self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
                     self.tableView.reloadData()
+                    self.tableView.refreshControl?.endRefreshing()
                 }
             }
             Loader.stop()
@@ -91,6 +96,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.allPosts.append(contentsOf: myPosts)
             self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
             self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
             Loader.stop()
             
         }

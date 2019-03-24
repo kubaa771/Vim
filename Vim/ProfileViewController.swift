@@ -18,15 +18,15 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        nameLabel.setBottomBorder()
+        surnameLabel.setBottomBorder()
+        emailLabel.setBottomBorder()
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         customize()
-        nameLabel.setBottomBorder()
-        surnameLabel.setBottomBorder()
-        emailLabel.setBottomBorder()
+        
     }
     
     func customize() {

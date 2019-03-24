@@ -32,6 +32,11 @@ class FriendsListTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.friendProfilePictureView.image = UIImage(named: "user_male.jpg")
+    }
 
     func customize(user: User) {
         nameLabel.text = user.email

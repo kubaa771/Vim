@@ -9,19 +9,25 @@
 import UIKit
 import FirebaseAuth
 
-class FriendsListTableViewController: UITableViewController, AddFriendProtocolDelegate {
-    
+class FriendsListTableViewController: UITableViewController, AddFriendProtocolDelegate, UISearchResultsUpdating {
+   
     var allUsersArray: Array<User> = []
     var userFriendsArray: Array<User> = []
+    var filteredUsersArray: Array<User> = []
     var isUserFriendsList: Bool = false
     var currentUser: User!
+    var searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         customize()
+        setupSearchController()
         tableView.estimatedRowHeight = 81
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(modelSetUp), for: UIControl.Event.valueChanged)
+        tableView.refreshControl = refreshControl
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -38,11 +44,12 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
         }
     }
     
-    func modelSetUp() {
+    @objc func modelSetUp() {
         Loader.start()
         FirestoreDb.shared.getAllUsers { (usersList) in
             self.allUsersArray = usersList
             self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
             Loader.stop()
         }
         
@@ -83,13 +90,22 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering() {
+            return filteredUsersArray.count
+        }
         return allUsersArray.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendListCell", for: indexPath) as! FriendsListTableViewCell
-        cell.model = allUsersArray[indexPath.row]
+        let user: User!
+        if isFiltering() {
+            user = filteredUsersArray[indexPath.row]
+        } else {
+            user = allUsersArray[indexPath.row]
+        }
+        cell.model = user
         cell.delegate = self
 
         return cell
@@ -109,6 +125,38 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
         }
     }
     
+    
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContent(for: searchController.searchBar.text!)
+    }
+    
+    
+    func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        searchController.searchBar.tintColor = .white
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContent(for searchText: String) {
+        if allUsersArray.count > 0 {
+            filteredUsersArray = allUsersArray.filter({(user : User) -> Bool in
+                return user.email.lowercased().contains(searchText.lowercased())
+            })
+            tableView.reloadData()
+        }
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
     
 
 }
