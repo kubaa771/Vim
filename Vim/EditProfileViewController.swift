@@ -14,13 +14,14 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     var newName: String?
     var newSurname: String?
     var newPassword: String?
+    var defaultImage = UIImage(named: "user_male.jpg")
     
     @IBOutlet weak var profileImageView: UIImageView!
     var imagePicker: UIImagePickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        profileImageView.image = defaultImage
         // Do any additional setup after loading the view.
     }
     
@@ -61,11 +62,16 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         let auth = Auth.auth()
-        if newName == nil, newSurname == nil, newPassword == nil, profileImageView.image == nil{
+        if newName == nil, newSurname == nil, newPassword == nil, profileImageView.image == nil {
             displayErrorAlert(message: "Fulfill any field!")
         } else {
             let image = profileImageView.image
-            let imageData = NSData(data: (image?.jpegData(compressionQuality: 0.1))!)
+            var imageData: NSData?
+            if profileImageView.image == defaultImage {
+                imageData = nil
+            } else {
+                imageData = NSData(data: (image?.jpegData(compressionQuality: 0.1))!)
+            }
             let user = User(email: auth.currentUser?.email, imageData: imageData, name: newName, surname: newSurname, id: UUID().uuidString)
             FirestoreDb.shared.updateUserProfile(auth: auth, newUser: user, newPassword: newPassword) { (success) in
                 if success {

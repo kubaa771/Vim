@@ -195,7 +195,7 @@ class FirestoreDb {
     }
     
     func updateUserProfile(auth: Auth, newUser: User, newPassword: String?, completion: @escaping (Bool) -> Void) {
-        
+        NotificationCenter.default.post(name: NotificationNames.refreshProfile.notification, object: nil)
         if let name = newUser.name {
             db.collection("users").document(newUser.email).updateData(["name" : name])
         }

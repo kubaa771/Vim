@@ -89,7 +89,7 @@ public class TPKeyboardAvoidingTableView:UITableView,UITextFieldDelegate, UIText
         super.touchesEnded(touches, with: event)
     }
     
-    private func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if !self.focusNextTextField()
         {
             textField.resignFirstResponder()
@@ -312,7 +312,7 @@ public class TPKeyboardAvoidingScrollView:UIScrollView,UITextFieldDelegate,UITex
         super.touchesEnded(touches, with: event)
     }
     
-    private func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if !self.focusNextTextField()
         {
             textField.resignFirstResponder()

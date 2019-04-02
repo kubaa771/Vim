@@ -10,6 +10,7 @@ import Foundation
 
 enum NotificationNames: String {
     case refreshPostData = "refreshPostData"
+    case refreshProfile = "refreshProfile"
     
     var notification: Notification.Name {
         return Notification.Name(self.rawValue)

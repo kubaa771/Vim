@@ -17,6 +17,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var friends: Array<User> = []
     var currentUser: User!
     @IBOutlet weak var tableView: UITableView!
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(HomeViewController.refreshControlerFetchData),
+                                 for: UIControl.Event.valueChanged)
+        refreshControl.tintColor = UIColor.red
+        
+        return refreshControl
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +37,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshPostData), name: NotificationNames.refreshPostData.notification, object: nil)
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshPostData), for: UIControl.Event.valueChanged)
-        tableView.refreshControl = refreshControl
+        self.tableView.addSubview(self.refreshControl)
         // Do any additional setup after loading the view.
     }
     
@@ -39,6 +47,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         getFriendsPostData()
         getSelfPostData()
         
+    }
+    
+    @objc func refreshControlerFetchData() {
+        allPosts.removeAll()
+        getFriendsPostData()
+        getSelfPostData()
     }
     
     func customize() {
@@ -77,9 +91,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
                     self.tableView.reloadData()
                     self.tableView.refreshControl?.endRefreshing()
+                    Loader.stop()
                 }
             }
-            Loader.stop()
+            
         }
     }
     
@@ -95,9 +110,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             self.allPosts.append(contentsOf: myPosts)
             self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
-            self.tableView.reloadData()
-            self.tableView.refreshControl?.endRefreshing()
-            Loader.stop()
+            //self.tableView.reloadData()
+            
+            
             
         }
     }

@@ -15,21 +15,17 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var surnameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    var lock = true
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.setBottomBorder()
-        surnameLabel.setBottomBorder()
-        emailLabel.setBottomBorder()
+        customize()
+        NotificationCenter.default.addObserver(self, selector: #selector(customize), name: NotificationNames.refreshProfile.notification, object: nil)
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        customize()
-        
-    }
-    
-    func customize() {
+    @objc func customize() {
         let user = Auth.auth().currentUser
         Loader.start()
         FirestoreDb.shared.getUserProfileData(email: (user?.email)!) { (userData) in
@@ -40,6 +36,14 @@ class ProfileViewController: UIViewController {
                 self.profileImageView.image = UIImage(data: imgData as Data)
             }
             Loader.stop()
+            if self.lock {
+                self.nameLabel.addBorder(toSide: .Bottom, withColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), andThickness: 1)
+                self.surnameLabel.addBorder(toSide: .Bottom, withColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), andThickness: 1)
+                self.emailLabel.addBorder(toSide: .Bottom, withColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), andThickness: 1)
+                self.lock = false
+            }
+            
+            
             
         }
         /*if let user = user {
