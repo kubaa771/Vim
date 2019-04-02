@@ -20,9 +20,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
-            #selector(HomeViewController.refreshControlerFetchData),
+            #selector(HomeViewController.refreshPostData),
                                  for: UIControl.Event.valueChanged)
-        refreshControl.tintColor = UIColor.red
+        refreshControl.tintColor = UIColor.gray
         
         return refreshControl
     }()
@@ -49,12 +49,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    @objc func refreshControlerFetchData() {
-        allPosts.removeAll()
-        getFriendsPostData()
-        getSelfPostData()
-    }
-    
     func customize() {
         let user = Auth.auth().currentUser
         FirestoreDb.shared.getUserProfileData(email: (user?.email)!) { (userData) in
@@ -75,9 +69,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func getFriendsPostData() {
         FirestoreDb.shared.getFriends(currentUser: currentUser) { (friends) in
+            let group = DispatchGroup()
             self.friends.removeAll()
             self.friends.append(contentsOf: friends)
             for friendUser in friends {
+                group.enter()
                 FirestoreDb.shared.getPostsData(currentUser: friendUser) { (passedArray) in
                     var postsfriends: Array<Post> = passedArray
                     for post in passedArray {
@@ -87,15 +83,27 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             postsfriends.removeAll()
                         }
                     }
+                    group.leave()
                     self.allPosts.append(contentsOf: postsfriends)
                     self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
-                    self.tableView.reloadData()
-                    self.tableView.refreshControl?.endRefreshing()
-                    Loader.stop()
+                    
                 }
             }
             
+            group.notify(queue: .main) {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    print("cos231")
+                    self.tableView.refreshControl?.endRefreshing()
+                    self.refreshControl.endRefreshing()
+                    Loader.stop()
+                }
+                
+               
+            }
+           
         }
+        
     }
     
     func getSelfPostData() {
@@ -110,10 +118,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             self.allPosts.append(contentsOf: myPosts)
             self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
-            //self.tableView.reloadData()
-            
-            
-            
         }
     }
     
