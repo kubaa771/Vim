@@ -17,16 +17,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var friends: Array<User> = []
     var currentUser: User!
     @IBOutlet weak var tableView: UITableView!
-    lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action:
-            #selector(HomeViewController.refreshPostData),
-                                 for: UIControl.Event.valueChanged)
-        refreshControl.tintColor = UIColor.gray
-        
-        return refreshControl
-    }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +27,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshPostData), name: NotificationNames.refreshPostData.notification, object: nil)
-        self.tableView.addSubview(self.refreshControl)
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(HomeViewController.refreshPostData),
+                                 for: UIControl.Event.valueChanged)
+        refreshControl.tintColor = UIColor.gray
+        tableView.refreshControl = refreshControl
+        
         // Do any additional setup after loading the view.
     }
     
@@ -46,7 +42,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         Loader.start()
         getFriendsPostData()
         getSelfPostData()
-        
     }
     
     func customize() {
@@ -63,7 +58,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
-        cell.model = allPosts[indexPath.row]
+        if !tableView.refreshControl!.isRefreshing {
+            cell.model = allPosts[indexPath.row]
+        }
         return cell
     }
     
@@ -92,10 +89,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             group.notify(queue: .main) {
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    print("cos231")
                     self.tableView.refreshControl?.endRefreshing()
-                    self.refreshControl.endRefreshing()
+                    self.tableView.reloadData()
                     Loader.stop()
                 }
                 
