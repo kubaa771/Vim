@@ -61,7 +61,6 @@ class FirestoreDb {
                 completion(false)
                 print(errorString)
             }
-            completion(false)
             
             
         }

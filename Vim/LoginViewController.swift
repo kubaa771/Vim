@@ -26,6 +26,10 @@ class LoginViewController: UIViewController {
         view.endEditing(true)
     }
     
+    deinit {
+        print("deinit")
+    }
+    
     
     @IBAction func emailTextFieldTyped(_ sender: UITextField) {
         emailText = sender.text
@@ -38,12 +42,13 @@ class LoginViewController: UIViewController {
     @IBAction func doneBtnTapped(_ sender: UIButton) {
         Loader.start()
         if emailText != nil, passwordText != nil {
-            FirestoreDb.shared.checkUserLogin(givenEmail: emailText!, givenPassword: passwordText!) { (matched) in
+            FirestoreDb.shared.checkUserLogin(givenEmail: emailText!, givenPassword: passwordText!) { [weak self] (matched) in
                 if matched {
-                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
-                    self.showDetailViewController(vc, sender: sender)
+                    //self?.dismiss(animated: true, completion: nil)
+                    self?.performSegue(withIdentifier: "logged", sender: sender)
+                    
                 } else {
-                    self.displayErrorAlert(message: "Something went wrong, check your login, password or your internet connection!")
+                    self?.displayErrorAlert(message: "Something went wrong, check your login, password or your internet connection!")
                 }
                 Loader.stop()
             }
