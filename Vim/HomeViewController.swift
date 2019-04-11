@@ -26,7 +26,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.estimatedRowHeight = 420
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshPostData), name: NotificationNames.refreshPostData.notification, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(refreshPostData), name: NotificationNames.refreshPostData.notification, object: nil)
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
             #selector(HomeViewController.refreshPostData),
@@ -46,7 +46,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func customize() {
         let user = Auth.auth().currentUser
-        FirestoreDb.shared.getUserProfileData(email: (user?.email)!) { (userData) in
+        FirestoreDb.shared.getUserProfileData(userID: (user?.uid)!) { (userData) in
             self.currentUser = userData
             self.refreshPostData()
         }
@@ -65,12 +65,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func getFriendsPostData() {
-        FirestoreDb.shared.getFriends(currentUser: currentUser) { (friends) in
+        FirestoreDb.shared.getFriends() { (friends) in
             let group = DispatchGroup()
             self.friends.removeAll()
             self.friends.append(contentsOf: friends)
             for friendUser in friends {
                 group.enter()
+                print(friendUser)
                 FirestoreDb.shared.getPostsData(currentUser: friendUser) { (passedArray) in
                     var postsfriends: Array<Post> = passedArray
                     for post in passedArray {

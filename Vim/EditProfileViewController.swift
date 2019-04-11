@@ -72,7 +72,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
             } else {
                 imageData = NSData(data: (image?.jpegData(compressionQuality: 0.1))!)
             }
-            let user = User(email: auth.currentUser?.email, imageData: imageData, name: newName, surname: newSurname, id: UUID().uuidString)
+            let user = User(email: auth.currentUser?.email, imageData: imageData, name: newName, surname: newSurname, id: auth.currentUser!.uid)
             FirestoreDb.shared.updateUserProfile(auth: auth, newUser: user, newPassword: newPassword) { (success) in
                 if success {
                     self.navigationController?.popViewController(animated: true)

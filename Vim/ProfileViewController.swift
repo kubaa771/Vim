@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController {
     @objc func customize() {
         let user = Auth.auth().currentUser
         Loader.start()
-        FirestoreDb.shared.getUserProfileData(email: (user?.email)!) { (userData) in
+        FirestoreDb.shared.getUserProfileData(userID: (user?.uid)!) { (userData) in
             self.emailLabel.text = user?.email
             self.nameLabel.text = userData.name
             self.surnameLabel.text = userData.surname

@@ -23,9 +23,11 @@ class FirestoreDb {
     func addNewUser(givenEmail: String, givenPassword: String, givenName: String, completion: @escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: givenEmail, password: givenPassword) { (user, error) in
             if user != nil {
-                user?.user.createProfileChangeRequest().displayName = givenName
                 user?.user.createProfileChangeRequest().commitChanges(completion: { (error) in
                 })
+                self.db.collection("users").document((user?.user.uid)!).setData([
+                    "email" : givenEmail,
+                    "name" : givenName])
                 completion(true)
             } else {
                 completion(false)
@@ -35,8 +37,7 @@ class FirestoreDb {
             }
         }
         
-        db.collection("users").document(givenEmail).setData([
-            "email" : givenEmail])
+        
         /*db.collection("users").document(user.login).setData([
             "login" : user.login,
             "password" : user.password,
@@ -68,17 +69,18 @@ class FirestoreDb {
     }
     
     func getPostsData(currentUser: User, completion: @escaping (Array<Post>) -> Void) {
-        db.collection("users").document(currentUser.email).collection("posts").getDocuments { (snapshot, error) in
+        db.collection("users").document(currentUser.uuid).collection("posts").getDocuments { (snapshot, error) in
             if let documents = snapshot?.documents {
                 var postsArray: Array<Post> = []
                 for post in documents {
                     let myPost: Post!
                     let textContent = post.data()["text"] as! String
                     let timeResult = post.data()["date"] as! Timestamp
+                    
                     if let imageData = post.data()["image"] {
-                        myPost = Post(date: timeResult, text: textContent, image: nil, imageData: (imageData as! NSData), owner: currentUser, id: UUID().uuidString)
+                        myPost = Post(date: timeResult, text: textContent, image: nil, imageData: (imageData as! NSData), owner: currentUser, id: post.documentID)
                     } else {
-                        myPost = Post(date: timeResult, text: textContent, image: nil, imageData: nil, owner: currentUser, id: UUID().uuidString)
+                        myPost = Post(date: timeResult, text: textContent, image: nil, imageData: nil, owner: currentUser, id: post.documentID)
                     }
                     postsArray.append(myPost)
                 }
@@ -87,10 +89,11 @@ class FirestoreDb {
         }
     }
     
-    func createNewPost(currentUser: User, date: Timestamp, text: String, imageData: NSData?) {
+    func createNewPost(date: Timestamp, text: String, imageData: NSData?) {
         NotificationCenter.default.post(name: NotificationNames.refreshPostData.notification, object: nil)
+        let userID = Auth.auth().currentUser!.uid
         if let myimageData = imageData {
-            db.collection("users").document(currentUser.email).collection("posts").addDocument(data: [
+            db.collection("users").document(userID).collection("posts").addDocument(data: [
                 "date" : date,
                 "text" : text,
                 "image" : myimageData
@@ -100,7 +103,7 @@ class FirestoreDb {
                 }
             }
         } else {
-            db.collection("users").document(currentUser.email).collection("posts").addDocument(data: [
+            db.collection("users").document(userID).collection("posts").addDocument(data: [
                 "date" : date,
                 "text" : text,
             ]) { (error) in
@@ -112,15 +115,17 @@ class FirestoreDb {
         
     }
     
-    func getFriends(currentUser: User, completion: @escaping (Array<User>) -> Void) {
-        db.collection("users").document(currentUser.email).collection("friends").getDocuments { (snapshot, error) in
+    func getFriends(completion: @escaping (Array<User>) -> Void) {
+        let userID = Auth.auth().currentUser!.uid
+        db.collection("users").document(userID).collection("friends").getDocuments { (snapshot, error) in
             if let documents = snapshot?.documents {
                 var friendsArray: Array<User> = []
                 let group = DispatchGroup()
                 for friend in documents {
                     group.enter()
                     let friendEmail = friend.data()["email"] as! String
-                    self.getUserProfileData(email: friendEmail, completion: { (friendUser) in
+                    let friendID = friend.data()["id"] as! String
+                    self.getUserProfileData(userID: friendID, completion: { (friendUser) in
                         friendsArray.append(friendUser)
                         group.leave()
                     })
@@ -143,7 +148,9 @@ class FirestoreDb {
                 for user in documents {
                     group.enter()
                     let userEmail = user.data()["email"] as! String
-                    self.getUserProfileData(email: userEmail, completion: { (newUser) in
+                    let userID = user.documentID
+                    print(userID)
+                    self.getUserProfileData(userID: userID, completion: { (newUser) in
                         usersArray.append(newUser)
                         group.leave()
                     })
@@ -155,15 +162,16 @@ class FirestoreDb {
         }
     }
     
-    func addFriend(currentUser: User, userToAdd: User) {
-        NotificationCenter.default.post(name: NotificationNames.refreshPostData.notification, object: nil)
-        db.collection("users").document(currentUser.email).collection("friends").addDocument(data: [
-            "email" : userToAdd.email])
+    func addFriend(userToAdd: User) {
+        //NotificationCenter.default.post(name: NotificationNames.refreshPostData.notification, object: nil)
+        let userID = Auth.auth().currentUser!.uid
+        db.collection("users").document(userID).collection("friends").addDocument(data: [
+            "email" : userToAdd.email!,
+            "id" : userToAdd.uuid])
     }
     
-    func getUserProfileData(email: String, completion: @escaping (User) -> Void){
-        
-        db.collection("users").document(email).getDocument { (snapshot, error) in
+    func getUserProfileData(userID: String, completion: @escaping (User) -> Void){
+        db.collection("users").document(userID).getDocument { (snapshot, error) in
             if let documentData = snapshot?.data(){
                 let email = documentData["email"] as! String
                 let name: String
@@ -186,7 +194,7 @@ class FirestoreDb {
                     photo = nil
                 }
                 
-                let user = User(email: email, imageData: photo, name: name, surname: surname, id: UUID().uuidString)
+                let user = User(email: email, imageData: photo, name: name, surname: surname, id: userID)
                 completion(user)
             }
            
@@ -196,15 +204,15 @@ class FirestoreDb {
     func updateUserProfile(auth: Auth, newUser: User, newPassword: String?, completion: @escaping (Bool) -> Void) {
         NotificationCenter.default.post(name: NotificationNames.refreshProfile.notification, object: nil)
         if let name = newUser.name {
-            db.collection("users").document(newUser.email).updateData(["name" : name])
+            db.collection("users").document(newUser.uuid).updateData(["name" : name])
         }
         
         if let surname = newUser.surname {
-            db.collection("users").document(newUser.email).updateData(["surname" : surname])
+            db.collection("users").document(newUser.uuid).updateData(["surname" : surname])
         }
         
         if let photo = newUser.imageData {
-            db.collection("users").document(newUser.email).updateData(["photo" : photo])
+            db.collection("users").document(newUser.uuid).updateData(["photo" : photo])
         }
         
         let user = auth.currentUser
