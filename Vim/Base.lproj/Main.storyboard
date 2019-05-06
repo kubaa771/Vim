@@ -346,6 +346,9 @@
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zei-tA-tDH">
                                                                     <rect key="frame" x="27" y="153" width="30" height="30"/>
                                                                     <state key="normal" image="heart"/>
+                                                                    <connections>
+                                                                        <action selector="likeTapped:" destination="jan-Wl-w5d" eventType="touchUpInside" id="GjL-ei-y2g"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ulZ-Zm-sMB">
                                                                     <rect key="frame" x="66" y="133" width="15" height="50"/>
@@ -382,6 +385,7 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="i2z-w8-4yE" id="UU0-81-6x4"/>
                                             <outlet property="imageHeight" destination="Q45-8Z-KbK" id="xrM-YF-Ppy"/>
+                                            <outlet property="likeNumber" destination="daK-4p-F2o" id="9Wa-Uy-6PI"/>
                                             <outlet property="ownerPictureImageView" destination="SKS-Vs-U6g" id="k36-1h-eu8"/>
                                             <outlet property="postContentLabel" destination="GO5-8W-dyK" id="lsj-f8-d0N"/>
                                             <outlet property="postImageView" destination="xWT-Xg-5rc" id="1UJ-Wi-TSU"/>

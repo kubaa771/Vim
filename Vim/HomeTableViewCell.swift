@@ -16,6 +16,9 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var ownerPictureImageView: UIImageView!
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
+    @IBOutlet weak var likeNumber: UILabel!
+    
+    weak var delegate: PostLikedProtocolDelegate?
     
     var model: Post! {
         didSet {
@@ -67,6 +70,12 @@ class HomeTableViewCell: UITableViewCell {
         postContentLabel.text = post.text
         userLabel.text = post.owner.email
         
+    }
+    
+    
+    
+    @IBAction func likeTapped(_ sender: UIButton) {
+        delegate?.postLikedButtonAction(cell: self)
     }
     
     

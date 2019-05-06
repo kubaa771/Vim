@@ -12,3 +12,8 @@ import Foundation
 protocol AddFriendProtocolDelegate: AnyObject {
     func addFriendButtonTapped(cell: FriendsListTableViewCell)
 }
+
+
+protocol PostLikedProtocolDelegate: AnyObject {
+    func postLikedButtonAction(cell: HomeTableViewCell)
+}

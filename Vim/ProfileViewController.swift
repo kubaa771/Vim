@@ -57,6 +57,8 @@ class ProfileViewController: UIViewController {
         let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendListTableViewController") as! FriendsListTableViewController
         vc.isUserFriendsList = true
         self.navigationController?.pushViewController(vc, animated: true)
+        //self.navigationController?.show(vc, sender: nil)
+        //self.show(vc, sender: nil)
     }
     /*
     // MARK: - Navigation

@@ -26,6 +26,7 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
+        tableView.delegate = self
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(modelSetUp), for: UIControl.Event.valueChanged)
         tableView.refreshControl = refreshControl
@@ -47,33 +48,45 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
     
     @objc func modelSetUp() {
         Loader.start()
-        FirestoreDb.shared.getAllUsers { (usersList) in
-            self.allUsersArray = usersList
-            self.tableView.reloadData()
-            self.tableView.refreshControl?.endRefreshing()
-            Loader.stop()
-        }
         if !isUserFriendsList {
-           
+            let group = DispatchGroup()
+            group.enter()
+            FirestoreDb.shared.getAllUsers { (usersList) in
+                self.allUsersArray = usersList
+                group.leave()
+            }
             
+            group.enter()
             FirestoreDb.shared.getFriends() { (friends) in
                 self.userFriendsArray = friends
+                group.leave()
+            }
+            
+            group.notify(queue: .main) {
                 self.tableView.reloadData()
+                self.tableView.refreshControl?.endRefreshing()
                 Loader.stop()
             }
         } else {
-            FirestoreDb.shared.getFriends() { (friends) in
-                self.userFriendsArray.removeAll()
-                for friend in friends {
-                    let checker = self.checkIfFriendExists(user: friend)
-                    if checker {
-                        self.userFriendsArray.append(friend)
+            let group = DispatchGroup()
+            group.enter()
+            FirestoreDb.shared.getAllUsers { (usersList) in
+                self.allUsersArray = usersList
+                group.leave()
+            }
+        
+            group.notify(queue: .main) {
+                FirestoreDb.shared.getFriends() { (friends) in
+                    self.userFriendsArray.removeAll()
+                    for friend in friends {
+                        let checker = self.checkIfFriendExists(user: friend)
+                        if checker {
+                            self.userFriendsArray.append(friend)
+                        }
                     }
-                }
-                self.allUsersArray = self.userFriendsArray
-                DispatchQueue.main.async {
-                    self.tableView.refreshControl?.endRefreshing()
+                    self.allUsersArray = self.userFriendsArray
                     self.tableView.reloadData()
+                    self.tableView.refreshControl?.endRefreshing()
                     Loader.stop()
                 }
             }
@@ -123,6 +136,7 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
             displayErrorAlert(message: "It's you!")
         } else {
             FirestoreDb.shared.addFriend(userToAdd: cell.model)
+            modelSetUp()
             cell.backgroundColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
             UIView.animate(withDuration: 1.5) {
                 cell.backgroundColor = UIColor.clear

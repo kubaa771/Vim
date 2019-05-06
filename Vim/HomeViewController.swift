@@ -11,7 +11,7 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PostLikedProtocolDelegate {
    
     var allPosts: Array<Post> = []
     var friends: Array<User> = []
@@ -60,6 +60,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
         if !tableView.refreshControl!.isRefreshing {
             cell.model = allPosts[indexPath.row]
+            cell.delegate = self
         }
         return cell
     }
@@ -116,6 +117,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
         }
     }
+    
+    func postLikedButtonAction(cell: HomeTableViewCell) {
+        print("like")
+    }
+    
     
 
 }
