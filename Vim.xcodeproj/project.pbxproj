@@ -171,25 +171,12 @@
 		8A03E0A1220F56F80038EA9C /* Vim */ = {
 			isa = PBXGroup;
 			children = (
-				8A07475D2210939900C6828A /* Model */,
 				8A03E0A2220F56F80038EA9C /* AppDelegate.swift */,
-				8AFC05A722122B3A004F5CEC /* Extensions.swift */,
-				8AF962B42225BE1D00ACF1C1 /* Protocols.swift */,
-				8AF9875F221B0BDC00EE956E /* Loader.swift */,
-				8AF575722216F49300F3D4AD /* NotificationNames.swift */,
-				8A0747622210986400C6828A /* LoginViewController.swift */,
-				8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */,
-				8AF823D42211A15500BC2C95 /* HomeViewController.swift */,
-				8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */,
-				8AF575742216FB6300F3D4AD /* AddNewPostViewController.swift */,
-				8A0747642210DDF600C6828A /* MainTabBarController.swift */,
-				8AFE5C362227461C00C3F48F /* ProfileViewController.swift */,
-				8AFBD576222C2242002722A2 /* EditProfileViewController.swift */,
-				8AF962B222258EA400ACF1C1 /* FriendsListTableViewCell.swift */,
-				8AFBD2F122244061009C47A0 /* FriendsListTableViewController.swift */,
+				8A07FAD5228237BB001A3664 /* Support */,
+				8A07475D2210939900C6828A /* Model */,
+				8A07FAD6228237E4001A3664 /* Controllers */,
+				8A07FAD722823819001A3664 /* Storyboards */,
 				8A03E0A9220F56FA0038EA9C /* Assets.xcassets */,
-				8A03E0A6220F56F80038EA9C /* Main.storyboard */,
-				8A03E0AB220F56FA0038EA9C /* LaunchScreen.storyboard */,
 				8A03E0AE220F56FA0038EA9C /* Info.plist */,
 				8A07475B22108CBE00C6828A /* GoogleService-Info.plist */,
 			);
@@ -222,6 +209,43 @@
 				8A074760221095AB00C6828A /* User.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8A07FAD5228237BB001A3664 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				8AFC05A722122B3A004F5CEC /* Extensions.swift */,
+				8AF962B42225BE1D00ACF1C1 /* Protocols.swift */,
+				8AF9875F221B0BDC00EE956E /* Loader.swift */,
+				8AF575722216F49300F3D4AD /* NotificationNames.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		8A07FAD6228237E4001A3664 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8A0747622210986400C6828A /* LoginViewController.swift */,
+				8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */,
+				8AF823D42211A15500BC2C95 /* HomeViewController.swift */,
+				8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */,
+				8AF575742216FB6300F3D4AD /* AddNewPostViewController.swift */,
+				8A0747642210DDF600C6828A /* MainTabBarController.swift */,
+				8AFE5C362227461C00C3F48F /* ProfileViewController.swift */,
+				8AFBD576222C2242002722A2 /* EditProfileViewController.swift */,
+				8AF962B222258EA400ACF1C1 /* FriendsListTableViewCell.swift */,
+				8AFBD2F122244061009C47A0 /* FriendsListTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8A07FAD722823819001A3664 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				8A03E0AB220F56FA0038EA9C /* LaunchScreen.storyboard */,
+				8A03E0A6220F56F80038EA9C /* Main.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
