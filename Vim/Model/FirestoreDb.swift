@@ -72,19 +72,45 @@ class FirestoreDb {
         db.collection("users").document(currentUser.uuid).collection("posts").getDocuments { (snapshot, error) in
             if let documents = snapshot?.documents {
                 var postsArray: Array<Post> = []
+                let group = DispatchGroup()
                 for post in documents {
-                    let myPost: Post!
+                    group.enter()
+                    var myPost: Post!
                     let textContent = post.data()["text"] as! String
                     let timeResult = post.data()["date"] as! Timestamp
+                    let imageData = post.data()["image"] as? NSData
+                    /*var peopleWhoLikedIDs: Array<String> = []
+                    let group = DispatchGroup()
                     
-                    if let imageData = post.data()["image"] {
-                        myPost = Post(date: timeResult, text: textContent, image: nil, imageData: (imageData as! NSData), owner: currentUser, id: post.documentID)
-                    } else {
-                        myPost = Post(date: timeResult, text: textContent, image: nil, imageData: nil, owner: currentUser, id: post.documentID)
-                    }
-                    postsArray.append(myPost)
+                    group.enter()
+                    post.reference.collection("peopleWhoLiked").getDocuments(completion: { (snapshot, err) in
+                        if let documents = snapshot?.documents {
+                            for document in documents {
+                                
+                                peopleWhoLikedIDs.append(document.data()["uuid"] as! String)
+                                group.leave()
+                            }
+                        } else {
+                            print("cops")
+                        }
+                    })
+                    group.notify(queue: .main, execute: {
+                        print(peopleWhoLikedIDs)
+                    })*/
+                    
+                    post.reference.collection("peopleWhoLiked").getDocuments(completion: { (snapshot, error) in
+                        if let documents = snapshot?.documents {
+                            let likes = documents.map { $0["uuid"] } as? Array<String>
+                            myPost = Post(date: timeResult, text: textContent, image: nil, imageData: imageData, owner: currentUser, id: post.documentID, whoLiked: likes)
+                            postsArray.append(myPost)
+                            group.leave()
+                        }
+                    })
+                    
                 }
-                completion(postsArray)
+                group.notify(queue: .main, execute: {
+                    completion(postsArray)
+                })
             }
         }
     }
@@ -224,6 +250,10 @@ class FirestoreDb {
             }
         }
         completion(true)
+    }
+    
+    func likedAPost(whoLiked: User, likedPost: Post) {
+        db.collection("users").document(likedPost.owner.uuid).collection("posts").document(likedPost.uuid).collection("peopleWhoLiked").document(whoLiked.uuid).setData(["uuid" : whoLiked.uuid])
     }
     
 }

@@ -15,13 +15,15 @@ class Post: HashableClass {
     var imageData: NSData!
     var owner: User!
     var uuid = UUID().uuidString
+    var whoLiked: Array<String>?
     
-    init(date: Timestamp, text: String, image: UIImage?, imageData: NSData?, owner: User, id: String) {
+    init(date: Timestamp, text: String, image: UIImage?, imageData: NSData?, owner: User, id: String, whoLiked: Array<String>?) {
         self.date = date
         self.text = text
         self.imageData = imageData
         self.owner = owner
         self.uuid = id
+        self.whoLiked = whoLiked
         
         if let image = image {
             let data = NSData(data: image.jpegData(compressionQuality: 0.6)!)

@@ -72,7 +72,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.friends.append(contentsOf: friends)
             for friendUser in friends {
                 group.enter()
-                print(friendUser)
                 FirestoreDb.shared.getPostsData(currentUser: friendUser) { (passedArray) in
                     var postsfriends: Array<Post> = passedArray
                     for post in passedArray {
@@ -119,7 +118,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func postLikedButtonAction(cell: HomeTableViewCell) {
-        print("like")
+        FirestoreDb.shared.likedAPost(whoLiked: currentUser, likedPost: cell.model)
     }
     
     

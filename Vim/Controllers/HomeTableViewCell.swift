@@ -69,6 +69,8 @@ class HomeTableViewCell: UITableViewCell {
         dateLabel.text = strDate
         postContentLabel.text = post.text
         userLabel.text = post.owner.email
+        guard let likes = post.whoLiked?.count else { return }
+        likeNumber.text = String(likes)
         
     }
     
@@ -76,6 +78,7 @@ class HomeTableViewCell: UITableViewCell {
     
     @IBAction func likeTapped(_ sender: UIButton) {
         delegate?.postLikedButtonAction(cell: self)
+        
     }
     
     
