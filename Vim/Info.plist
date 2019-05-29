@@ -38,6 +38,10 @@
 	<string>This app will use camera.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app will use photo library with your permission</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Montserrat-Regular.ttf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

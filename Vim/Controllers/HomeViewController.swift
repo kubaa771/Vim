@@ -26,7 +26,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.estimatedRowHeight = 420
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
-        //NotificationCenter.default.addObserver(self, selector: #selector(refreshPostData), name: NotificationNames.refreshPostData.notification, object: nil)
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
             #selector(HomeViewController.refreshPostData),
@@ -118,7 +117,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func postLikedButtonAction(cell: HomeTableViewCell) {
-        FirestoreDb.shared.likedAPost(whoLiked: currentUser, likedPost: cell.model)
+        guard let currentUserID = currentUser?.uuid else { return }
+        if (cell.model.whoLiked?.contains(currentUserID))! {
+
+        } else {
+             FirestoreDb.shared.likedAPost(whoLiked: currentUser, likedPost: cell.model)
+        }
+       
+        print(cell.model.whoLiked!)
     }
     
     

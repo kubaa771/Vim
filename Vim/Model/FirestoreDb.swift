@@ -253,6 +253,7 @@ class FirestoreDb {
     }
     
     func likedAPost(whoLiked: User, likedPost: Post) {
+       NotificationCenter.default.post(name: NotificationNames.refreshLikeButtonState.notification, object: nil)
         db.collection("users").document(likedPost.owner.uuid).collection("posts").document(likedPost.uuid).collection("peopleWhoLiked").document(whoLiked.uuid).setData(["uuid" : whoLiked.uuid])
     }
     

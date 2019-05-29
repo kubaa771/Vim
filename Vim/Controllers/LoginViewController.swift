@@ -16,6 +16,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateView()
         //FirestoreDb.shared.addNewUser(user: first)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -60,3 +61,4 @@ class LoginViewController: UIViewController {
     }
     
 }
+

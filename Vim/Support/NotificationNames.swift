@@ -11,6 +11,7 @@ import Foundation
 enum NotificationNames: String {
     case refreshPostData = "refreshPostData"
     case refreshProfile = "refreshProfile"
+    case refreshLikeButtonState = "refreshLikeButtonState"
     
     var notification: Notification.Name {
         return Notification.Name(self.rawValue)

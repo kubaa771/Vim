@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class HomeTableViewCell: UITableViewCell {
 
@@ -17,6 +18,10 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
     @IBOutlet weak var likeNumber: UILabel!
+    @IBOutlet weak var likeImageView: UIButton!
+    
+    
+    var currentUser = Auth.auth().currentUser
     
     weak var delegate: PostLikedProtocolDelegate?
     
@@ -39,12 +44,14 @@ class HomeTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadLikedButtonState), name: NotificationNames.refreshLikeButtonState.notification, object: nil)
         self.postImageView.image = nil
         self.ownerPictureImageView.image = UIImage(named: "user_male.jpg")
         imageHeight.constant = 0
     }
     
     func customize(post: Post) {
+       
         if let imageData = post.imageData {
             let image = UIImage(data: imageData as Data)
             let ratio = image!.size.width / image!.size.height
@@ -71,6 +78,21 @@ class HomeTableViewCell: UITableViewCell {
         userLabel.text = post.owner.email
         guard let likes = post.whoLiked?.count else { return }
         likeNumber.text = String(likes)
+        guard let currentUserID = currentUser?.uid else { return }
+        if (post.whoLiked?.contains(currentUserID))! {
+            likeImageView.setImage(UIImage(named: "redheart.png"), for: .normal)
+        } else {
+            likeImageView.setImage(UIImage(named: "heart.png"), for: .normal)
+        }
+    }
+    
+    @objc func reloadLikedButtonState(notification: NSNotification) {
+        guard let currentUserID = currentUser?.uid else { return }
+        if (self.model.whoLiked?.contains(currentUserID))! {
+            likeImageView.setImage(UIImage(named: "redheart.png"), for: .normal)
+        } else {
+            likeImageView.setImage(UIImage(named: "heart.png"), for: .normal)
+        }
         
     }
     

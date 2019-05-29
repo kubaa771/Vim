@@ -32,6 +32,7 @@
 		8AFBD2F222244061009C47A0 /* FriendsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFBD2F122244061009C47A0 /* FriendsListTableViewController.swift */; };
 		8AFBD577222C2242002722A2 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFBD576222C2242002722A2 /* EditProfileViewController.swift */; };
 		8AFC05A822122B3A004F5CEC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC05A722122B3A004F5CEC /* Extensions.swift */; };
+		8AFD0037229F0AE0009AFF93 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AFD0036229F0AE0009AFF93 /* Montserrat-Regular.ttf */; };
 		8AFE5C372227461C00C3F48F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE5C362227461C00C3F48F /* ProfileViewController.swift */; };
 		C6025D9B4D45BD4166B4518A /* Pods_VimUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E3BE1E2FB026D781721729 /* Pods_VimUITests.framework */; };
 /* End PBXBuildFile section */
@@ -84,6 +85,7 @@
 		8AFBD2F122244061009C47A0 /* FriendsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListTableViewController.swift; sourceTree = "<group>"; };
 		8AFBD576222C2242002722A2 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		8AFC05A722122B3A004F5CEC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8AFD0036229F0AE0009AFF93 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		8AFE5C362227461C00C3F48F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8F81FC9FA32F3E76CD66B1C2 /* Pods-VimTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimTests/Pods-VimTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6E5A1C2CF76701D250D5096 /* Pods-Vim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vim.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vim/Pods-Vim.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		8A03E0A1220F56F80038EA9C /* Vim */ = {
 			isa = PBXGroup;
 			children = (
+				8AFD0035229F0AC8009AFF93 /* Resources */,
 				8A03E0A2220F56F80038EA9C /* AppDelegate.swift */,
 				8A07FAD5228237BB001A3664 /* Support */,
 				8A07475D2210939900C6828A /* Model */,
@@ -246,6 +249,14 @@
 				8A03E0A6220F56F80038EA9C /* Main.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		8AFD0035229F0AC8009AFF93 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8AFD0036229F0AE0009AFF93 /* Montserrat-Regular.ttf */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,6 +373,7 @@
 				8A03E0AD220F56FA0038EA9C /* LaunchScreen.storyboard in Resources */,
 				8A07475C22108CBE00C6828A /* GoogleService-Info.plist in Resources */,
 				8A03E0AA220F56FA0038EA9C /* Assets.xcassets in Resources */,
+				8AFD0037229F0AE0009AFF93 /* Montserrat-Regular.ttf in Resources */,
 				8A03E0A8220F56F80038EA9C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

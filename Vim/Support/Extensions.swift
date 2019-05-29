@@ -21,6 +21,17 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
+    
+    func updateView() {
+        let image1 = UIImage(named: "bg3.png")
+        let color = UIColor(patternImage: image1!)
+        view.backgroundColor = color
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+    }
 }
 
 extension Sequence where Iterator.Element : Hashable {
