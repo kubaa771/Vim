@@ -20,6 +20,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateView(imageName: "bg3.png")
         customize()
         tableView.dataSource = self
         tableView.delegate = self
@@ -50,7 +51,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.refreshPostData()
         }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allPosts.count
     }

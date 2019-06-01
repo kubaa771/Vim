@@ -20,7 +20,6 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var likeNumber: UILabel!
     @IBOutlet weak var likeImageView: UIButton!
     
-    
     var currentUser = Auth.auth().currentUser
     
     weak var delegate: PostLikedProtocolDelegate?
@@ -50,6 +49,11 @@ class HomeTableViewCell: UITableViewCell {
         imageHeight.constant = 0
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
+    
     func customize(post: Post) {
        
         if let imageData = post.imageData {
@@ -62,7 +66,13 @@ class HomeTableViewCell: UITableViewCell {
         }
         
         if let profileImageData = post.owner.imageData {
-            let image = UIImage(data: profileImageData as Data) //imageData    NSData?    0x000060000322d3c0
+            let image = UIImage(data: profileImageData as Data)
+            
+            ownerPictureImageView.layer.masksToBounds = false
+            
+            ownerPictureImageView.layer.cornerRadius = 26
+            ownerPictureImageView.clipsToBounds = true
+            ownerPictureImageView.contentMode = UIView.ContentMode.scaleAspectFill//imageData    NSData?    0x000060000322d3c0
             ownerPictureImageView.image = image
             self.layoutIfNeeded()
         }
@@ -71,11 +81,13 @@ class HomeTableViewCell: UITableViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
         dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm" //Specify your format that you want
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm" //Specify your format that you want
         let strDate = dateFormatter.string(from: date)
         dateLabel.text = strDate
         postContentLabel.text = post.text
-        userLabel.text = post.owner.email
+        let name = post.owner.name ?? post.owner.email
+        let surname = post.owner.surname ?? ""
+        userLabel.text = name! + " " + surname //dokoncz
         guard let likes = post.whoLiked?.count else { return }
         likeNumber.text = String(likes)
         guard let currentUserID = currentUser?.uid else { return }

@@ -22,15 +22,52 @@ extension UIViewController {
         self.present(alert, animated: true)
     }
     
-    func updateView() {
-        let image1 = UIImage(named: "bg3.png")
+    func updateView(imageName: String) {
+        /*let image1 = UIImage(named: "bg3.png")
+        let screenBounds = UIScreen.main.bounds
+        image1?.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .stretch)
         let color = UIColor(patternImage: image1!)
-        view.backgroundColor = color
+        view.backgroundColor = color*/
+        
+        let width = UIScreen.main.bounds.size.width
+        let height = UIScreen.main.bounds.size.height
+        
+        let imageViewBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        imageViewBackground.image = UIImage(named: imageName)
+        
+        imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFill
+        
+        view.addSubview(imageViewBackground)
+        view.sendSubviewToBack(imageViewBackground)
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
+    }
+}
+
+extension UIImage {
+    func scale(with size: CGSize) -> UIImage? {
+        var scaledImageRect = CGRect.zero
+        
+        let aspectWidth:CGFloat = size.width / self.size.width
+        let aspectHeight:CGFloat = size.height / self.size.height
+        let aspectRatio:CGFloat = min(aspectWidth, aspectHeight)
+        
+        scaledImageRect.size.width = self.size.width * aspectRatio
+        scaledImageRect.size.height = self.size.height * aspectRatio
+        scaledImageRect.origin.x = (size.width - scaledImageRect.size.width) / 2.0
+        scaledImageRect.origin.y = (size.height - scaledImageRect.size.height) / 2.0
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        self.draw(in: scaledImageRect)
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return scaledImage
     }
 }
 
