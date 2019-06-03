@@ -21,6 +21,11 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateView(imageName: "bg3.png")
+        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.cornerRadius = 62
+        profileImageView.clipsToBounds = true
+        profileImageView.contentMode = UIView.ContentMode.scaleAspectFill
         profileImageView.image = defaultImage
         // Do any additional setup after loading the view.
     }

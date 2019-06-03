@@ -20,12 +20,18 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateView(imageName: "bg3.png")
         customize()
         NotificationCenter.default.addObserver(self, selector: #selector(customize), name: NotificationNames.refreshProfile.notification, object: nil)
         // Do any additional setup after loading the view.
     }
     
     @objc func customize() {
+        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.cornerRadius = 62
+        profileImageView.clipsToBounds = true
+        profileImageView.contentMode = UIView.ContentMode.scaleAspectFill
+        
         let user = Auth.auth().currentUser
         Loader.start()
         FirestoreDb.shared.getUserProfileData(userID: (user?.uid)!) { (userData) in

@@ -22,6 +22,8 @@ class HomeTableViewCell: UITableViewCell {
     
     var currentUser = Auth.auth().currentUser
     
+    var indexCell: IndexPath!
+    
     weak var delegate: PostLikedProtocolDelegate?
     
     var model: Post! {
@@ -43,7 +45,7 @@ class HomeTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadLikedButtonState), name: NotificationNames.refreshLikeButtonState.notification, object: nil)
+        
         self.postImageView.image = nil
         self.ownerPictureImageView.image = UIImage(named: "user_male.jpg")
         imageHeight.constant = 0
@@ -98,14 +100,12 @@ class HomeTableViewCell: UITableViewCell {
         }
     }
     
-    @objc func reloadLikedButtonState(notification: NSNotification) {
-        guard let currentUserID = currentUser?.uid else { return }
-        if (self.model.whoLiked?.contains(currentUserID))! {
-            likeImageView.setImage(UIImage(named: "redheart.png"), for: .normal)
-        } else {
-            likeImageView.setImage(UIImage(named: "heart.png"), for: .normal)
-        }
-        
+    
+    func likeClicked() {
+        guard let likes = Int(likeNumber.text!) else { return }
+        let likes1 = likes + 1
+        likeNumber.text = String(likes1)
+        likeImageView.setImage(UIImage(named: "redheart.png"), for: .normal)
     }
     
     

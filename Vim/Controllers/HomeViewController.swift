@@ -27,6 +27,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.estimatedRowHeight = 420
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshPostData), name: NotificationNames.refreshPostData.notification, object: nil)
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
             #selector(HomeViewController.refreshPostData),
@@ -61,6 +62,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if !tableView.refreshControl!.isRefreshing {
             cell.model = allPosts[indexPath.row]
             cell.delegate = self
+            cell.indexCell = indexPath
         }
         return cell
     }
@@ -122,10 +124,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if (cell.model.whoLiked?.contains(currentUserID))! {
 
         } else {
-             FirestoreDb.shared.likedAPost(whoLiked: currentUser, likedPost: cell.model)
+            FirestoreDb.shared.likedAPost(whoLiked: currentUser, likedPost: cell.model) { (done) in
+                if done {
+                    cell.likeClicked()
+                    
+                    
+                }
+            }
         }
-       
-        print(cell.model.whoLiked!)
+        
+        
+        //print(cell.model.whoLiked!)
     }
     
     

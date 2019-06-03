@@ -21,6 +21,7 @@ class AddNewPostViewController: UIViewController, UITextViewDelegate, UINavigati
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateView(imageName: "bg3.png")
         textView.delegate = self
         textView.text = "What's on your mind?"
         textView.textColor = UIColor.lightGray
