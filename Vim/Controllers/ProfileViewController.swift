@@ -9,17 +9,31 @@
 import UIKit
 import FirebaseAuth
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var surnameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
-    var lock = true
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
+    
+    
+    
+    var allPosts: Array<Post> = []
+    var friends: Array<User> = []
+    var currentUser: User!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.estimatedRowHeight = 420
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.tableFooterView = UIView()
         updateView(imageName: "bg3.png")
         customize()
         NotificationCenter.default.addObserver(self, selector: #selector(customize), name: NotificationNames.refreshProfile.notification, object: nil)
@@ -35,29 +49,54 @@ class ProfileViewController: UIViewController {
         let user = Auth.auth().currentUser
         Loader.start()
         FirestoreDb.shared.getUserProfileData(userID: (user?.uid)!) { (userData) in
-            self.emailLabel.text = user?.email
-            self.nameLabel.text = userData.name
-            self.surnameLabel.text = userData.surname
+            self.emailLabel.text = "  " + (user?.email)!
+            self.nameLabel.text = " " + userData.name! + " " + userData.surname!
             if let imgData = userData.imageData {
                 self.profileImageView.image = UIImage(data: imgData as Data)
             }
             Loader.stop()
-            if self.lock {
-                self.nameLabel.addBorder(toSide: .Bottom, withColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), andThickness: 1)
-                self.surnameLabel.addBorder(toSide: .Bottom, withColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), andThickness: 1)
-                self.emailLabel.addBorder(toSide: .Bottom, withColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), andThickness: 1)
-                self.lock = false
-            }
-            
-            
-            
         }
+        
+        FirestoreDb.shared.getUserProfileData(userID: (user?.uid)!) { (userData) in
+            self.currentUser = userData
+            self.getSelfPostData()
+        }
+        
         /*if let user = user {
             nameLabel.text = user.displayName
             emailLabel.text = user.email
         }*/
     }
     
+    func getSelfPostData() {
+        FirestoreDb.shared.getPostsData(currentUser: currentUser) { (passedArray) in
+            var myPosts = passedArray
+            for post in passedArray {
+                let results = self.allPosts.filter {$0.uuid == post.uuid}
+                let exists = results.isEmpty == false
+                if exists {
+                    myPosts.removeAll()
+                }
+            }
+            self.allPosts.append(contentsOf: myPosts)
+            self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
+            self.tableView.reloadData()
+            self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
+            //self.scrollViewHeightConstraint.constant = self.tableView.contentSize.height
+            self.scrollView.contentSize.height = self.tableView.contentSize.height + 100
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return allPosts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
+        cell.model = allPosts[indexPath.row]
+        cell.indexCell = indexPath
+        return cell
+    }
 
     @IBAction func friendsButtonAction(_ sender: UIButton) {
         let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendListTableViewController") as! FriendsListTableViewController
