@@ -79,33 +79,17 @@ class FirestoreDb {
                     let textContent = post.data()["text"] as! String
                     let timeResult = post.data()["date"] as! Timestamp
                     let imageData = post.data()["image"] as? NSData
-                    /*var peopleWhoLikedIDs: Array<String> = []
-                    let group = DispatchGroup()
                     
-                    group.enter()
-                    post.reference.collection("peopleWhoLiked").getDocuments(completion: { (snapshot, err) in
-                        if let documents = snapshot?.documents {
-                            for document in documents {
-                                
-                                peopleWhoLikedIDs.append(document.data()["uuid"] as! String)
-                                group.leave()
-                            }
-                        } else {
-                            print("cops")
-                        }
-                    })
-                    group.notify(queue: .main, execute: {
-                        print(peopleWhoLikedIDs)
-                    })*/
                     
-                    post.reference.collection("peopleWhoLiked").getDocuments(completion: { (snapshot, error) in
+                    post.reference.collection("peopleWhoLiked").getDocuments { (snapshot, error) in
                         if let documents = snapshot?.documents {
                             let likes = documents.map { $0["uuid"] } as? Array<String>
                             myPost = Post(date: timeResult, text: textContent, image: nil, imageData: imageData, owner: currentUser, id: post.documentID, whoLiked: likes)
                             postsArray.append(myPost)
                             group.leave()
                         }
-                    })
+                    }
+                    
                     
                 }
                 group.notify(queue: .main, execute: {
@@ -252,9 +236,39 @@ class FirestoreDb {
         completion(true)
     }
     
-    func likedAPost(whoLiked: User, likedPost: Post, completion: @escaping (Bool) -> Void) {
-        db.collection("users").document(likedPost.owner.uuid).collection("posts").document(likedPost.uuid).collection("peopleWhoLiked").document(whoLiked.uuid).setData(["uuid" : whoLiked.uuid])
-        completion(true)
+    func likedPost(whoLiked: User, likedPost: Post, completion: @escaping (Array<String>?) -> Void) {
+        db.collection("users").document(likedPost.owner.uuid).collection("posts").document(likedPost.uuid).collection("peopleWhoLiked").document(whoLiked.uuid).setData(["uuid" : whoLiked.uuid]) { (err) in
+            if err == nil {
+            }
+        }
+        
+        self.getLikes(from: likedPost, completion: { (likes) in
+            completion(likes)
+        })
+        
+        //db.collection("users").document(likedPost.owner.uuid).collection("posts").document(likedPost.uuid).updateData(["peopleWhoLiked" : [whoLiked.uuid]]) { (error) in}
+        
     }
+    
+    func unlikedPost(whoUnliked: User, likedPost: Post, completion: @escaping (Array<String>?) -> Void) {
+        db.collection("users").document(likedPost.owner.uuid).collection("posts").document(likedPost.uuid).collection("peopleWhoLiked").document(whoUnliked.uuid).delete { (err) in
+            if err == nil {
+            }
+        }
+        self.getLikes(from: likedPost, completion: { (likes) in
+            completion(likes)
+        })
+    }
+    
+    func getLikes(from post: Post, completion: @escaping (Array<String>?) -> Void) {
+        db.collection("users").document(post.owner.uuid).collection("posts").document(post.uuid).collection("peopleWhoLiked").getDocuments { (snapshot, error) in
+            if let documents = snapshot?.documents {
+                let documentLikes = documents.map { $0["uuid"] } as? Array<String>
+                completion(documentLikes)
+            }
+        }
+        
+    }
+    
     
 }

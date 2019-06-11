@@ -9,13 +9,16 @@
 import UIKit
 import FirebaseAuth
 
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostLikedProtocolDelegate {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var friendsButtonOutlet: UIButton!
+    @IBOutlet weak var postsButtonOutlet: UIButton!
+    
     
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
@@ -41,6 +44,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @objc func customize() {
+        self.emailLabel.text = ""
+        self.nameLabel.text = ""
         profileImageView.layer.masksToBounds = false
         profileImageView.layer.cornerRadius = 62
         profileImageView.clipsToBounds = true
@@ -54,7 +59,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             if let imgData = userData.imageData {
                 self.profileImageView.image = UIImage(data: imgData as Data)
             }
-            Loader.stop()
+        }
+        
+        FirestoreDb.shared.getFriends { (friends) in
+            //sprawdzic czy friend istnieje
+            self.friendsButtonOutlet.setTitle(String(friends.count) + " " + "Friends", for: .normal)
         }
         
         FirestoreDb.shared.getUserProfileData(userID: (user?.uid)!) { (userData) in
@@ -80,10 +89,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             }
             self.allPosts.append(contentsOf: myPosts)
             self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
+            self.postsButtonOutlet.setTitle(String(self.allPosts.count) + " " + "Posts", for: .normal)
             self.tableView.reloadData()
             self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
             //self.scrollViewHeightConstraint.constant = self.tableView.contentSize.height
             self.scrollView.contentSize.height = self.tableView.contentSize.height + 100
+            Loader.stop()
         }
     }
     
@@ -94,6 +105,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
         cell.model = allPosts[indexPath.row]
+        cell.delegate = self
         cell.indexCell = indexPath
         return cell
     }
@@ -105,14 +117,24 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         //self.navigationController?.show(vc, sender: nil)
         //self.show(vc, sender: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func postLikedButtonAction(cell: HomeTableViewCell) {
+        guard let currentUserID = currentUser?.uuid else { return }
+        if (cell.model.whoLiked?.contains(currentUserID))! {
+            FirestoreDb.shared.unlikedPost(whoUnliked: currentUser, likedPost: cell.model) { (likes) in
+                self.allPosts[cell.indexCell.row] = Post(date: cell.model.date, text: cell.model.text, image: nil, imageData: cell.model.imageData, owner: cell.model.owner, id: cell.model.uuid, whoLiked: likes)
+                self.tableView.reloadRows(at: [cell.indexCell], with: .automatic)
+            }
+            
+        } else {
+            FirestoreDb.shared.likedPost(whoLiked: currentUser, likedPost: cell.model) { (likes) in
+                self.allPosts[cell.indexCell.row] = Post(date: cell.model.date, text: cell.model.text, image: nil, imageData: cell.model.imageData, owner: cell.model.owner, id: cell.model.uuid, whoLiked: likes)
+                self.tableView.reloadRows(at: [cell.indexCell], with: .automatic)
+            }
+            
+        }
+        
     }
-    */
+    
 
 }

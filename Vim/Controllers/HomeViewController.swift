@@ -122,21 +122,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func postLikedButtonAction(cell: HomeTableViewCell) {
         guard let currentUserID = currentUser?.uuid else { return }
         if (cell.model.whoLiked?.contains(currentUserID))! {
-
-        } else {
-            FirestoreDb.shared.likedAPost(whoLiked: currentUser, likedPost: cell.model) { (done) in
-                if done {
-                    cell.likeClicked()
-                    
-                    
-                }
+            FirestoreDb.shared.unlikedPost(whoUnliked: currentUser, likedPost: cell.model) { (likes) in
+                self.allPosts[cell.indexCell.row] = Post(date: cell.model.date, text: cell.model.text, image: nil, imageData: cell.model.imageData, owner: cell.model.owner, id: cell.model.uuid, whoLiked: likes)
+                self.tableView.reloadRows(at: [cell.indexCell], with: .automatic)
             }
+            
+        } else {
+            FirestoreDb.shared.likedPost(whoLiked: currentUser, likedPost: cell.model) { (likes) in
+                self.allPosts[cell.indexCell.row] = Post(date: cell.model.date, text: cell.model.text, image: nil, imageData: cell.model.imageData, owner: cell.model.owner, id: cell.model.uuid, whoLiked: likes)
+                    self.tableView.reloadRows(at: [cell.indexCell], with: .automatic)
+            }
+            
         }
         
-        
-        //print(cell.model.whoLiked!)
+
     }
-    
-    
 
 }

@@ -101,11 +101,19 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     
-    func likeClicked() {
-        guard let likes = Int(likeNumber.text!) else { return }
+    func likeClicked(post: Post) {
+        guard let likes = post.whoLiked?.count else { return }
         let likes1 = likes + 1
         likeNumber.text = String(likes1)
         likeImageView.setImage(UIImage(named: "redheart.png"), for: .normal)
+        
+    }
+    
+    func unlikeClicked(post: Post) {
+        guard let likes = post.whoLiked?.count else { return }
+        let likes1 = likes - 1
+        likeNumber.text = String(likes1)
+        likeImageView.setImage(UIImage(named: "heart.png"), for: .normal)
     }
     
     
