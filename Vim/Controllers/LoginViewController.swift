@@ -23,6 +23,14 @@ class LoginViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if Auth.auth().currentUser != nil {
+            print("logged \(Auth.auth().currentUser?.email!)")
+        } else {
+            print("login please")
+        }
+    }
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }

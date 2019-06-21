@@ -24,6 +24,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationAppereace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Search users", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        
+        //uncomment for autologin
+        
+        if Auth.auth().currentUser != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTabBarController")
+            self.window!.rootViewController = initialViewController
+        } else {
+            print("login please")
+        }
+        
         return true
     }
 

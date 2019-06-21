@@ -20,14 +20,15 @@ class FirestoreDb {
         //docRef = Firestore.firestore().document("users")
     }
     
-    func addNewUser(givenEmail: String, givenPassword: String, givenName: String, completion: @escaping (Bool) -> Void) {
+    func addNewUser(givenEmail: String, givenPassword: String, givenName: String, givenSurname: String, completion: @escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: givenEmail, password: givenPassword) { (user, error) in
             if user != nil {
                 user?.user.createProfileChangeRequest().commitChanges(completion: { (error) in
                 })
                 self.db.collection("users").document((user?.user.uid)!).setData([
                     "email" : givenEmail,
-                    "name" : givenName])
+                    "name" : givenName,
+                    "surname" : givenSurname])
                 completion(true)
             } else {
                 completion(false)

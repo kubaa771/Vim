@@ -13,6 +13,7 @@ class RegisterViewController: UIViewController {
     var newEmail: String?
     var newPassword: String?
     var newName: String?
+    var newSurname: String?
 
 
     override func viewDidLoad() {
@@ -38,11 +39,15 @@ class RegisterViewController: UIViewController {
         newName = sender.text
     }
     
+    @IBAction func surnameTextFieldEdit(_ sender: UITextField) {
+        newSurname = sender.text
+    }
+    
     @IBAction func registerButton(_ sender: UIButton) {
         Loader.start()
-        if newEmail != nil, newPassword != nil, newName != nil {
+        if newEmail != nil, newPassword != nil, newName != nil, newSurname != nil {
             if (newEmail?.isValidEmail())! {
-                FirestoreDb.shared.addNewUser(givenEmail: newEmail!, givenPassword: newPassword!, givenName: newName!) { (finished) in
+                FirestoreDb.shared.addNewUser(givenEmail: newEmail!, givenPassword: newPassword!, givenName: newName!, givenSurname: newSurname!) { (finished) in
                     if finished {
                         self.navigationController?.popViewController(animated: true)
                     } else {

@@ -93,7 +93,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.tableView.reloadData()
             self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
             //self.scrollViewHeightConstraint.constant = self.tableView.contentSize.height
-            self.scrollView.contentSize.height = self.tableView.contentSize.height + 100
+            self.scrollView.contentSize.height = self.tableView.contentSize.height
             Loader.stop()
         }
     }

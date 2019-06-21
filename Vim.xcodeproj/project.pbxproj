@@ -26,6 +26,7 @@
 		8AF823D72211CCFA00BC2C95 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */; };
 		8AF823D92211DB7E00BC2C95 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */; };
 		8AF823DB2211E02C00BC2C95 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF823DA2211E02C00BC2C95 /* Post.swift */; };
+		8AF8EF5A22B96C54001B45F2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF8EF5922B96C54001B45F2 /* SettingsViewController.swift */; };
 		8AF962B322258EA400ACF1C1 /* FriendsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF962B222258EA400ACF1C1 /* FriendsListTableViewCell.swift */; };
 		8AF962B52225BE1D00ACF1C1 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF962B42225BE1D00ACF1C1 /* Protocols.swift */; };
 		8AF98760221B0BDC00EE956E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9875F221B0BDC00EE956E /* Loader.swift */; };
@@ -79,6 +80,7 @@
 		8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8AF823DA2211E02C00BC2C95 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		8AF8EF5922B96C54001B45F2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8AF962B222258EA400ACF1C1 /* FriendsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListTableViewCell.swift; sourceTree = "<group>"; };
 		8AF962B42225BE1D00ACF1C1 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		8AF9875F221B0BDC00EE956E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 		8A07FAD6228237E4001A3664 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8AF8EF5922B96C54001B45F2 /* SettingsViewController.swift */,
 				8A0747622210986400C6828A /* LoginViewController.swift */,
 				8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */,
 				8AF823D42211A15500BC2C95 /* HomeViewController.swift */,
@@ -513,6 +516,7 @@
 				8AF823D72211CCFA00BC2C95 /* HomeTableViewCell.swift in Sources */,
 				8AF823D92211DB7E00BC2C95 /* RegisterViewController.swift in Sources */,
 				8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */,
+				8AF8EF5A22B96C54001B45F2 /* SettingsViewController.swift in Sources */,
 				8AF575752216FB6300F3D4AD /* AddNewPostViewController.swift in Sources */,
 				8AF962B322258EA400ACF1C1 /* FriendsListTableViewCell.swift in Sources */,
 				8AFE5C372227461C00C3F48F /* ProfileViewController.swift in Sources */,
