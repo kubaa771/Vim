@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostLikedProtocolDelegate {
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostOptionsDelegate {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
@@ -71,13 +71,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.getSelfPostData()
         }
         
-        /*if let user = user {
-            nameLabel.text = user.displayName
-            emailLabel.text = user.email
-        }*/
+        getSelfPostData()
     }
     
     func getSelfPostData() {
+        guard currentUser != nil else { return }
         FirestoreDb.shared.getPostsData(currentUser: currentUser) { (passedArray) in
             var myPosts = passedArray
             for post in passedArray {
@@ -135,6 +133,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
     }
+    
+    func commentSectionButtonTappedAction(cell: HomeTableViewCell) {
+        //
+    }
+    
     
 
 }

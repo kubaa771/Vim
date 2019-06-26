@@ -11,7 +11,7 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PostLikedProtocolDelegate {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PostOptionsDelegate {
    
     var allPosts: Array<Post> = []
     var friends: Array<User> = []
@@ -137,5 +137,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
 
     }
+    
+    func commentSectionButtonTappedAction(cell: HomeTableViewCell) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CommentsViewController") as! CommentsViewController
+        vc.model = cell.model
+        //performSegue(withIdentifier: "commentSectionSegue", sender: nil)
+        self.show(vc, sender: nil)
+    }
+    
 
 }

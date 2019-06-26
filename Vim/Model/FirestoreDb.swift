@@ -243,7 +243,7 @@ class FirestoreDb {
             }
         }
         
-        self.getLikes(from: likedPost, completion: { (likes) in
+        getLikes(from: likedPost, completion: { (likes) in
             completion(likes)
         })
         
@@ -256,7 +256,7 @@ class FirestoreDb {
             if err == nil {
             }
         }
-        self.getLikes(from: likedPost, completion: { (likes) in
+        getLikes(from: likedPost, completion: { (likes) in
             completion(likes)
         })
     }

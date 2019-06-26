@@ -243,7 +243,7 @@
                                                 <connections>
                                                     <outlet property="dateLabel" destination="taI-8Q-ece" id="RLb-7L-8xi"/>
                                                     <outlet property="imageHeight" destination="UZR-GU-Id0" id="v2Q-dL-Xhi"/>
-                                                    <outlet property="likeImageView" destination="IQ9-Vn-DvE" id="J7d-i8-Ldl"/>
+                                                    <outlet property="likeButton" destination="IQ9-Vn-DvE" id="J7d-i8-Ldl"/>
                                                     <outlet property="likeNumber" destination="nuZ-Kc-PaG" id="itl-zg-fP4"/>
                                                     <outlet property="ownerPictureImageView" destination="0Ue-H8-OZE" id="HCg-D5-fJE"/>
                                                     <outlet property="postContentLabel" destination="Dbi-8E-5MQ" id="wGm-lE-UQS"/>
@@ -516,6 +516,9 @@
                                                                     <rect key="frame" x="112" y="138" width="30" height="30"/>
                                                                     <inset key="imageEdgeInsets" minX="-1" minY="7" maxX="7" maxY="0.0"/>
                                                                     <state key="normal" image="comments"/>
+                                                                    <connections>
+                                                                        <action selector="commentSectionButtonTapped:" destination="jan-Wl-w5d" eventType="touchUpInside" id="bPC-sb-LAB"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
@@ -538,7 +541,7 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="i2z-w8-4yE" id="UU0-81-6x4"/>
                                             <outlet property="imageHeight" destination="Q45-8Z-KbK" id="xrM-YF-Ppy"/>
-                                            <outlet property="likeImageView" destination="Zei-tA-tDH" id="fPc-cT-yi9"/>
+                                            <outlet property="likeButton" destination="Zei-tA-tDH" id="fPc-cT-yi9"/>
                                             <outlet property="likeNumber" destination="daK-4p-F2o" id="9Wa-Uy-6PI"/>
                                             <outlet property="ownerPictureImageView" destination="SKS-Vs-U6g" id="k36-1h-eu8"/>
                                             <outlet property="postContentLabel" destination="GO5-8W-dyK" id="lsj-f8-d0N"/>
@@ -573,6 +576,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBE-tC-IOJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2519" y="46"/>
+        </scene>
+        <!--Comments View Controller-->
+        <scene sceneID="gLq-Wk-5LD">
+            <objects>
+                <viewController storyboardIdentifier="CommentsViewController" id="gOg-Q3-ZFu" customClass="CommentsViewController" customModule="Vim" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qDL-9p-AWo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWq-oT-wDB">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="kHp-8R-bvs" firstAttribute="trailing" secondItem="DWq-oT-wDB" secondAttribute="trailing" id="8w4-tc-17I"/>
+                            <constraint firstItem="DWq-oT-wDB" firstAttribute="top" secondItem="kHp-8R-bvs" secondAttribute="top" id="Kfu-tF-vK9"/>
+                            <constraint firstAttribute="bottom" secondItem="DWq-oT-wDB" secondAttribute="bottom" id="SGs-gH-ELH"/>
+                            <constraint firstItem="DWq-oT-wDB" firstAttribute="leading" secondItem="qDL-9p-AWo" secondAttribute="leading" id="sdB-u9-f72"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kHp-8R-bvs"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="7ID-86-AAB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qA3-WL-Zm6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4415.1999999999998" y="-669.71514242878561"/>
         </scene>
         <!--Add New Post View Controller-->
         <scene sceneID="4oV-sT-jHf">
@@ -680,7 +710,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mlY-To-gVM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3458" y="46"/>
+            <point key="canvasLocation" x="3476" y="45"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="lto-N7-8ry">
@@ -1541,6 +1571,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ep-uh-B9j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="36" y="45"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QYG-CW-9Br">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qeu-6s-laj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ndM-dB-Uok">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gOg-Q3-ZFu" kind="relationship" relationship="rootViewController" id="QZQ-3K-eZF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IVP-0q-qRG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3476" y="-669.71514242878561"/>
         </scene>
     </scenes>
     <resources>

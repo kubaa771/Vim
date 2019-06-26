@@ -15,6 +15,7 @@
 		8A03E0AD220F56FA0038EA9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A03E0AB220F56FA0038EA9C /* LaunchScreen.storyboard */; };
 		8A03E0B8220F56FA0038EA9C /* VimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A03E0B7220F56FA0038EA9C /* VimTests.swift */; };
 		8A03E0C3220F56FA0038EA9C /* VimUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A03E0C2220F56FA0038EA9C /* VimUITests.swift */; };
+		8A06F23C22C3F86500031085 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06F23B22C3F86500031085 /* CommentsViewController.swift */; };
 		8A07475C22108CBE00C6828A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A07475B22108CBE00C6828A /* GoogleService-Info.plist */; };
 		8A07475F221093D100C6828A /* FirestoreDb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07475E221093D100C6828A /* FirestoreDb.swift */; };
 		8A074761221095AB00C6828A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A074760221095AB00C6828A /* User.swift */; };
@@ -69,6 +70,7 @@
 		8A03E0BE220F56FA0038EA9C /* VimUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VimUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A03E0C2220F56FA0038EA9C /* VimUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimUITests.swift; sourceTree = "<group>"; };
 		8A03E0C4220F56FA0038EA9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A06F23B22C3F86500031085 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		8A07475B22108CBE00C6828A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8A07475E221093D100C6828A /* FirestoreDb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDb.swift; sourceTree = "<group>"; };
 		8A074760221095AB00C6828A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */,
 				8AF823D42211A15500BC2C95 /* HomeViewController.swift */,
 				8AF823D62211CCFA00BC2C95 /* HomeTableViewCell.swift */,
+				8A06F23B22C3F86500031085 /* CommentsViewController.swift */,
 				8AF575742216FB6300F3D4AD /* AddNewPostViewController.swift */,
 				8A0747642210DDF600C6828A /* MainTabBarController.swift */,
 				8AFE5C362227461C00C3F48F /* ProfileViewController.swift */,
@@ -519,6 +522,7 @@
 				8AF8EF5A22B96C54001B45F2 /* SettingsViewController.swift in Sources */,
 				8AF575752216FB6300F3D4AD /* AddNewPostViewController.swift in Sources */,
 				8AF962B322258EA400ACF1C1 /* FriendsListTableViewCell.swift in Sources */,
+				8A06F23C22C3F86500031085 /* CommentsViewController.swift in Sources */,
 				8AFE5C372227461C00C3F48F /* ProfileViewController.swift in Sources */,
 				8AFBD577222C2242002722A2 /* EditProfileViewController.swift in Sources */,
 				8AFC05A822122B3A004F5CEC /* Extensions.swift in Sources */,

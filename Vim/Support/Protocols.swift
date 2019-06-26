@@ -14,6 +14,7 @@ protocol AddFriendProtocolDelegate: AnyObject {
 }
 
 
-protocol PostLikedProtocolDelegate: AnyObject {
+protocol PostOptionsDelegate: AnyObject {
     func postLikedButtonAction(cell: HomeTableViewCell)
+    func commentSectionButtonTappedAction(cell: HomeTableViewCell)
 }

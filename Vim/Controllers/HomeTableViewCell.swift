@@ -18,13 +18,13 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
     @IBOutlet weak var likeNumber: UILabel!
-    @IBOutlet weak var likeImageView: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
     
     var currentUser = Auth.auth().currentUser
     
     var indexCell: IndexPath!
     
-    weak var delegate: PostLikedProtocolDelegate?
+    weak var delegate: PostOptionsDelegate?
     
     var model: Post! {
         didSet {
@@ -94,35 +94,18 @@ class HomeTableViewCell: UITableViewCell {
         likeNumber.text = String(likes)
         guard let currentUserID = currentUser?.uid else { return }
         if (post.whoLiked?.contains(currentUserID))! {
-            likeImageView.setImage(UIImage(named: "redheart.png"), for: .normal)
+            likeButton.setImage(UIImage(named: "redheart.png"), for: .normal)
         } else {
-            likeImageView.setImage(UIImage(named: "heart.png"), for: .normal)
+            likeButton.setImage(UIImage(named: "heart.png"), for: .normal)
         }
     }
     
-    
-    func likeClicked(post: Post) {
-        guard let likes = post.whoLiked?.count else { return }
-        let likes1 = likes + 1
-        likeNumber.text = String(likes1)
-        likeImageView.setImage(UIImage(named: "redheart.png"), for: .normal)
-        
-    }
-    
-    func unlikeClicked(post: Post) {
-        guard let likes = post.whoLiked?.count else { return }
-        let likes1 = likes - 1
-        likeNumber.text = String(likes1)
-        likeImageView.setImage(UIImage(named: "heart.png"), for: .normal)
-    }
-    
-    
-    
     @IBAction func likeTapped(_ sender: UIButton) {
         delegate?.postLikedButtonAction(cell: self)
-        
     }
     
+    @IBAction func commentSectionButtonTapped(_ sender: UIButton) {
+        delegate?.commentSectionButtonTappedAction(cell: self)
+    }
     
-
 }
