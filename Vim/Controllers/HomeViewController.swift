@@ -140,7 +140,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func commentSectionButtonTappedAction(cell: HomeTableViewCell) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CommentsViewController") as! CommentsViewController
-        vc.model = cell.model
+        vc.postModel = cell.model
         //performSegue(withIdentifier: "commentSectionSegue", sender: nil)
         self.show(vc, sender: nil)
     }
