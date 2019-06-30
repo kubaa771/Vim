@@ -90,8 +90,6 @@ class FirestoreDb {
                             group.leave()
                         }
                     }
-                    
-                    
                 }
                 group.notify(queue: .main, execute: {
                     completion(postsArray)
@@ -270,6 +268,40 @@ class FirestoreDb {
         }
         
     }
+    
+    
+    func commentPost(commentedPost: Post, comment: Comment) {
+        db.collection("users").document(commentedPost.owner.uuid).collection("posts").document(commentedPost.uuid).collection("comments").addDocument(data: [
+            "date" : comment.date!,
+            "text" : comment.text!,
+            "userID" : comment.user.uuid])
+    }
+    
+    func getComments(from post: Post, completion: @escaping (Array<Comment>) -> Void) {
+        db.collection("users").document(post.owner.uuid).collection("posts").document(post.uuid).collection("comments").getDocuments { (snapshot, error) in
+            if let documents = snapshot?.documents {
+                var commentsArray: Array<Comment> = []
+                let group = DispatchGroup()
+                for comment in documents {
+                    group.enter()
+                    let textContent = comment.data()["text"] as! String
+                    let timeResult = comment.data()["date"] as! Timestamp
+                    let commentOwnerID = comment.data()["userID"] as! String
+                    
+                    self.getUserProfileData(userID: commentOwnerID, completion: { (user) in
+                        let currentComment = Comment(user: user, date: timeResult, text: textContent, uuid: comment.documentID)
+                        commentsArray.append(currentComment)
+                        group.leave()
+                    })
+                    
+                }
+                group.notify(queue: .main) {
+                    completion(commentsArray)
+                }
+            }
+        }
+    }
+    
     
     
 }

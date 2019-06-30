@@ -16,6 +16,7 @@ class Post: HashableClass {
     var owner: User!
     var uuid = UUID().uuidString
     var whoLiked: Array<String>?
+    var comments: Array<Comment>?
     
     init(date: Timestamp, text: String, image: UIImage?, imageData: NSData?, owner: User, id: String, whoLiked: Array<String>?) {
         self.date = date

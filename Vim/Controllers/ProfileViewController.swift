@@ -54,11 +54,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let user = Auth.auth().currentUser
         Loader.start()
         FirestoreDb.shared.getUserProfileData(userID: (user?.uid)!) { (userData) in
+            self.currentUser = userData
             self.emailLabel.text = "  " + (user?.email)!
             self.nameLabel.text = " " + userData.name! + " " + userData.surname!
             if let imgData = userData.imageData {
                 self.profileImageView.image = UIImage(data: imgData as Data)
             }
+            self.getSelfPostData()
         }
         
         FirestoreDb.shared.getFriends { (friends) in
@@ -66,12 +68,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.friendsButtonOutlet.setTitle(String(friends.count) + " " + "Friends", for: .normal)
         }
         
-        FirestoreDb.shared.getUserProfileData(userID: (user?.uid)!) { (userData) in
-            self.currentUser = userData
-            self.getSelfPostData()
-        }
-        
-        getSelfPostData()
+        //getSelfPostData()
     }
     
     func getSelfPostData() {

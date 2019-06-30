@@ -32,9 +32,11 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var currentUser = Auth.auth().currentUser
+    var userFB = Auth.auth().currentUser
+    var userData: User! = nil
     var postModel: Post! = nil
-    var comments: Array<Comment> = [Comment(user: User(email: "test123@gmail.com", imageData: nil, name: "Test", surname: "Test", id: UUID().uuidString), date: Firebase.Timestamp.init(date: Date()), text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", uuid: UUID().uuidString), Comment(user: User(email: "inny@gmail.com", imageData: nil, name: "Test", surname: "Tessssssssssssssst", id: UUID().uuidString), date: Firebase.Timestamp.init(date: Date()), text: "Lorem ipsum dolor sit amet", uuid: UUID().uuidString), Comment(user: User(email: "test123@gmail.com", imageData: nil, name: "Te", surname: "st", id: UUID().uuidString), date: Firebase.Timestamp.init(date: Date()), text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", uuid: UUID().uuidString), Comment(user: User(email: "inny@gmail.com", imageData: nil, name: "Name", surname: "Surname", id: UUID().uuidString), date: Firebase.Timestamp.init(date: Date()), text: "Lorem ipsum", uuid: UUID().uuidString), Comment(user: User(email: "test123@gmail.com", imageData: nil, name: "User", surname: "Wisnakannxwoanwuyasknyskjyans", id: UUID().uuidString), date: Firebase.Timestamp.init(date: Date()), text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", uuid: UUID().uuidString), Comment(user: User(email: "inny@gmail.com", imageData: nil, name: "Test", surname: "T", id: UUID().uuidString), date: Firebase.Timestamp.init(date: Date()), text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", uuid: UUID().uuidString), Comment(user: User(email: "inny@gmail.com", imageData: nil, name: "Test", surname: "T", id: UUID().uuidString), date: Firebase.Timestamp.init(date: Date()), text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", uuid: UUID().uuidString)]
+    var commentText: String?
+    var comments: Array<Comment> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +49,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
         guard postModel != nil else { return }
-        customize(post: postModel)
+        fetchData()
         
         // Do any additional setup after loading the view.
     }
@@ -63,7 +65,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         button.setImage(UIImage(named: "paper_plane.png"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
         button.frame = CGRect(x: CGFloat(textField.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
-        //button.addTarget(self, action: #selector(self.refresh), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.commentPost), for: .touchUpInside)
         textField.rightView = button
         textField.rightViewMode = .always
         
@@ -99,7 +101,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         guard let likes = post.whoLiked?.count else { return }
         likeNumberLabel.text = String(likes)
         commentsNumberLabel.text = String(comments.count)
-        guard let currentUserID = currentUser?.uid else { return }
+        guard let currentUserID = userFB?.uid else { return }
         if (post.whoLiked?.contains(currentUserID))! {
             likeButton.setImage(UIImage(named: "redheart.png"), for: .normal)
         } else {
@@ -108,12 +110,18 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         tableView.reloadData()
         
-        //tableViewHeightConstraint.constant = tableView.contentSize.height * 2
-        //tableView.contentSize.height = scrollView.contentSize.height
-        //scrollViewHeightConstraint.constant = tableView.contentSize.height
-        //scrollView.contentSize.height = tableView.contentSize.height
-        //tableView.frame.size.height = tableView.contentSize.height
+    }
+    
+    func fetchData() {
+        FirestoreDb.shared.getUserProfileData(userID: (userFB?.uid)!) { (userData) in
+            self.userData = userData
+        }
         
+        FirestoreDb.shared.getComments(from: postModel) { (comments) in
+            self.comments = comments
+            self.customize(post: self.postModel)
+            
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -136,7 +144,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
-        //
+        commentText = sender.text
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -168,6 +176,13 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
                             self.textFieldBottomConstraint.constant = keyboardHeight
                                 self.view.layoutIfNeeded() },
                            completion: nil)
+        }
+    }
+    
+    @objc func commentPost() {
+        if commentText != nil, userData != nil {
+            let comment = Comment(user: userData, date: Firebase.Timestamp.init(date: Date()), text: commentText!, uuid: UUID().uuidString)
+            FirestoreDb.shared.commentPost(commentedPost: postModel, comment: comment)
         }
     }
     
