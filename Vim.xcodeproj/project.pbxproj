@@ -21,6 +21,8 @@
 		8A074761221095AB00C6828A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A074760221095AB00C6828A /* User.swift */; };
 		8A0747632210986400C6828A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747622210986400C6828A /* LoginViewController.swift */; };
 		8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747642210DDF600C6828A /* MainTabBarController.swift */; };
+		8A07F18B22CA52DF0067D8BD /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07F18922CA52DF0067D8BD /* HeaderView.swift */; };
+		8A07F18C22CA52DF0067D8BD /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A07F18A22CA52DF0067D8BD /* HeaderView.xib */; };
 		8A11B35422C543FD00972ED0 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11B35322C543FD00972ED0 /* CommentsTableViewCell.swift */; };
 		8A11B35622C5483700972ED0 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11B35522C5483700972ED0 /* Comment.swift */; };
 		8AF575732216F49300F3D4AD /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF575722216F49300F3D4AD /* NotificationNames.swift */; };
@@ -78,6 +80,8 @@
 		8A074760221095AB00C6828A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8A0747622210986400C6828A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8A0747642210DDF600C6828A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		8A07F18922CA52DF0067D8BD /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		8A07F18A22CA52DF0067D8BD /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		8A11B35322C543FD00972ED0 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		8A11B35522C5483700972ED0 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		8AF575722216F49300F3D4AD /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
@@ -186,7 +190,7 @@
 				8A07FAD5228237BB001A3664 /* Support */,
 				8A07475D2210939900C6828A /* Model */,
 				8A07FAD6228237E4001A3664 /* Controllers */,
-				8A07FAD722823819001A3664 /* Storyboards */,
+				8A07FAD722823819001A3664 /* Storyboards Views */,
 				8A03E0A9220F56FA0038EA9C /* Assets.xcassets */,
 				8A03E0AE220F56FA0038EA9C /* Info.plist */,
 				8A07475B22108CBE00C6828A /* GoogleService-Info.plist */,
@@ -254,13 +258,15 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		8A07FAD722823819001A3664 /* Storyboards */ = {
+		8A07FAD722823819001A3664 /* Storyboards Views */ = {
 			isa = PBXGroup;
 			children = (
 				8A03E0AB220F56FA0038EA9C /* LaunchScreen.storyboard */,
 				8A03E0A6220F56F80038EA9C /* Main.storyboard */,
+				8A07F18922CA52DF0067D8BD /* HeaderView.swift */,
+				8A07F18A22CA52DF0067D8BD /* HeaderView.xib */,
 			);
-			path = Storyboards;
+			path = "Storyboards Views";
 			sourceTree = "<group>";
 		};
 		8AFD0035229F0AC8009AFF93 /* Resources */ = {
@@ -385,6 +391,7 @@
 				8A03E0AD220F56FA0038EA9C /* LaunchScreen.storyboard in Resources */,
 				8A07475C22108CBE00C6828A /* GoogleService-Info.plist in Resources */,
 				8A03E0AA220F56FA0038EA9C /* Assets.xcassets in Resources */,
+				8A07F18C22CA52DF0067D8BD /* HeaderView.xib in Resources */,
 				8AFD0037229F0AE0009AFF93 /* Montserrat-Regular.ttf in Resources */,
 				8A03E0A8220F56F80038EA9C /* Main.storyboard in Resources */,
 			);
@@ -541,6 +548,7 @@
 				8A074761221095AB00C6828A /* User.swift in Sources */,
 				8AF823D52211A15500BC2C95 /* HomeViewController.swift in Sources */,
 				8AFBD2F222244061009C47A0 /* FriendsListTableViewController.swift in Sources */,
+				8A07F18B22CA52DF0067D8BD /* HeaderView.swift in Sources */,
 				8AF962B52225BE1D00ACF1C1 /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

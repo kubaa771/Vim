@@ -34,7 +34,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.estimatedRowHeight = 420
+        //tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
         updateView(imageName: "bg3.png")
@@ -86,11 +86,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
             self.postsButtonOutlet.setTitle(String(self.allPosts.count) + " " + "Posts", for: .normal)
             self.tableView.reloadData()
-            self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
+            //self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
             //self.scrollViewHeightConstraint.constant = self.tableView.contentSize.height
-            self.scrollView.contentSize.height = self.tableView.contentSize.height
+            //self.scrollView.contentSize.height = self.tableView.contentSize.height
             Loader.stop()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        tableViewHeightConstraint.constant = tableView.contentSize.height + 65
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -10,27 +10,12 @@ import UIKit
 import FirebaseAuth
 import Firebase
 
-class CommentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var datePostLabel: UILabel!
-    @IBOutlet weak var textPostLabel: UILabel!
-    @IBOutlet weak var photoPostImageView: UIImageView!
-    @IBOutlet weak var likeNumberLabel: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var commentsNumberLabel: UILabel!
-    @IBOutlet weak var photoPostHeightConstraint: NSLayoutConstraint!
+class CommentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     
     @IBOutlet weak var textField: UITextField!
-    
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldBottomConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var scrollView: UIScrollView!
     
     var userFB = Auth.auth().currentUser
     var userData: User! = nil
@@ -47,9 +32,11 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.delegate = self
         tableView.estimatedRowHeight = 77
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.estimatedSectionHeaderHeight = 269
         tableView.tableFooterView = UIView()
         guard postModel != nil else { return }
-        fetchData()
+        customize()
         
         // Do any additional setup after loading the view.
     }
@@ -59,8 +46,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         view.endEditing(true)
     }
     
-    func customize(post: Post) {
-        
+    func customize() {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "paper_plane.png"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
@@ -69,63 +55,21 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         textField.rightView = button
         textField.rightViewMode = .always
         
-        if let imageData = post.imageData {
-            let image = UIImage(data: imageData as Data)
-            let ratio = image!.size.width / image!.size.height
-            let newHeight = photoPostImageView.frame.width / ratio
-            photoPostHeightConstraint.constant = newHeight
-            photoPostImageView.image = image
-        }
-        
-        if let profileImageData = post.owner.imageData {
-            let image = UIImage(data: profileImageData as Data)
-    
-            userImageView.layer.masksToBounds = false
-            userImageView.layer.cornerRadius = 26
-            userImageView.clipsToBounds = true
-            userImageView.contentMode = UIView.ContentMode.scaleAspectFill
-            userImageView.image = image
-        }
-        
-        let date = post.date.dateValue()
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
-        dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm" //Specify your format that you want
-        let strDate = dateFormatter.string(from: date)
-        datePostLabel.text = strDate
-        textPostLabel.text = post.text
-        let name = post.owner.name ?? post.owner.email
-        let surname = post.owner.surname ?? ""
-        userNameLabel.text = name! + " " + surname //dokoncz
-        guard let likes = post.whoLiked?.count else { return }
-        likeNumberLabel.text = String(likes)
-        commentsNumberLabel.text = String(comments.count)
-        guard let currentUserID = userFB?.uid else { return }
-        if (post.whoLiked?.contains(currentUserID))! {
-            likeButton.setImage(UIImage(named: "redheart.png"), for: .normal)
-        } else {
-            likeButton.setImage(UIImage(named: "heart.png"), for: .normal)
-        }
-        
-        tableView.reloadData()
-        
+        fetchData()
     }
     
     func fetchData() {
+        Loader.start()
         FirestoreDb.shared.getUserProfileData(userID: (userFB?.uid)!) { (userData) in
             self.userData = userData
         }
         
         FirestoreDb.shared.getComments(from: postModel) { (comments) in
             self.comments = comments
-            self.customize(post: self.postModel)
-            
+            self.comments.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
+            self.tableView.reloadData()
+            Loader.stop()
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        tableViewHeightConstraint.constant = tableView.contentSize.height + 40
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -136,6 +80,20 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentsTableViewCell
         cell.model = comments[indexPath.row]
         return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = Bundle.main.loadNibNamed("HeaderView", owner: self, options: nil)?.first as! HeaderView
+        headerView.model = postModel
+        return headerView
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //
     }
     
     
@@ -183,6 +141,9 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         if commentText != nil, userData != nil {
             let comment = Comment(user: userData, date: Firebase.Timestamp.init(date: Date()), text: commentText!, uuid: UUID().uuidString)
             FirestoreDb.shared.commentPost(commentedPost: postModel, comment: comment)
+            textField.text = ""
+            fetchData()
+            
         }
     }
     
