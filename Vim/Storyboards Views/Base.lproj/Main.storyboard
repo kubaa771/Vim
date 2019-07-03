@@ -662,6 +662,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="dkf-rI-jXD" firstAttribute="trailing" secondItem="kHp-8R-bvs" secondAttribute="trailing" id="1Ph-gX-viD"/>
                             <constraint firstItem="dkf-rI-jXD" firstAttribute="leading" secondItem="kHp-8R-bvs" secondAttribute="leading" id="B5g-k6-hkt"/>

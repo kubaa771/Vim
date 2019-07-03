@@ -92,10 +92,6 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         return headerView
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //
-    }
-    
     
     @IBAction func textFieldDidEndEditing(_ sender: UITextField) {
         textFieldBottomConstraint.constant = 0

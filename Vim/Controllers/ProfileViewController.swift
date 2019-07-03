@@ -86,9 +86,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
             self.postsButtonOutlet.setTitle(String(self.allPosts.count) + " " + "Posts", for: .normal)
             self.tableView.reloadData()
-            //self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
+            self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
             //self.scrollViewHeightConstraint.constant = self.tableView.contentSize.height
-            //self.scrollView.contentSize.height = self.tableView.contentSize.height
+            self.scrollView.contentSize.height = self.tableView.contentSize.height
             Loader.stop()
         }
     }
