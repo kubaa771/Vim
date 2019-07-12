@@ -20,7 +20,7 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //updateView(imageName: "bg3.png")
+        updateView(imageName: "bg3.png")
         customize()
         setupSearchController()
         tableView.estimatedRowHeight = 81

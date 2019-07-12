@@ -354,6 +354,7 @@
                                             </constraints>
                                         </stackView>
                                     </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="KSX-3V-dtU" secondAttribute="bottom" constant="10" id="PNe-d4-nRs"/>
                                         <constraint firstItem="KSX-3V-dtU" firstAttribute="leading" secondItem="qjS-lM-3dU" secondAttribute="leading" constant="10" id="aSD-eZ-6Et"/>
