@@ -49,6 +49,7 @@ class RegisterViewController: UIViewController {
             if (newEmail?.isValidEmail())! {
                 FirestoreDb.shared.addNewUser(givenEmail: newEmail!, givenPassword: newPassword!, givenName: newName!, givenSurname: newSurname!) { (finished) in
                     if finished {
+                        self.dismiss(animated: true, completion: nil)
                         self.navigationController?.popViewController(animated: true)
                     } else {
                         self.displayErrorAlert(message: "Something went wrong, check your email or password!")

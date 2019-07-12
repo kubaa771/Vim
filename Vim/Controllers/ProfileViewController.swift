@@ -11,19 +11,8 @@ import FirebaseAuth
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostOptionsDelegate {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
+
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var friendsButtonOutlet: UIButton!
-    @IBOutlet weak var postsButtonOutlet: UIButton!
-    
-    
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
-    
-    
     
     var allPosts: Array<Post> = []
     var friends: Array<User> = []
@@ -32,40 +21,29 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateView(imageName: "bg3.png")
         tableView.dataSource = self
         tableView.delegate = self
-        //tableView.estimatedRowHeight = 200
+        tableView.estimatedRowHeight = 420
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
-        updateView(imageName: "bg3.png")
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.estimatedSectionHeaderHeight = 180
         customize()
         NotificationCenter.default.addObserver(self, selector: #selector(customize), name: NotificationNames.refreshProfile.notification, object: nil)
         // Do any additional setup after loading the view.
     }
     
     @objc func customize() {
-        self.emailLabel.text = ""
-        self.nameLabel.text = ""
-        profileImageView.layer.masksToBounds = false
-        profileImageView.layer.cornerRadius = 62
-        profileImageView.clipsToBounds = true
-        profileImageView.contentMode = UIView.ContentMode.scaleAspectFill
-        
         let user = Auth.auth().currentUser
         Loader.start()
         FirestoreDb.shared.getUserProfileData(userID: (user?.uid)!) { (userData) in
             self.currentUser = userData
-            self.emailLabel.text = "  " + (user?.email)!
-            self.nameLabel.text = " " + userData.name! + " " + userData.surname!
-            if let imgData = userData.imageData {
-                self.profileImageView.image = UIImage(data: imgData as Data)
-            }
             self.getSelfPostData()
         }
         
         FirestoreDb.shared.getFriends { (friends) in
-            //sprawdzic czy friend istnieje
-            self.friendsButtonOutlet.setTitle(String(friends.count) + " " + "Friends", for: .normal)
+            self.friends = friends
         }
         
         //getSelfPostData()
@@ -84,21 +62,19 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             }
             self.allPosts.append(contentsOf: myPosts)
             self.allPosts.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
-            self.postsButtonOutlet.setTitle(String(self.allPosts.count) + " " + "Posts", for: .normal)
             self.tableView.reloadData()
-            self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
-            //self.scrollViewHeightConstraint.constant = self.tableView.contentSize.height
-            self.scrollView.contentSize.height = self.tableView.contentSize.height
+            self.tableView.isHidden = false
             Loader.stop()
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        tableViewHeightConstraint.constant = tableView.contentSize.height + 65
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allPosts.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,13 +84,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.indexCell = indexPath
         return cell
     }
-
-    @IBAction func friendsButtonAction(_ sender: UIButton) {
-        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendListTableViewController") as! FriendsListTableViewController
-        vc.isUserFriendsList = true
-        self.navigationController?.pushViewController(vc, animated: true)
-        //self.navigationController?.show(vc, sender: nil)
-        //self.show(vc, sender: nil)
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self, options: nil)?.first as! ProfileHeaderView
+        headerView.friendsButtonOutlet.setTitle(String(friends.count) + " " + "Friends", for: .normal)
+        headerView.postsButtonOutlet.setTitle(String(allPosts.count) + " " + "Posts", for: .normal)
+        if currentUser != nil {
+            headerView.model = currentUser
+        }
+        return headerView
     }
     
     func postLikedButtonAction(cell: HomeTableViewCell) {

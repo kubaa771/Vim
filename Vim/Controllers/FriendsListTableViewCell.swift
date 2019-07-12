@@ -39,9 +39,15 @@ class FriendsListTableViewCell: UITableViewCell {
     }
 
     func customize(user: User) {
-        nameLabel.text = user.email
+        let name = user.name ?? user.email
+        let surname = user.surname ?? ""
+        nameLabel.text = name! + " " + surname
         if let imageData = user.imageData {
             let image = UIImage(data: imageData as Data)
+            friendProfilePictureView.layer.masksToBounds = false
+            friendProfilePictureView.layer.cornerRadius = 30
+            friendProfilePictureView.clipsToBounds = true
+            friendProfilePictureView.contentMode = UIView.ContentMode.scaleAspectFill
             friendProfilePictureView.image = image
             self.layoutIfNeeded()
         }

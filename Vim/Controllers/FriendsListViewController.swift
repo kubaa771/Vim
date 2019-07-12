@@ -9,8 +9,11 @@
 import UIKit
 import FirebaseAuth
 
-class FriendsListTableViewController: UITableViewController, AddFriendProtocolDelegate, UISearchResultsUpdating {
+class FriendsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddFriendProtocolDelegate, UISearchResultsUpdating {
    
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     var allUsersArray: Array<User> = []
     var userFriendsArray: Array<User> = []
     var filteredUsersArray: Array<User> = []
@@ -104,11 +107,11 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
             return filteredUsersArray.count
         }
@@ -116,13 +119,16 @@ class FriendsListTableViewController: UITableViewController, AddFriendProtocolDe
     }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendListCell", for: indexPath) as! FriendsListTableViewCell
         let user: User!
         if isFiltering() {
             user = filteredUsersArray[indexPath.row]
         } else {
             user = allUsersArray[indexPath.row]
+        }
+        if isUserFriendsList {
+            cell.addFriendButton.isHidden = true
         }
         cell.model = user
         cell.delegate = self

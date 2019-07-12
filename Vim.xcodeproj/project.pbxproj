@@ -23,6 +23,8 @@
 		8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0747642210DDF600C6828A /* MainTabBarController.swift */; };
 		8A07F18B22CA52DF0067D8BD /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07F18922CA52DF0067D8BD /* HeaderView.swift */; };
 		8A07F18C22CA52DF0067D8BD /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A07F18A22CA52DF0067D8BD /* HeaderView.xib */; };
+		8A0F72B522D8F24D0096160A /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0F72B322D8F24D0096160A /* ProfileHeaderView.swift */; };
+		8A0F72B622D8F24D0096160A /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A0F72B422D8F24D0096160A /* ProfileHeaderView.xib */; };
 		8A11B35422C543FD00972ED0 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11B35322C543FD00972ED0 /* CommentsTableViewCell.swift */; };
 		8A11B35622C5483700972ED0 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11B35522C5483700972ED0 /* Comment.swift */; };
 		8AF575732216F49300F3D4AD /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF575722216F49300F3D4AD /* NotificationNames.swift */; };
@@ -35,7 +37,7 @@
 		8AF962B322258EA400ACF1C1 /* FriendsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF962B222258EA400ACF1C1 /* FriendsListTableViewCell.swift */; };
 		8AF962B52225BE1D00ACF1C1 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF962B42225BE1D00ACF1C1 /* Protocols.swift */; };
 		8AF98760221B0BDC00EE956E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9875F221B0BDC00EE956E /* Loader.swift */; };
-		8AFBD2F222244061009C47A0 /* FriendsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFBD2F122244061009C47A0 /* FriendsListTableViewController.swift */; };
+		8AFBD2F222244061009C47A0 /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFBD2F122244061009C47A0 /* FriendsListViewController.swift */; };
 		8AFBD577222C2242002722A2 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFBD576222C2242002722A2 /* EditProfileViewController.swift */; };
 		8AFC05A822122B3A004F5CEC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC05A722122B3A004F5CEC /* Extensions.swift */; };
 		8AFD0037229F0AE0009AFF93 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AFD0036229F0AE0009AFF93 /* Montserrat-Regular.ttf */; };
@@ -82,6 +84,8 @@
 		8A0747642210DDF600C6828A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		8A07F18922CA52DF0067D8BD /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		8A07F18A22CA52DF0067D8BD /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		8A0F72B322D8F24D0096160A /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		8A0F72B422D8F24D0096160A /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		8A11B35322C543FD00972ED0 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		8A11B35522C5483700972ED0 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		8AF575722216F49300F3D4AD /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
@@ -94,7 +98,7 @@
 		8AF962B222258EA400ACF1C1 /* FriendsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListTableViewCell.swift; sourceTree = "<group>"; };
 		8AF962B42225BE1D00ACF1C1 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		8AF9875F221B0BDC00EE956E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
-		8AFBD2F122244061009C47A0 /* FriendsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListTableViewController.swift; sourceTree = "<group>"; };
+		8AFBD2F122244061009C47A0 /* FriendsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		8AFBD576222C2242002722A2 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		8AFC05A722122B3A004F5CEC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8AFD0036229F0AE0009AFF93 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
@@ -253,7 +257,7 @@
 				8AFE5C362227461C00C3F48F /* ProfileViewController.swift */,
 				8AFBD576222C2242002722A2 /* EditProfileViewController.swift */,
 				8AF962B222258EA400ACF1C1 /* FriendsListTableViewCell.swift */,
-				8AFBD2F122244061009C47A0 /* FriendsListTableViewController.swift */,
+				8AFBD2F122244061009C47A0 /* FriendsListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -265,6 +269,8 @@
 				8A03E0A6220F56F80038EA9C /* Main.storyboard */,
 				8A07F18922CA52DF0067D8BD /* HeaderView.swift */,
 				8A07F18A22CA52DF0067D8BD /* HeaderView.xib */,
+				8A0F72B322D8F24D0096160A /* ProfileHeaderView.swift */,
+				8A0F72B422D8F24D0096160A /* ProfileHeaderView.xib */,
 			);
 			path = "Storyboards Views";
 			sourceTree = "<group>";
@@ -393,6 +399,7 @@
 				8A03E0AA220F56FA0038EA9C /* Assets.xcassets in Resources */,
 				8A07F18C22CA52DF0067D8BD /* HeaderView.xib in Resources */,
 				8AFD0037229F0AE0009AFF93 /* Montserrat-Regular.ttf in Resources */,
+				8A0F72B622D8F24D0096160A /* ProfileHeaderView.xib in Resources */,
 				8A03E0A8220F56F80038EA9C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -534,6 +541,7 @@
 				8A11B35422C543FD00972ED0 /* CommentsTableViewCell.swift in Sources */,
 				8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */,
 				8AF8EF5A22B96C54001B45F2 /* SettingsViewController.swift in Sources */,
+				8A0F72B522D8F24D0096160A /* ProfileHeaderView.swift in Sources */,
 				8AF575752216FB6300F3D4AD /* AddNewPostViewController.swift in Sources */,
 				8AF962B322258EA400ACF1C1 /* FriendsListTableViewCell.swift in Sources */,
 				8A11B35622C5483700972ED0 /* Comment.swift in Sources */,
@@ -547,7 +555,7 @@
 				8AF823DB2211E02C00BC2C95 /* Post.swift in Sources */,
 				8A074761221095AB00C6828A /* User.swift in Sources */,
 				8AF823D52211A15500BC2C95 /* HomeViewController.swift in Sources */,
-				8AFBD2F222244061009C47A0 /* FriendsListTableViewController.swift in Sources */,
+				8AFBD2F222244061009C47A0 /* FriendsListViewController.swift in Sources */,
 				8A07F18B22CA52DF0067D8BD /* HeaderView.swift in Sources */,
 				8AF962B52225BE1D00ACF1C1 /* Protocols.swift in Sources */,
 			);
