@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="TD1-uC-zNI">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="420" id="g03-tC-NNs" customClass="HomeTableViewCell" customModule="Vim" customModuleProvider="target">
@@ -187,7 +187,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="TD1-uC-zNI" firstAttribute="top" secondItem="UfX-12-nzK" secondAttribute="top" id="69U-ka-57e"/>
-                            <constraint firstItem="UfX-12-nzK" firstAttribute="bottom" secondItem="TD1-uC-zNI" secondAttribute="bottom" id="QlL-nZ-4Yk"/>
+                            <constraint firstAttribute="bottom" secondItem="TD1-uC-zNI" secondAttribute="bottom" id="QlL-nZ-4Yk"/>
                             <constraint firstItem="TD1-uC-zNI" firstAttribute="leading" secondItem="UfX-12-nzK" secondAttribute="leading" id="qLa-ng-sYO"/>
                             <constraint firstItem="TD1-uC-zNI" firstAttribute="trailing" secondItem="UfX-12-nzK" secondAttribute="trailing" id="sOT-ub-ojm"/>
                         </constraints>

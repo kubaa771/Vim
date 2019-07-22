@@ -27,13 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //uncomment for autologin
         
-        if Auth.auth().currentUser != nil {
+        /*if Auth.auth().currentUser != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTabBarController")
             self.window!.rootViewController = initialViewController
         } else {
             print("login please")
-        }
+        }*/
         
         return true
     }

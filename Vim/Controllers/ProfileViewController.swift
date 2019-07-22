@@ -100,13 +100,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         if (cell.model.whoLiked?.contains(currentUserID))! {
             FirestoreDb.shared.unlikedPost(whoUnliked: currentUser, likedPost: cell.model) { (likes) in
                 self.allPosts[cell.indexCell.row] = Post(date: cell.model.date, text: cell.model.text, image: nil, imageData: cell.model.imageData, owner: cell.model.owner, id: cell.model.uuid, whoLiked: likes)
-                self.tableView.reloadRows(at: [cell.indexCell], with: .automatic)
+                //self.tableView.reloadRows(at: [cell.indexCell], with: .automatic)
+                self.tableView.reloadData()
             }
             
         } else {
             FirestoreDb.shared.likedPost(whoLiked: currentUser, likedPost: cell.model) { (likes) in
                 self.allPosts[cell.indexCell.row] = Post(date: cell.model.date, text: cell.model.text, image: nil, imageData: cell.model.imageData, owner: cell.model.owner, id: cell.model.uuid, whoLiked: likes)
-                self.tableView.reloadRows(at: [cell.indexCell], with: .automatic)
+                //self.tableView.reloadRows(at: [cell.indexCell], with: .automatic)
+                self.tableView.reloadData()
             }
             
         }
