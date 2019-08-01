@@ -9,8 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostOptionsDelegate {
-
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostOptionsDelegate, FriendsListDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -114,6 +113,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let headerView = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self, options: nil)?.first as! ProfileHeaderView
         headerView.friendsButtonOutlet.setTitle(String(friends.count) + " " + "Friends", for: .normal)
         headerView.postsButtonOutlet.setTitle(String(allPosts.count) + " " + "Posts", for: .normal)
+        headerView.delegate = self
         if currentUser != nil {
             headerView.model = currentUser
         }
@@ -145,6 +145,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         vc.postModel = cell.model
         self.show(vc, sender: nil)
     }
+    
+    func showFriendsList(cell: ProfileHeaderView) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
+        vc.isUserFriendsList = true
+        self.show(vc, sender: nil)
+    }
+    
     
     
 

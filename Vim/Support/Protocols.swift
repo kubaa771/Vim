@@ -18,3 +18,7 @@ protocol PostOptionsDelegate: AnyObject {
     func postLikedButtonAction(cell: HomeTableViewCell)
     func commentSectionButtonTappedAction(cell: HomeTableViewCell)
 }
+
+protocol FriendsListDelegate: AnyObject {
+    func showFriendsList(cell: ProfileHeaderView)
+}

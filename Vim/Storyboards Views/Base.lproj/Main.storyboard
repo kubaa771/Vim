@@ -209,7 +209,7 @@
         <!--Friends List View Controller-->
         <scene sceneID="OhS-WF-D5j">
             <objects>
-                <viewController storyboardIdentifier="FriendListViewController" id="sxX-vf-hNG" customClass="FriendsListViewController" customModule="Vim" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FriendsListViewController" id="sxX-vf-hNG" customClass="FriendsListViewController" customModule="Vim" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4ve-Ou-d1a">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

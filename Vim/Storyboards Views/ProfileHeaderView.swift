@@ -16,6 +16,8 @@ class ProfileHeaderView: UITableViewCell {
     @IBOutlet weak var friendsButtonOutlet: UIButton!
     @IBOutlet weak var postsButtonOutlet: UIButton!
     
+    weak var delegate: FriendsListDelegate?
+    
     var model: User! {
         didSet {
             customize(user: model)
@@ -47,9 +49,7 @@ class ProfileHeaderView: UITableViewCell {
     
     
     @IBAction func friendsTappedAction(_ sender: UIButton) {
-        //let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendListViewController") as! FriendsListViewController
-        //vc.isUserFriendsList = true
-        //self.navigationController?.pushViewController(vc, animated: true)
+        delegate?.showFriendsList(cell: self)
     }
     
 }

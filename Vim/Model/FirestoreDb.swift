@@ -178,7 +178,6 @@ class FirestoreDb {
                     group.enter()
                     let userEmail = user.data()["email"] as! String
                     let userID = user.documentID
-                    print(userID)
                     self.getUserProfileData(userID: userID, completion: { (newUser) in
                         usersArray.append(newUser)
                         group.leave()
