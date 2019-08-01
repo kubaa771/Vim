@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     var allPosts: Array<Post> = []
     var friends: Array<User> = []
     var currentUser: User!
+    var isSomeoneElseProfile: Bool = false
     
     
     override func viewDidLoad() {
@@ -29,6 +30,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.tableFooterView = UIView()
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedSectionHeaderHeight = 180
+        buttonSetUp()
         customize()
         NotificationCenter.default.addObserver(self, selector: #selector(customize), name: NotificationNames.refreshProfile.notification, object: nil)
         // Do any additional setup after loading the view.
@@ -37,10 +39,20 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @objc func customize() {
         let user = Auth.auth().currentUser
         Loader.start()
-        FirestoreDb.shared.getUserProfileData(userID: (user?.uid)!) { (userData) in
-            self.currentUser = userData
-            self.getSelfPostData()
+        if isSomeoneElseProfile {
+            if currentUser != nil {
+                getSelfPostData()
+                
+            } else {
+                //error occured
+            }
+        } else {
+            FirestoreDb.shared.getUserProfileData(userID: (user?.uid)!) { (userData) in
+                self.currentUser = userData
+                self.getSelfPostData()
+            }
         }
+        
         
         FirestoreDb.shared.getFriends { (friends) in
             self.friends = friends
@@ -48,6 +60,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         //getSelfPostData()
     }
+    
     
     func getSelfPostData() {
         guard currentUser != nil else { return }
@@ -66,6 +79,18 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.tableView.isHidden = false
             Loader.stop()
         }
+    }
+    
+    func buttonSetUp() {
+        if !isSomeoneElseProfile {
+            let button = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonAction))
+            self.navigationItem.leftBarButtonItem = button
+        }
+    }
+    
+    @objc func editButtonAction() {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
+        self.show(vc, sender: nil)
     }
     
     
@@ -116,7 +141,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func commentSectionButtonTappedAction(cell: HomeTableViewCell) {
-        //
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CommentsViewController") as! CommentsViewController
+        vc.postModel = cell.model
+        self.show(vc, sender: nil)
     }
     
     

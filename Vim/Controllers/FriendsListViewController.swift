@@ -136,6 +136,21 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedFriend: User!
+        if isFiltering() {
+            selectedFriend = filteredUsersArray[indexPath.row]
+        } else {
+            selectedFriend = allUsersArray[indexPath.row]
+        }
+    
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+        vc.isSomeoneElseProfile = true
+        vc.currentUser = selectedFriend
+        self.show(vc, sender: nil)
+        
+    }
+    
     func addFriendButtonTapped(cell: FriendsListTableViewCell) {
         if userFriendsArray.contains(where: {$0.email == cell.model.email}){
             displayErrorAlert(message: "You are already friends.")

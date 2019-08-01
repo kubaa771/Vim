@@ -86,10 +86,18 @@ class FirestoreDb {
                         if let documents = snapshot?.documents {
                             let likes = documents.map { $0["uuid"] } as? Array<String>
                             myPost = Post(date: timeResult, text: textContent, image: nil, imageData: imageData, owner: currentUser, id: post.documentID, whoLiked: likes)
-                            postsArray.append(myPost)
-                            group.leave()
+                            post.reference.collection("comments").getDocuments(completion: { (snapshot, error) in
+                                if let documents = snapshot?.documents {
+                                    let commentsAmount = documents.count
+                                    myPost.commentsNumber = commentsAmount//licznik
+                                    postsArray.append(myPost)
+                                    group.leave()
+                                }
+                            })
                         }
                     }
+                    
+                    
                 }
                 group.notify(queue: .main, execute: {
                     completion(postsArray)
@@ -97,6 +105,18 @@ class FirestoreDb {
             }
         }
     }
+    
+    /*func getComments(from post: Post) {
+        db.collection("users").document(post.owner.uuid).collection("posts").document(post.uuid).getDocument { (snapshot, error) in
+            if snapshot != nil {
+                var myPost: Post!
+                let textContent = snapshot.data()["text"] as! String
+                let timeResult = snapshot.data()["date"] as! Timestamp
+                let imageData = snapshot.data()["image"] as? NSData
+            }
+        }
+        //get single post (commentssection update)
+    }*/
     
     func createNewPost(date: Timestamp, text: String, imageData: NSData?) {
         NotificationCenter.default.post(name: NotificationNames.refreshPostData.notification, object: nil)
@@ -300,6 +320,16 @@ class FirestoreDb {
                 }
             }
         }
+    }
+    
+    func getCommentsNumber(from post: Post, completion: @escaping (Int) -> Void) {
+        db.collection("users").document(post.owner.uuid).collection("posts").document(post.uuid).collection("comments").getDocuments { (snapshot, error) in
+            if let documents = snapshot?.documents {
+                completion(documents.count)
+            }
+            completion(0)
+        }
+        
     }
     
     

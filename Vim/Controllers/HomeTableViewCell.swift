@@ -19,6 +19,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
     @IBOutlet weak var likeNumber: UILabel!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var commentsLabel: UILabel!
     
     var currentUser = Auth.auth().currentUser
     
@@ -90,6 +91,8 @@ class HomeTableViewCell: UITableViewCell {
         let name = post.owner.name ?? post.owner.email
         let surname = post.owner.surname ?? ""
         userLabel.text = name! + " " + surname //dokoncz
+        let commentsNumber = post.commentsNumber ?? 0
+        commentsLabel.text = String(commentsNumber)
         guard let likes = post.whoLiked?.count else { return }
         likeNumber.text = String(likes)
         guard let currentUserID = currentUser?.uid else { return }

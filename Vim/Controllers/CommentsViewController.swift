@@ -67,6 +67,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         FirestoreDb.shared.getComments(from: postModel) { (comments) in
             self.comments = comments
             self.comments.sort(by: { $0.date.dateValue() > $1.date.dateValue() })
+            self.postModel.commentsNumber = comments.count
             self.tableView.reloadData()
             Loader.stop()
         }

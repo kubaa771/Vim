@@ -161,6 +161,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="commentsLabel" destination="txc-EP-m3H" id="aH1-ub-EP3"/>
                 <outlet property="dateLabel" destination="LGH-sw-qBB" id="snG-G0-slL"/>
                 <outlet property="imageHeight" destination="dPi-1U-rqo" id="kZV-I9-iqt"/>
                 <outlet property="likeButton" destination="VOC-Kx-ebp" id="suH-wd-nnc"/>
