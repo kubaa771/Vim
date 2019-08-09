@@ -37,7 +37,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Do any additional setup after loading the view.
     }
-    
+
     @objc func refreshPostData() {
         allPosts.removeAll()
         Loader.start()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "727E8D5D7F6BE0C3100B17F11057F6C1"
+               BlueprintIdentifier = "4632642D070C47BEF6078F4339ABFB2A"
                BuildableName = "gRPCCertificates.bundle"
                BlueprintName = "gRPC-C++-gRPCCertificates"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "727E8D5D7F6BE0C3100B17F11057F6C1"
+            BlueprintIdentifier = "4632642D070C47BEF6078F4339ABFB2A"
             BuildableName = "gRPCCertificates.bundle"
             BlueprintName = "gRPC-C++-gRPCCertificates"
             ReferencedContainer = "container:Pods.xcodeproj">

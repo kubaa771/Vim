@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DBF38ADBB4FE50C39AEF0C106BC1F254"
+               BlueprintIdentifier = "177D65B8355F6F309C7068A8E5E7793E"
                BuildableName = "openssl_grpc.framework"
                BlueprintName = "BoringSSL-GRPC"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBF38ADBB4FE50C39AEF0C106BC1F254"
+            BlueprintIdentifier = "177D65B8355F6F309C7068A8E5E7793E"
             BuildableName = "openssl_grpc.framework"
             BlueprintName = "BoringSSL-GRPC"
             ReferencedContainer = "container:Pods.xcodeproj">

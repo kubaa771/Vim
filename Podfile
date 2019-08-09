@@ -9,6 +9,8 @@ target 'Vim' do
 pod 'Firebase/Core'
 pod 'Firebase/Firestore'
 pod 'Firebase/Auth'
+pod 'Firebase/Analytics'
+pod 'Firebase/Database'
 pod 'TPKeyboardAvoidingSwift'
 pod 'NVActivityIndicatorView'
 
