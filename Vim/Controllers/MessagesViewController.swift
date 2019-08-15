@@ -9,29 +9,101 @@
 import UIKit
 import Firebase
 
-class MessagesViewController: UIViewController {
+class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var messages = [Message]()
+    var messagesDictionary = [String : Message]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         updateView(imageName: "bg3.png")
-        //sendMessage()
-        // Do any additional setup after loading the view.
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.estimatedRowHeight = 85
+        //tableView.rowHeight = UITableView.automaticDimension
+        tableView.tableFooterView = UIView()
+        observeUserMessages()
     }
     
-    func sendMessage() {
+    override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    func observeUserMessages() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let ref = Database.database().reference().child("user-messages").child(uid)
+        ref.observe(.childAdded, with: { (snapshot) in
+            let messageId = snapshot.key
+            let messagesReference = Database.database().reference().child("messages").child(messageId)
+            
+            messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String : Any] {
+                    let message = Message()
+                    message.setValuesForKeys(dictionary)
+                    
+                    if let toId = message.toId {
+                        if toId != Auth.auth().currentUser?.uid {
+                            self.messagesDictionary[toId] = message
+                            self.messages = Array(self.messagesDictionary.values)
+                            self.messages.sort(by: { (m1, m2) -> Bool in
+                                return m1.timestamp!.intValue > m2.timestamp!.intValue
+                            })
+                        }
+                        
+                    }
+                    
+                    self.tableView.reloadData()
+                }
+                
+            }, withCancel: nil)
+            
+        }, withCancel: nil)
+    }
+    
+    /*func observeMessages() {
         let ref = Database.database().reference().child("messages")
-        let values = ["text" : "tektsjakis"]
-        ref.childByAutoId().updateChildValues(values)
+        ref.observe(.childAdded, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String : Any] {
+                let message = Message()
+                message.setValuesForKeys(dictionary)
+                
+                if let toId = message.toId {
+                    self.messagesDictionary[toId] = message
+                    self.messages = Array(self.messagesDictionary.values)
+                    self.messages.sort(by: { (m1, m2) -> Bool in
+                        return m1.timestamp!.intValue > m2.timestamp!.intValue
+                    })
+                }
+                
+                self.tableView.reloadData()
+            }
+            
+        }, withCancel: nil)
+    }*/
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessagesTableViewCell", for: indexPath) as! MessagesTableViewCell
+        cell.message = messages[indexPath.row]
+        return cell
     }
-    */
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let message = messages[indexPath.row]
+        let chatVC = ChatLogViewController(collectionViewLayout: UICollectionViewLayout())
+        chatVC.user = message.chatPartner
+        navigationController?.show(chatVC, sender: nil)
+    }
+    
+    
 
 }

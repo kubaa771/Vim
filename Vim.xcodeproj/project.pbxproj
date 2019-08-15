@@ -25,6 +25,7 @@
 		8A07BE6C22E601510025781D /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07BE6B22E601510025781D /* LaunchScreenViewController.swift */; };
 		8A07F18B22CA52DF0067D8BD /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07F18922CA52DF0067D8BD /* HeaderView.swift */; };
 		8A07F18C22CA52DF0067D8BD /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A07F18A22CA52DF0067D8BD /* HeaderView.xib */; };
+		8A0823DF22FEF0B000534458 /* ChatLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0823DE22FEF0B000534458 /* ChatLogViewController.swift */; };
 		8A0F72B522D8F24D0096160A /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0F72B322D8F24D0096160A /* ProfileHeaderView.swift */; };
 		8A0F72B622D8F24D0096160A /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A0F72B422D8F24D0096160A /* ProfileHeaderView.xib */; };
 		8A11B35422C543FD00972ED0 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11B35322C543FD00972ED0 /* CommentsTableViewCell.swift */; };
@@ -45,6 +46,7 @@
 		8AFBD2F222244061009C47A0 /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFBD2F122244061009C47A0 /* FriendsListViewController.swift */; };
 		8AFBD577222C2242002722A2 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFBD576222C2242002722A2 /* EditProfileViewController.swift */; };
 		8AFC05A822122B3A004F5CEC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC05A722122B3A004F5CEC /* Extensions.swift */; };
+		8AFCF49B2301C8390000DFEA /* MessagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFCF49A2301C8390000DFEA /* MessagesTableViewCell.swift */; };
 		8AFD0037229F0AE0009AFF93 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AFD0036229F0AE0009AFF93 /* Montserrat-Regular.ttf */; };
 		8AFE5C372227461C00C3F48F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE5C362227461C00C3F48F /* ProfileViewController.swift */; };
 		C6025D9B4D45BD4166B4518A /* Pods_VimUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E3BE1E2FB026D781721729 /* Pods_VimUITests.framework */; };
@@ -91,6 +93,7 @@
 		8A07BE6B22E601510025781D /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		8A07F18922CA52DF0067D8BD /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		8A07F18A22CA52DF0067D8BD /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		8A0823DE22FEF0B000534458 /* ChatLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogViewController.swift; sourceTree = "<group>"; };
 		8A0F72B322D8F24D0096160A /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		8A0F72B422D8F24D0096160A /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		8A11B35322C543FD00972ED0 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 		8AFBD2F122244061009C47A0 /* FriendsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		8AFBD576222C2242002722A2 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		8AFC05A722122B3A004F5CEC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8AFCF49A2301C8390000DFEA /* MessagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MessagesTableViewCell.swift; path = Vim/Controllers/MessagesTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		8AFD0036229F0AE0009AFF93 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		8AFE5C362227461C00C3F48F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8F81FC9FA32F3E76CD66B1C2 /* Pods-VimTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimTests/Pods-VimTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -257,7 +261,9 @@
 			isa = PBXGroup;
 			children = (
 				8ACA39D122FDCDF100F62D2F /* MessagesViewController.swift */,
+				8AFCF49A2301C8390000DFEA /* MessagesTableViewCell.swift */,
 				8ACA39D522FDD1AE00F62D2F /* NewMessageViewController.swift */,
+				8A0823DE22FEF0B000534458 /* ChatLogViewController.swift */,
 				8AF8EF5922B96C54001B45F2 /* SettingsViewController.swift */,
 				8A0747622210986400C6828A /* LoginViewController.swift */,
 				8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */,
@@ -554,8 +560,10 @@
 				8A03E0A3220F56F80038EA9C /* AppDelegate.swift in Sources */,
 				8ACA39D222FDCDF100F62D2F /* MessagesViewController.swift in Sources */,
 				8AF823D72211CCFA00BC2C95 /* HomeTableViewCell.swift in Sources */,
+				8A0823DF22FEF0B000534458 /* ChatLogViewController.swift in Sources */,
 				8AF823D92211DB7E00BC2C95 /* RegisterViewController.swift in Sources */,
 				8A11B35422C543FD00972ED0 /* CommentsTableViewCell.swift in Sources */,
+				8AFCF49B2301C8390000DFEA /* MessagesTableViewCell.swift in Sources */,
 				8A0747652210DDF600C6828A /* MainTabBarController.swift in Sources */,
 				8AF8EF5A22B96C54001B45F2 /* SettingsViewController.swift in Sources */,
 				8A0F72B522D8F24D0096160A /* ProfileHeaderView.swift in Sources */,

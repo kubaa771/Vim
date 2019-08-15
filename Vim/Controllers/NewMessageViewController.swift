@@ -21,6 +21,10 @@ class NewMessageViewController: UIViewController, UITableViewDelegate, UITableVi
         fetchFriends()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     func fetchFriends() {
         FirestoreDb.shared.getFriends() { [weak self] (friends) in
             self?.friends = friends
@@ -38,6 +42,13 @@ class NewMessageViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.model = friend
         cell.addFriendButton.isHidden = true
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user = friends[indexPath.row]
+        let chatVC = ChatLogViewController(collectionViewLayout: UICollectionViewLayout())
+        chatVC.user = user
+        navigationController?.show(chatVC, sender: nil)
     }
     
 
