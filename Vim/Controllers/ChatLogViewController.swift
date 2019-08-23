@@ -22,6 +22,7 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
     let containerView: UIView = {
         let cView = UIView()
         cView.translatesAutoresizingMaskIntoConstraints = false
+        cView.backgroundColor = UIColor.white
         return cView
     }()
     
@@ -29,15 +30,25 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
         didSet {
             let name = user.name ?? user.email
             let surname = user.surname ?? ""
-            navigationController?.title = name! + " " + surname
+            navigationItem.title = name! + " " + surname
+            observeMessages()
+            
         }
     }
+    
+    var messages = [Message]()
+    let cellId = "cellId"
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.register(ChatLogCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.backgroundColor = UIColor.white//UIColor(patternImage: UIImage(named: "bg3.png")!)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
+        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        collectionView.alwaysBounceVertical = true
+        collectionView.dataSource = self
+        collectionView.delegate = self
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         updateView(imageName: "bg3.png")
@@ -55,7 +66,6 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
     
     
     func setupInputComponents() {
-        
         
         view.addSubview(containerView)
         
@@ -121,6 +131,8 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
                 return
             }
             
+            self.inputTextfield.text = nil
+            
             let userMessagesRef = Database.database().reference().child("user-messages").child(fromId).child(messageId)
             userMessagesRef.setValue(1)
             
@@ -183,21 +195,92 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
         }
     }
     
+    func observeMessages() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let ref = Database.database().reference().child("user-messages").child(uid)
+        ref.observe(.childAdded, with: { (snapshot) in
+            
+            let messageId = snapshot.key
+            let messageRef = Database.database().reference().child("messages").child(messageId)
+            messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                guard let dictionary = snapshot.value as? [String: Any] else {
+                    return
+                }
+                
+                
+                let message = Message()
+                message.setValuesForKeys(dictionary)
+                
+                if message.chatPartnerId() == self.user.uuid {
+                    self.messages.append(message)
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
+                }
+                
+                
+            }, withCancel: nil)
+            
+        }, withCancel: nil)
+        
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return messages.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = UIColor.blue
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatLogCollectionViewCell
+        let message = messages[indexPath.row]
+        cell.textView.text = message.text
+        
+        if message.fromId == Auth.auth().currentUser?.uid {
+            cell.bubbleView.backgroundColor = #colorLiteral(red: 0, green: 0.5364930759, blue: 1, alpha: 1)
+            cell.textView.textColor = .white
+            cell.profileImageView.isHidden = true
+            cell.bubbleLeftAnchor?.isActive = false
+            cell.bubbleRightAnchor?.isActive = true
+            
+        } else {
+            cell.bubbleView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            cell.textView.textColor = .black
+            cell.profileImageView.isHidden = false
+            cell.bubbleLeftAnchor?.isActive = true
+            cell.bubbleRightAnchor?.isActive = false
+        }
+        
+        if let userImageData = message.chatPartner?.imageData {
+            let image = UIImage(data: userImageData as Data)
+            cell.profileImageView.image = image
+            cell.layoutIfNeeded()
+        }
+        
+        cell.bubbleWidthAnchor?.constant = estimatedSizeForText(text: message.text!).width + 32
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        <#code#>
+        
+        var height: CGFloat = 80
+        if let text = messages[indexPath.row].text {
+            height = estimatedSizeForText(text: text).height + 20
+        }
+        
+        return CGSize(width: view.frame.width, height: height)
     }
     
-
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    func estimatedSizeForText(text: String) -> CGRect {
+        let size = CGSize(width: 200, height: 1000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0)], context: nil)
+    }
     
 }

@@ -19,6 +19,7 @@ class MessagesTableViewCell: UITableViewCell {
     
     var message: Message? {
         didSet {
+            profileImageView.image = UIImage(named: "user_male.jpg")
             updateUserLog()
             if let seconds = self.message?.timestamp?.doubleValue {
                 let timestampDate = Date(timeIntervalSince1970: seconds)
@@ -59,12 +60,16 @@ class MessagesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.profileImageView.image = UIImage(named: "user_male.jpg")
+    }
+    
     override func layoutSubviews() {
         customize()
     }
     
     func customize() {
-        //nameLabel.text = ""
         profileImageView.layer.masksToBounds = false
         profileImageView.layer.cornerRadius = 32
         profileImageView.clipsToBounds = true

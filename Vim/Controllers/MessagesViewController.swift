@@ -47,7 +47,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                     let message = Message()
                     message.setValuesForKeys(dictionary)
                     
-                    if let toId = message.toId {
+                    if let toId = message.chatPartnerId() {
                         if toId != Auth.auth().currentUser?.uid {
                             self.messagesDictionary[toId] = message
                             self.messages = Array(self.messagesDictionary.values)
@@ -58,12 +58,22 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                         
                     }
                     
-                    self.tableView.reloadData()
+                    self.timer?.invalidate()
+                    self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleTableViewRefresh), userInfo: nil, repeats: false)
+                    
                 }
                 
             }, withCancel: nil)
             
         }, withCancel: nil)
+    }
+    
+    var timer: Timer?
+    
+    @objc func handleTableViewRefresh() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     /*func observeMessages() {
@@ -99,7 +109,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let message = messages[indexPath.row]
-        let chatVC = ChatLogViewController(collectionViewLayout: UICollectionViewLayout())
+        let chatVC = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
         chatVC.user = message.chatPartner
         navigationController?.show(chatVC, sender: nil)
     }

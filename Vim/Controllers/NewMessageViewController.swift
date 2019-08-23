@@ -46,7 +46,7 @@ class NewMessageViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let user = friends[indexPath.row]
-        let chatVC = ChatLogViewController(collectionViewLayout: UICollectionViewLayout())
+        let chatVC = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
         chatVC.user = user
         navigationController?.show(chatVC, sender: nil)
     }

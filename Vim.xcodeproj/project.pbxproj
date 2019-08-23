@@ -30,6 +30,7 @@
 		8A0F72B622D8F24D0096160A /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A0F72B422D8F24D0096160A /* ProfileHeaderView.xib */; };
 		8A11B35422C543FD00972ED0 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11B35322C543FD00972ED0 /* CommentsTableViewCell.swift */; };
 		8A11B35622C5483700972ED0 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11B35522C5483700972ED0 /* Comment.swift */; };
+		8A258DE223060A1E003B0E35 /* ChatLogCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A258DE123060A1E003B0E35 /* ChatLogCollectionViewCell.swift */; };
 		8ACA39D222FDCDF100F62D2F /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA39D122FDCDF100F62D2F /* MessagesViewController.swift */; };
 		8ACA39D422FDD10000F62D2F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA39D322FDD10000F62D2F /* Message.swift */; };
 		8ACA39D622FDD1AE00F62D2F /* NewMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA39D522FDD1AE00F62D2F /* NewMessageViewController.swift */; };
@@ -98,6 +99,7 @@
 		8A0F72B422D8F24D0096160A /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		8A11B35322C543FD00972ED0 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		8A11B35522C5483700972ED0 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		8A258DE123060A1E003B0E35 /* ChatLogCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogCollectionViewCell.swift; sourceTree = "<group>"; };
 		8ACA39D122FDCDF100F62D2F /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		8ACA39D322FDD10000F62D2F /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		8ACA39D522FDD1AE00F62D2F /* NewMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageViewController.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				8AFCF49A2301C8390000DFEA /* MessagesTableViewCell.swift */,
 				8ACA39D522FDD1AE00F62D2F /* NewMessageViewController.swift */,
 				8A0823DE22FEF0B000534458 /* ChatLogViewController.swift */,
+				8A258DE123060A1E003B0E35 /* ChatLogCollectionViewCell.swift */,
 				8AF8EF5922B96C54001B45F2 /* SettingsViewController.swift */,
 				8A0747622210986400C6828A /* LoginViewController.swift */,
 				8AF823D82211DB7E00BC2C95 /* RegisterViewController.swift */,
@@ -572,6 +575,7 @@
 				8A11B35622C5483700972ED0 /* Comment.swift in Sources */,
 				8A06F23C22C3F86500031085 /* CommentsViewController.swift in Sources */,
 				8AFE5C372227461C00C3F48F /* ProfileViewController.swift in Sources */,
+				8A258DE223060A1E003B0E35 /* ChatLogCollectionViewCell.swift in Sources */,
 				8AFBD577222C2242002722A2 /* EditProfileViewController.swift in Sources */,
 				8AFC05A822122B3A004F5CEC /* Extensions.swift in Sources */,
 				8A07475F221093D100C6828A /* FirestoreDb.swift in Sources */,
