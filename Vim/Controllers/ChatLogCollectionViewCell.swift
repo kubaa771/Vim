@@ -30,7 +30,7 @@ class ChatLogCollectionViewCell: UICollectionViewCell {
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "bg4.png")
+        imageView.image = UIImage(named: "user_male.png")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true

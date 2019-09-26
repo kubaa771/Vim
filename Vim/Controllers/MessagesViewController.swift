@@ -35,12 +35,15 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
+        let group = DispatchGroup()
+        
+        Loader.start()
         
         let ref = Database.database().reference().child("user-messages").child(uid)
         ref.observe(.childAdded, with: { (snapshot) in
             let messageId = snapshot.key
             let messagesReference = Database.database().reference().child("messages").child(messageId)
-            
+            group.enter()
             messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String : Any] {
@@ -49,6 +52,10 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                     
                     if let toId = message.chatPartnerId() {
                         if toId != Auth.auth().currentUser?.uid {
+                            FirestoreDb.shared.getUserProfileData(userID: toId) { (user) in
+                                message.chatPartner = user
+                                group.leave()
+                            }
                             self.messagesDictionary[toId] = message
                             self.messages = Array(self.messagesDictionary.values)
                             self.messages.sort(by: { (m1, m2) -> Bool in
@@ -58,22 +65,31 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                         
                     }
                     
-                    self.timer?.invalidate()
-                    self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleTableViewRefresh), userInfo: nil, repeats: false)
+                    group.notify(queue: .main, execute: {
+                        Loader.stop()
+                        self.timer?.invalidate()
+                        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleTableViewRefresh), userInfo: nil, repeats: false)
+                    })
+                    
                     
                 }
                 
             }, withCancel: nil)
             
         }, withCancel: nil)
+        
+        
+        
+        
     }
     
     var timer: Timer?
     
     @objc func handleTableViewRefresh() {
-        DispatchQueue.main.async {
+        //DispatchQueue.main.async {
             self.tableView.reloadData()
-        }
+        
+        //}
     }
     
     /*func observeMessages() {

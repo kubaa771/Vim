@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        Fabric.with([Crashlytics.self])
         let navigationAppereace = UINavigationBar.appearance()
         navigationAppereace.tintColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
         navigationAppereace.barTintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 0)

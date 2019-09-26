@@ -253,11 +253,14 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
             cell.bubbleRightAnchor?.isActive = false
         }
         
-        if let userImageData = message.chatPartner?.imageData {
-            let image = UIImage(data: userImageData as Data)
-            cell.profileImageView.image = image
-            cell.layoutIfNeeded()
+        DispatchQueue.main.async {
+            if let userImageData = self.user.imageData {
+                let image = UIImage(data: userImageData as Data)
+                cell.profileImageView.image = image
+            }
         }
+        
+        
         
         cell.bubbleWidthAnchor?.constant = estimatedSizeForText(text: message.text!).width + 32
         return cell
