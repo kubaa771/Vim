@@ -122,10 +122,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func postLikedButtonAction(cell: HomeTableViewCell) {
         guard let currentUserID = currentUser?.uuid else { return }
+        let comments = allPosts[cell.indexCell.row].commentsNumber
         if (cell.model.whoLiked?.contains(currentUserID))! {
             FirestoreDb.shared.unlikedPost(whoUnliked: currentUser, likedPost: cell.model) { (likes) in
                 self.allPosts[cell.indexCell.row] = Post(date: cell.model.date, text: cell.model.text, image: nil, imageData: cell.model.imageData, owner: cell.model.owner, id: cell.model.uuid, whoLiked: likes)
                 //self.tableView.reloadRows(at: [cell.indexCell], with: .automatic)
+                self.allPosts[cell.indexCell.row].commentsNumber = comments
                 self.tableView.reloadData()
             }
             
@@ -133,6 +135,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             FirestoreDb.shared.likedPost(whoLiked: currentUser, likedPost: cell.model) { (likes) in
                 self.allPosts[cell.indexCell.row] = Post(date: cell.model.date, text: cell.model.text, image: nil, imageData: cell.model.imageData, owner: cell.model.owner, id: cell.model.uuid, whoLiked: likes)
                 //self.tableView.reloadRows(at: [cell.indexCell], with: .automatic)
+                self.allPosts[cell.indexCell.row].commentsNumber = comments
                 self.tableView.reloadData()
             }
             
